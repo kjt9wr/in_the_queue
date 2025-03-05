@@ -10,7 +10,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>In The Queue</Text>
+      <Text className="text-3xl">In The Queue</Text>
       <Link href="/profile" style={{ color: "blue" }}>
         Go To Profile
       </Link>
