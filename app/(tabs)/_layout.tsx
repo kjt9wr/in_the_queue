@@ -16,19 +16,13 @@ const TabIcon = ({
   focused: boolean;
 }) => {
   return (
-    <View className="items-center justify-center gap-2">
+    <View className="items-center justify-center gap-1">
       <Image
         source={icon}
         resizeMode="contain"
         tintColor={color}
         className="w-6 h-6"
       />
-      {/* <Text
-        className={`${focused ? "font-semibold" : "font-pregular"} text-xs`}
-        style={{ color: color }}
-      >
-        {name}
-      </Text> */}
     </View>
   );
 };
@@ -38,14 +32,14 @@ const TabsLayout = () => {
     <>
       <Tabs
         screenOptions={{
-          tabBarShowLabel: false,
+          tabBarShowLabel: true,
           tabBarActiveTintColor: "#FFA001",
           tabBarInactiveTintColor: "#CDCDE0",
           tabBarStyle: {
             backgroundColor: "#161622",
             borderTopWidth: 1,
             borderTopColor: "#232533",
-            height: 84,
+            height: 64,
           },
         }}
       >
@@ -73,7 +67,7 @@ const TabsLayout = () => {
               <TabIcon
                 icon={icons.timer}
                 color={color}
-                name="ComingSoon"
+                name="Coming Soon"
                 focused={focused}
               />
             ),
