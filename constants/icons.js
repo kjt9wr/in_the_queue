@@ -11,6 +11,10 @@ import logout from "../assets/icons/logout.png";
 import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
+import finished from "../assets/icons/finished.png";
+import timer from "../assets/icons/timer.png";
+import queue from "../assets/icons/queue.png";
+import tv from "../assets/icons/tv.png";
 
 export default {
   play,
@@ -26,4 +30,8 @@ export default {
   logout,
   eyeHide,
   eye,
+  finished,
+  timer,
+  queue,
+  tv,
 };
