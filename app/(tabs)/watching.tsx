@@ -2,33 +2,26 @@ import { View, Text, FlatList, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getAllShows } from "../../lib/appwrite";
+import useAppwrite from "@/lib/useAppwrite";
 
 const Watching = () => {
-  const [data, setData] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data, refetch, isLoading } = useAppwrite(getAllShows);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await getAllShows();
-        setData(response);
-      } catch (error: any) {
-        Alert.alert("Error", error.message);
-      }
-    };
-    fetchData();
-  }, []);
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
 
   console.log(data);
-
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        data={data}
         keyExtractor={(item: any) => item.id}
         renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
+          <Text className="text-3xl text-white">{item.Name}</Text>
         )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
