@@ -19,7 +19,7 @@ const Watching = () => {
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={data}
-        keyExtractor={(item: any) => item.id}
+        keyExtractor={(item: any) => item.$id}
         renderItem={({ item }) => (
           <Text className="text-3xl text-white">{item.Name}</Text>
         )}
