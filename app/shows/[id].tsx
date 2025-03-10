@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Queue = () => {
+const ShowDetails = () => {
   return (
     <View>
-      <Text>Queue Page</Text>
+      <Text>ShowDetails</Text>
     </View>
   );
 };
 
-export default Queue;
+export default ShowDetails;

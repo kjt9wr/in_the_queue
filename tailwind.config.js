@@ -6,31 +6,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#161622",
-        secondary: {
-          DEFAULT: "#FF9C01",
-          100: "#FF9001",
-          200: "#FF8E01",
+        primary: "#030014",
+        secondary: "#151312",
+        light: {
+          100: "#D6C7FF",
+          200: "#A8B5DB",
+          300: "#9CA4AB",
         },
-        black: {
-          DEFAULT: "#000",
-          100: "#1E1E2D",
-          200: "#232533",
+        dark: {
+          100: "#221F3D",
+          200: "#0F0D23",
         },
-        gray: {
-          100: "#CDCDE0",
-        },
-      },
-      fontFamily: {
-        pthin: ["Poppins-Thin", "sans-serif"],
-        pextralight: ["Poppins-ExtraLight", "sans-serif"],
-        plight: ["Poppins-Light", "sans-serif"],
-        pregular: ["Poppins-Regular", "sans-serif"],
-        pmedium: ["Poppins-Medium", "sans-serif"],
-        psemibold: ["Poppins-SemiBold", "sans-serif"],
-        pbold: ["Poppins-Bold", "sans-serif"],
-        pextrabold: ["Poppins-ExtraBold", "sans-serif"],
-        pblack: ["Poppins-Black", "sans-serif"],
+        accent: "#AB8BFF",
       },
     },
   },
