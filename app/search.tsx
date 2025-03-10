@@ -75,7 +75,7 @@ const Search = () => {
 
             {!loading && !error && searchQuery.trim() && shows?.length > 0 && (
               <Text className="text-xl text-white font-bold">
-                Search Results for {""}
+                Search Results for{" "}
                 <Text className="text-accent">{searchQuery}</Text>
               </Text>
             )}
@@ -85,10 +85,7 @@ const Search = () => {
           !loading && !error ? (
             <View className="mt-10 px-5">
               <Text className="text-center text-gray-500">
-                {" "}
-                {searchQuery.trim()
-                  ? "No TV Shows found"
-                  : "Search for a show"}{" "}
+                {searchQuery.trim() ? "No TV Shows found" : "Search for a show"}
               </Text>
             </View>
           ) : null

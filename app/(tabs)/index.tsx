@@ -64,6 +64,7 @@ const Index = () => {
                   marginBottom: 10,
                 }}
                 className="mt-2 pb-32"
+                scrollEnabled={false}
               />
             </>
           </View>
