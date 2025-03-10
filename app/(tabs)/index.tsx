@@ -1,33 +1,22 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Alert,
-  Image,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { getAllShows } from "../../lib/appwrite";
-import useAppwrite from "@/lib/useAppwrite";
+import SearchBar from "@/components/SearchBar";
+import TVShowCard from "@/components/TVShowCard";
+import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { useRouter } from "expo-router";
 import { fetchShows } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import { icons } from "@/constants/icons";
-import TVShowCard from "@/components/TVShowCard";
+import { useRouter } from "expo-router";
+import React from "react";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 
 const Index = () => {
-  // const { data, refetch, isLoading } = useAppwrite(getAllShows);
-
   const router = useRouter();
-
-  // const onRefresh = async () => {
-  //   setRefreshing(true);
-  //   await refetch();
-  //   setRefreshing(false);
-  // };
 
   const {
     data: shows,
@@ -35,10 +24,14 @@ const Index = () => {
     error: showsError,
   } = useFetch(() => fetchShows({ query: "" }));
 
-  // console.log(data);
   return (
-    <SafeAreaView className="bg-primary h-full">
-      <Image source={images.bg} className="absolute w-full z-0" />
+    <View className="bg-primary flex-1">
+      <Image
+        source={images.bg}
+        className="absolute w-full z-0"
+        resizeMode="cover"
+      />
+
       <ScrollView
         className="flex-1 px-5"
         showsVerticalScrollIndicator={false}
@@ -51,6 +44,10 @@ const Index = () => {
           <Text>Error: {showsError?.message}</Text>
         ) : (
           <View>
+            <SearchBar
+              onPress={() => router.push("/search")}
+              placeholder="Search for a TV show"
+            />
             <>
               <Text className="text-lg text-white font-bold mt-5 mb-3">
                 Watch List
@@ -72,7 +69,7 @@ const Index = () => {
           </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

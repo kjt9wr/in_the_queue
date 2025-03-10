@@ -6,7 +6,8 @@ const RootLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="show/[id]" options={{ headerShown: false }} />
+      <Stack.Screen name="shows/[id]" options={{ headerShown: false }} />
+      <Stack.Screen name="search" options={{ headerShown: false }} />
     </Stack>
   );
 };

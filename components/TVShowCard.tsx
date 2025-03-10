@@ -15,7 +15,9 @@ const TVShowCard = ({ id, poster_path, name }: TVShow) => {
           className="w-full h-52 rounded-lg"
           resizeMode="cover"
         />
-        <Text className="text-sm font-bold text-white mt-2">{name}</Text>
+        <Text className="text-sm font-bold text-white mt-2" numberOfLines={1}>
+          {name}
+        </Text>
       </TouchableOpacity>
     </Link>
   );
