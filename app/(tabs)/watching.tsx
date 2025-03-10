@@ -1,8 +1,27 @@
-import { View, Text, FlatList } from "react-native";
-import React from "react";
+import { View, Text, FlatList, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getAllShows } from "../../lib/appwrite";
 
 const Watching = () => {
+  const [data, setData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await getAllShows();
+        setData(response);
+      } catch (error: any) {
+        Alert.alert("Error", error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
+  console.log(data);
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
