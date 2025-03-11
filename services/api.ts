@@ -27,15 +27,45 @@ export const fetchShows = async ({ query }: { query: string }) => {
   return data.results;
 };
 
-export const addToWatchList = async (showId: number, isAdding: boolean) => {
-  const endpoint = `${TMDB_CONFIG.BASE_URL}/account/${process.env.EXPO_PUBLIC_ACCOUNT_ID}/watchlist`;
+export const fetchAllShows = async () => {
+  const endpoint = `${TMDB_CONFIG.BASE_URL}/account/${process.env.EXPO_PUBLIC_ACCOUNT_ID}/favorite/tv`;
+  const response = await fetch(endpoint, {
+    method: "GET",
+    headers: TMDB_CONFIG.headers,
+  });
+
+  if (!response.ok) {
+    // @ts-ignore
+    throw new Error("Failed to fetch shows", response.statusText);
+  }
+
+  const data = await response.json();
+  return data.results;
+};
+
+export const addToTMDB = async (
+  list: string, // either "watchlist" or "favorite"
+  showId: number,
+  isAdding: boolean
+) => {
+  const endpoint = `${TMDB_CONFIG.BASE_URL}/account/${process.env.EXPO_PUBLIC_ACCOUNT_ID}/${list}`;
+
+  const requestBodyParams =
+    list === "watchlist"
+      ? {
+          watchlist: isAdding,
+        }
+      : {
+          favorite: isAdding,
+        };
+
   const response = await fetch(endpoint, {
     method: "POST",
     headers: TMDB_CONFIG.headers,
     body: JSON.stringify({
+      ...requestBodyParams,
       media_type: "tv",
       media_id: showId,
-      watchlist: isAdding,
     }),
   });
 
@@ -43,7 +73,7 @@ export const addToWatchList = async (showId: number, isAdding: boolean) => {
     // @ts-ignore
     throw new Error("Failed to add show to list", response.statusText);
   }
-  const data = await response.json();
 
+  const data = await response.json();
   return data.results;
 };
