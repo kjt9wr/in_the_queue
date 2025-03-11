@@ -3,7 +3,6 @@ import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchAllShows } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import { useRouter } from "expo-router";
 import React from "react";
 import {
   ActivityIndicator,
@@ -15,8 +14,6 @@ import {
 } from "react-native";
 
 const Watching = () => {
-  const router = useRouter();
-
   const {
     data: shows,
     loading: showsLoading,
