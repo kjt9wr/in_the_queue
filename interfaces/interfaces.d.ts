@@ -22,6 +22,7 @@ interface TVShow {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
+  next_episode_to_air: Object;
   original_language: string;
   original_title: string;
   overview: string;

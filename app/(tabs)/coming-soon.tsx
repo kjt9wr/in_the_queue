@@ -20,6 +20,14 @@ const ComingSoon = () => {
     error: detailsError,
   } = useFetch(fetchComingSoonShowsDetails);
 
+  const releaseDatedShows = detailedShows?.filter(
+    (tvShow: TVShow) => tvShow.next_episode_to_air
+  );
+
+  const awaitingReturnShows = detailedShows?.filter(
+    (tvShow: TVShow) => !tvShow.next_episode_to_air
+  );
+
   return (
     <View className="bg-primary flex-1">
       <Image
@@ -45,7 +53,26 @@ const ComingSoon = () => {
                 Coming Soon
               </Text>
               <FlatList
-                data={detailedShows}
+                data={releaseDatedShows}
+                renderItem={({ item }) => <TVShowCard {...item} />}
+                keyExtractor={(item) => item.id.toString()}
+                numColumns={3}
+                columnWrapperStyle={{
+                  justifyContent: "flex-start",
+                  gap: 20,
+                  paddingRight: 5,
+                  marginBottom: 10,
+                }}
+                className="mt-2 pb-32"
+                scrollEnabled={false}
+              />
+            </>
+            <>
+              <Text className="text-lg text-white font-bold mt-5 mb-3">
+                Awaiting Return
+              </Text>
+              <FlatList
+                data={awaitingReturnShows}
                 renderItem={({ item }) => <TVShowCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
