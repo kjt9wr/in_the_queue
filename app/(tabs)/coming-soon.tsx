@@ -1,7 +1,7 @@
 import TVShowCard from "@/components/TVShowCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { fetchAllShows } from "@/services/api";
+import { fetchComingSoonShowsDetails } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import React from "react";
 import {
@@ -15,10 +15,10 @@ import {
 
 const ComingSoon = () => {
   const {
-    data: shows,
-    loading: showsLoading,
-    error: showsError,
-  } = useFetch(() => fetchAllShows());
+    data: detailedShows,
+    loading: detailsLoading,
+    error: detailsError,
+  } = useFetch(fetchComingSoonShowsDetails);
 
   return (
     <View className="bg-primary flex-1">
@@ -34,10 +34,10 @@ const ComingSoon = () => {
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
       >
         <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
-        {showsLoading ? (
+        {detailsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
-        ) : showsError ? (
-          <Text>Error: {showsError?.message}</Text>
+        ) : detailsError ? (
+          <Text>Error: {detailsError?.message}</Text>
         ) : (
           <View>
             <>
@@ -45,7 +45,7 @@ const ComingSoon = () => {
                 Coming Soon
               </Text>
               <FlatList
-                data={shows}
+                data={detailedShows}
                 renderItem={({ item }) => <TVShowCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}

@@ -41,6 +41,14 @@ interface TrendingMovie {
   poster_url: string;
 }
 
+interface ShowFromDB {
+  name: string;
+  release_status: string;
+  party: string;
+  viewing_status: string;
+  TMDB_ID: number;
+}
+
 interface MovieDetails {
   adult: boolean;
   backdrop_path: string | null;

@@ -1,5 +1,9 @@
+import { Query } from "react-native-appwrite";
+import { getShowsFromDB } from "./appwrite";
+
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
+  BASE_URL_V4: "https://api.themoviedb.org/4",
   API_KEY: process.env.EXPO_PUBLIC_TV_API_KEY,
   headers: {
     accept: "application/json",
@@ -28,7 +32,7 @@ export const fetchShows = async ({ query }: { query: string }) => {
 };
 
 export const fetchAllShows = async () => {
-  const endpoint = `${TMDB_CONFIG.BASE_URL}/account/${process.env.EXPO_PUBLIC_ACCOUNT_ID}/favorite/tv`;
+  const endpoint = `${TMDB_CONFIG.BASE_URL_V4}/list/${process.env.EXPO_PUBLIC_LIST_ID}`;
   const response = await fetch(endpoint, {
     method: "GET",
     headers: TMDB_CONFIG.headers,
@@ -76,4 +80,31 @@ export const addToTMDB = async (
 
   const data = await response.json();
   return data.results;
+};
+
+export const fetchComingSoonShowsDetails = async () => {
+  const comingSoonQueries = [
+    Query.equal("Release_Status", ["Awaiting"]),
+    Query.equal("Viewing_Status", ["Caught_Up"]),
+  ];
+  return fetchDetailedShows(comingSoonQueries);
+};
+
+const fetchDetailedShows = async (queries: string[]) => {
+  const showsFromDb = await getShowsFromDB(queries);
+
+  const data = showsFromDb
+    ? Promise.all(
+        showsFromDb.map(
+          async (tvShow: ShowFromDB) =>
+            await (
+              await fetch(`${TMDB_CONFIG.BASE_URL}/tv/${tvShow.TMDB_ID}`, {
+                method: "GET",
+                headers: TMDB_CONFIG.headers,
+              })
+            ).json()
+        )
+      )
+    : [];
+  return data;
 };
