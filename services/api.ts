@@ -84,7 +84,10 @@ export const addToTMDB = async (
 
 export const fetchComingSoonShowsDetails = async () => {
   const comingSoonQueries = [
-    Query.equal("Release_Status", ["Awaiting"]),
+    Query.or([
+      Query.equal("Release_Status", ["Awaiting"]),
+      Query.equal("Release_Status", ["Limbo"]),
+    ]),
     Query.equal("Viewing_Status", ["Caught_Up"]),
   ];
   return fetchDetailedShows(comingSoonQueries);

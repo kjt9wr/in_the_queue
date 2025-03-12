@@ -32,6 +32,7 @@ interface TVShow {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  status: string;
 }
 
 interface TrendingMovie {

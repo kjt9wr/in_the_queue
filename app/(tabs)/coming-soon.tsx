@@ -25,7 +25,13 @@ const ComingSoon = () => {
   );
 
   const awaitingReturnShows = detailedShows?.filter(
-    (tvShow: TVShow) => !tvShow.next_episode_to_air
+    (tvShow: TVShow) =>
+      !tvShow.next_episode_to_air && tvShow.status === "Returning Series"
+  );
+
+  const showsInLimbo = detailedShows?.filter(
+    (tvShow: TVShow) =>
+      !tvShow.next_episode_to_air && tvShow.status !== "Returning Series"
   );
 
   return (
@@ -69,10 +75,29 @@ const ComingSoon = () => {
             </>
             <>
               <Text className="text-lg text-white font-bold mt-5 mb-3">
-                Awaiting Return
+                Awaiting New Season
               </Text>
               <FlatList
                 data={awaitingReturnShows}
+                renderItem={({ item }) => <TVShowCard {...item} />}
+                keyExtractor={(item) => item.id.toString()}
+                numColumns={3}
+                columnWrapperStyle={{
+                  justifyContent: "flex-start",
+                  gap: 20,
+                  paddingRight: 5,
+                  marginBottom: 10,
+                }}
+                className="mt-2 pb-32"
+                scrollEnabled={false}
+              />
+            </>
+            <>
+              <Text className="text-lg text-white font-bold mt-5 mb-3">
+                Uncertain Futures or Awaiting Movies
+              </Text>
+              <FlatList
+                data={showsInLimbo}
                 renderItem={({ item }) => <TVShowCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
