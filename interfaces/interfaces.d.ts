@@ -19,6 +19,7 @@ interface TVShow {
   vote_average: number;
   vote_count: number;
   status: string;
+  party: string;
 }
 
 interface TrendingMovie {
@@ -31,9 +32,9 @@ interface TrendingMovie {
 
 interface ShowFromDB {
   name: string;
-  release_status: string;
-  party: string;
-  viewing_status: string;
+  Release_Status: string;
+  Party: string;
+  Viewing_Status: string;
   TMDB_ID: number;
 }
 

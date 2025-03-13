@@ -103,16 +103,19 @@ const fetchDetailedShows = async (queries: string[]) => {
 
   const data = showsFromDb
     ? Promise.all(
-        showsFromDb.map(
-          async (tvShow: ShowFromDB) =>
-            await (
+        showsFromDb.map(async (tvShow: ShowFromDB) => {
+          return {
+            ...(await (
               await fetch(`${TMDB_CONFIG.BASE_URL}/tv/${tvShow.TMDB_ID}`, {
                 method: "GET",
                 headers: TMDB_CONFIG.headers,
               })
-            ).json()
-        )
+            ).json()),
+            party: tvShow.Party,
+          };
+        })
       )
     : [];
+
   return data;
 };
