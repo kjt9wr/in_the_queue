@@ -98,6 +98,16 @@ export const fetchShowsintheQueue = async () => {
   return fetchDetailedShows(queueQuery);
 };
 
+export const fetchWatchingNow = async () => {
+  const watchingQuery = [
+    Query.or([
+      Query.equal("Viewing_Status", ["Currently_Watching"]),
+      Query.equal("Viewing_Status", ["Rewatching"]),
+    ]),
+  ];
+  return fetchDetailedShows(watchingQuery);
+};
+
 const fetchDetailedShows = async (queries: string[]) => {
   const showsFromDb = await getShowsFromDB(queries);
 

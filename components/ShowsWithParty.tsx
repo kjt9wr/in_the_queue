@@ -3,17 +3,17 @@ import React from "react";
 import TVShowCard from "./TVShowCard";
 
 interface Props {
-  party: string;
+  sectionTitle: string;
   shows?: TVShow[];
 }
 
-const ShowsWithParty = ({ party, shows }: Props) => {
+const ShowsWithParty = ({ sectionTitle, shows }: Props) => {
   return (
     <View>
       {shows && shows.length > 0 && (
         <>
           <Text className="text-lg text-white font-bold mt-5 mb-3">
-            {party} Queue
+            {sectionTitle}
           </Text>
           <FlatList
             data={shows}

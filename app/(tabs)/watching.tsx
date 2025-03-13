@@ -1,24 +1,34 @@
-import TVShowCard from "@/components/TVShowCard";
+import ShowsWithParty from "@/components/ShowsWithParty";
+import { PARTY } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { fetchAllShows } from "@/services/api";
+import { fetchWatchingNow } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import React from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
 
 const Watching = () => {
   const {
     data: shows,
     loading: showsLoading,
     error: showsError,
-  } = useFetch(() => fetchAllShows());
+  } = useFetch(fetchWatchingNow);
+
+  const soloShows = shows?.filter(
+    (tvShow: TVShow) => tvShow.party === PARTY.SOLO
+  );
+
+  const friendShows = shows?.filter(
+    (tvShow: TVShow) => tvShow.party === PARTY.FRIENDS
+  );
+
+  const familyShows = shows?.filter(
+    (tvShow: TVShow) => tvShow.party === PARTY.FAMILY
+  );
+
+  const christineShows = shows?.filter(
+    (tvShow: TVShow) => tvShow.party === PARTY.CHRISTINE
+  );
 
   return (
     <View className="bg-primary flex-1">
@@ -29,7 +39,7 @@ const Watching = () => {
       />
 
       <ScrollView
-        className="flex-1 px-5"
+        className="flex-1 px-5 mb-32"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
       >
@@ -41,24 +51,26 @@ const Watching = () => {
         ) : (
           <View>
             <>
-              <Text className="text-lg text-white font-bold mt-5 mb-3">
+              <Text className="text-2xl text-white font-bold mt-5 mb-3">
                 Watching Now
               </Text>
-              <FlatList
-                data={shows}
-                renderItem={({ item }) => <TVShowCard {...item} />}
-                keyExtractor={(item) => item.id.toString()}
-                numColumns={3}
-                columnWrapperStyle={{
-                  justifyContent: "flex-start",
-                  gap: 20,
-                  paddingRight: 5,
-                  marginBottom: 10,
-                }}
-                className="mt-2 pb-32"
-                scrollEnabled={false}
-              />
             </>
+            <ShowsWithParty
+              shows={soloShows}
+              sectionTitle={`Watching ${PARTY.SOLO}`}
+            />
+            <ShowsWithParty
+              shows={friendShows}
+              sectionTitle={`Watching with ${PARTY.FRIENDS}`}
+            />
+            <ShowsWithParty
+              shows={familyShows}
+              sectionTitle={`Watching with ${PARTY.FAMILY}`}
+            />
+            <ShowsWithParty
+              shows={christineShows}
+              sectionTitle={`Watching with ${PARTY.CHRISTINE}`}
+            />
           </View>
         )}
       </ScrollView>

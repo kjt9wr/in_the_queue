@@ -1,20 +1,13 @@
 import SearchBar from "@/components/SearchBar";
 import ShowsWithParty from "@/components/ShowsWithParty";
-import TVShowCard from "@/components/TVShowCard";
+import { PARTY } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchShowsintheQueue } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
 import React from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
 
 const Index = () => {
   const router = useRouter();
@@ -26,19 +19,19 @@ const Index = () => {
   } = useFetch(fetchShowsintheQueue);
 
   const soloQueueShows = allQueuedShows?.filter(
-    (tvShow: TVShow) => tvShow.party === "Solo"
+    (tvShow: TVShow) => tvShow.party === PARTY.SOLO
   );
 
   const friendQueueShows = allQueuedShows?.filter(
-    (tvShow: TVShow) => tvShow.party === "Friends"
+    (tvShow: TVShow) => tvShow.party === PARTY.FRIENDS
   );
 
   const familyQueueShows = allQueuedShows?.filter(
-    (tvShow: TVShow) => tvShow.party === "Family"
+    (tvShow: TVShow) => tvShow.party === PARTY.FAMILY
   );
 
   const christineQueueShows = allQueuedShows?.filter(
-    (tvShow: TVShow) => tvShow.party === "Christine"
+    (tvShow: TVShow) => tvShow.party === PARTY.CHRISTINE
   );
 
   return (
@@ -70,10 +63,22 @@ const Index = () => {
                 In The Queue
               </Text>
             </>
-            <ShowsWithParty shows={soloQueueShows} party={"Solo"} />
-            <ShowsWithParty shows={friendQueueShows} party={"Friends"} />
-            <ShowsWithParty shows={familyQueueShows} party={"Family"} />
-            <ShowsWithParty shows={christineQueueShows} party={"Christine"} />
+            <ShowsWithParty
+              shows={soloQueueShows}
+              sectionTitle={`${PARTY.SOLO} Queue`}
+            />
+            <ShowsWithParty
+              shows={friendQueueShows}
+              sectionTitle={`${PARTY.FRIENDS} Queue`}
+            />
+            <ShowsWithParty
+              shows={familyQueueShows}
+              sectionTitle={`${PARTY.FAMILY} Queue`}
+            />
+            <ShowsWithParty
+              shows={christineQueueShows}
+              sectionTitle={`${PARTY.CHRISTINE} Queue`}
+            />
           </View>
         )}
       </ScrollView>
