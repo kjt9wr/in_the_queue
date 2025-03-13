@@ -55,7 +55,7 @@ const ComingSoon = () => {
         ) : (
           <View>
             <>
-              <Text className="text-lg text-white font-bold mt-5 mb-3">
+              <Text className="text-2xl text-white font-bold mt-5 mb-3">
                 Coming Soon
               </Text>
               <FlatList
@@ -69,12 +69,12 @@ const ComingSoon = () => {
                   paddingRight: 5,
                   marginBottom: 10,
                 }}
-                className="mt-2 pb-32"
+                className="mt-2 pb-12"
                 scrollEnabled={false}
               />
             </>
             <>
-              <Text className="text-lg text-white font-bold mt-5 mb-3">
+              <Text className="text-2xl text-white font-bold mt-5 mb-3">
                 Awaiting New Season
               </Text>
               <FlatList
@@ -88,12 +88,12 @@ const ComingSoon = () => {
                   paddingRight: 5,
                   marginBottom: 10,
                 }}
-                className="mt-2 pb-32"
+                className="mt-2 pb-12"
                 scrollEnabled={false}
               />
             </>
             <>
-              <Text className="text-lg text-white font-bold mt-5 mb-3">
+              <Text className="text-2xl text-white font-bold mt-5 mb-3">
                 Uncertain Futures or Awaiting Movies
               </Text>
               <FlatList

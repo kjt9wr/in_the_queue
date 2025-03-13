@@ -93,6 +93,11 @@ export const fetchComingSoonShowsDetails = async () => {
   return fetchDetailedShows(comingSoonQueries);
 };
 
+export const fetchShowsintheQueue = async () => {
+  const queueQuery = [Query.equal("Viewing_Status", ["Queue"])];
+  return fetchDetailedShows(queueQuery);
+};
+
 const fetchDetailedShows = async (queries: string[]) => {
   const showsFromDb = await getShowsFromDB(queries);
 

@@ -1,20 +1,4 @@
 //TODO Update these
-interface Movie {
-  id: number;
-  title: string;
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
 
 interface TVShow {
   id: number;
@@ -22,7 +6,9 @@ interface TVShow {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
-  next_episode_to_air: Object;
+  next_episode_to_air?: {
+    air_date: string;
+  };
   original_language: string;
   original_title: string;
   overview: string;

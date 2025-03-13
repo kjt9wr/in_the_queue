@@ -2,7 +2,7 @@ import SearchBar from "@/components/SearchBar";
 import TVShowCard from "@/components/TVShowCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { fetchShows } from "@/services/api";
+import { fetchShowsintheQueue } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -22,7 +22,7 @@ const Index = () => {
     data: shows,
     loading: showsLoading,
     error: showsError,
-  } = useFetch(() => fetchShows({ query: "" }));
+  } = useFetch(fetchShowsintheQueue);
 
   return (
     <View className="bg-primary flex-1">
@@ -50,7 +50,7 @@ const Index = () => {
             />
             <>
               <Text className="text-lg text-white font-bold mt-5 mb-3">
-                Watch List
+                In The Queue
               </Text>
               <FlatList
                 data={shows}
