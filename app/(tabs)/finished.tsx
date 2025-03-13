@@ -1,7 +1,7 @@
 import TVShowCard from "@/components/TVShowCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { fetchAllShows } from "@/services/api";
+import { fetchAllShows, fetchFinishedShows } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import React from "react";
 import {
@@ -18,7 +18,7 @@ const Finished = () => {
     data: shows,
     loading: showsLoading,
     error: showsError,
-  } = useFetch(() => fetchAllShows());
+  } = useFetch(fetchFinishedShows);
 
   return (
     <View className="bg-primary flex-1">
