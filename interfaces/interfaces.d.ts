@@ -20,6 +20,7 @@ interface TVShow {
   vote_count: number;
   status: string;
   party: string;
+  viewing_status: string;
 }
 
 interface TrendingMovie {

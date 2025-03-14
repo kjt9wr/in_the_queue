@@ -130,6 +130,7 @@ const fetchDetailedShows = async (queries: string[]) => {
               })
             ).json()),
             party: tvShow.Party,
+            viewing_status: tvShow.Viewing_Status,
           };
         })
       )

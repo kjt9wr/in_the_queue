@@ -23,7 +23,7 @@ const ShowsCarousel = ({ sectionTitle, shows }: Props) => {
             className="mb-4 mt-3"
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
-              gap: 14,
+              gap: 26,
             }}
             ItemSeparatorComponent={() => <View className="w-4" />}
           />
