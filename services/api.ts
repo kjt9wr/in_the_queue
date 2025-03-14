@@ -138,3 +138,29 @@ const fetchDetailedShows = async (queries: string[]) => {
 
   return data;
 };
+
+export const fetchSingleShowDetails = async (showId: string) => {
+  const showFromDb = await getShowsFromDB([
+    Query.equal("TMDB_ID", [Number(showId)]),
+  ]);
+  try {
+    const response = await fetch(`${TMDB_CONFIG.BASE_URL}/tv/${showId}`, {
+      method: "GET",
+      headers: TMDB_CONFIG.headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch show details: ${response.statusText}`);
+    }
+
+    let detailedShow = await response.json();
+
+    if (showFromDb && showFromDb.length > 0) {
+      detailedShow = { ...detailedShow, ...showFromDb[0] };
+    }
+    return detailedShow;
+  } catch (error) {
+    console.error("Error fetching show details:", error);
+    throw error;
+  }
+};

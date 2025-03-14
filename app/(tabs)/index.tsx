@@ -42,7 +42,6 @@ const Index = () => {
         className="absolute w-full z-0"
         resizeMode="cover"
       />
-
       <ScrollView
         className="flex-1 px-5 mb-32"
         showsVerticalScrollIndicator={false}
@@ -59,11 +58,10 @@ const Index = () => {
               onPress={() => router.push("/search")}
               placeholder="Search for a TV show"
             />
-            <>
-              <Text className="text-2xl text-white font-bold mt-5 mb-3">
-                In The Queue
-              </Text>
-            </>
+            <Text className="text-2xl text-white font-bold mt-5 mb-3">
+              In The Queue
+            </Text>
+
             <ShowsCarousel
               shows={soloQueueShows}
               sectionTitle={`${PARTY.SOLO} Queue`}
