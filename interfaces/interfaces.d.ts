@@ -87,6 +87,5 @@ interface MovieDetails {
 }
 
 interface TrendingCardProps {
-  movie: TrendingMovie;
-  index: number;
+  tvShow: TVShow;
 }

@@ -1,5 +1,6 @@
 import SearchBar from "@/components/SearchBar";
-import ShowsWithParty from "@/components/ShowsWithParty";
+import ShowsCarousel from "@/components/ShowsCarousel";
+
 import { PARTY } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -63,19 +64,19 @@ const Index = () => {
                 In The Queue
               </Text>
             </>
-            <ShowsWithParty
+            <ShowsCarousel
               shows={soloQueueShows}
               sectionTitle={`${PARTY.SOLO} Queue`}
             />
-            <ShowsWithParty
+            <ShowsCarousel
               shows={friendQueueShows}
               sectionTitle={`${PARTY.FRIENDS} Queue`}
             />
-            <ShowsWithParty
+            <ShowsCarousel
               shows={familyQueueShows}
               sectionTitle={`${PARTY.FAMILY} Queue`}
             />
-            <ShowsWithParty
+            <ShowsCarousel
               shows={christineQueueShows}
               sectionTitle={`${PARTY.CHRISTINE} Queue`}
             />

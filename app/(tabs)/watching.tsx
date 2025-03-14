@@ -1,4 +1,4 @@
-import ShowsWithParty from "@/components/ShowsWithParty";
+import ShowsCarousel from "@/components/ShowsCarousel";
 import { PARTY } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -55,19 +55,19 @@ const Watching = () => {
                 Watching Now
               </Text>
             </>
-            <ShowsWithParty
+            <ShowsCarousel
               shows={soloShows}
               sectionTitle={`Watching ${PARTY.SOLO}`}
             />
-            <ShowsWithParty
+            <ShowsCarousel
               shows={friendShows}
               sectionTitle={`Watching with ${PARTY.FRIENDS}`}
             />
-            <ShowsWithParty
+            <ShowsCarousel
               shows={familyShows}
               sectionTitle={`Watching with ${PARTY.FAMILY}`}
             />
-            <ShowsWithParty
+            <ShowsCarousel
               shows={christineShows}
               sectionTitle={`Watching with ${PARTY.CHRISTINE}`}
             />
