@@ -1,10 +1,11 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import useFetch from "@/services/useFetch";
-import { fetchSingleShowDetails } from "@/services/api";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { icons } from "@/constants/icons";
+import { fetchSingleShowDetails } from "@/services/api";
+import useFetch from "@/services/useFetch";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React from "react";
+import { Image, ScrollView, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ShowActions from "./ShowActions";
 
 interface ShowInfoProps {
   label: string;
@@ -43,9 +44,6 @@ const ShowDetails = () => {
               resizeMode="stretch"
             />
           </View>
-          {show && !show.TMDB_ID && (
-            <Text className="text-white">add to db?</Text>
-          )}
           <View className="flex-col items-start justify-center mt-5 px-5">
             <Text className="text-white font-bold text-xl">{show?.name}</Text>
             <View className="flex-row items-center gap-x-1 mt-2">
@@ -79,6 +77,9 @@ const ShowDetails = () => {
               }
             />
           </View>
+          {show && (
+            <ShowActions loading={loading} status={show.Viewing_Status} />
+          )}
         </ScrollView>
       )}
     </SafeAreaView>
