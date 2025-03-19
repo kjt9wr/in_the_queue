@@ -22,7 +22,6 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
     setShowForm(false);
   };
 
-  console.log(show);
   const onSubmit = async (page: string) => {
     const showToAdd: ShowFromDB = {
       Name: show?.name || "",

@@ -31,7 +31,6 @@ export const updateShow = async (tvShow: ShowFromDB) => {
     const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
       Query.equal("TMDB_ID", tvShow.TMDB_ID),
     ]);
-    // console.log(result);
 
     // already in DB
     if (result.documents.length > 0) {

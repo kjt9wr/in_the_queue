@@ -7,7 +7,7 @@ import { images } from "@/constants/images";
 const CarouselCard = ({ id, name, poster_path, viewing_status }: TVShow) => {
   return (
     <Link href={`/shows/${id}`} asChild>
-      <TouchableOpacity className="w-32 relative pl-5">
+      <TouchableOpacity className="w-32 relative mr-5 pl-5">
         <Image
           source={{
             uri: poster_path
