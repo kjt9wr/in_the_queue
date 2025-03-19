@@ -5,7 +5,7 @@ import { determineReleaseStatus } from "@/services/helpers";
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 interface ShowActionsProps {
   loading: boolean;
@@ -41,10 +41,11 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
     <View>
       {showForm && (
         <View className="mt-6">
+          <Text className="text-white">Add to Queue: </Text>
           <Picker
             selectedValue={queue}
             onValueChange={(itemValue) => setQueue(itemValue)}
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "#221F3D", color: "white" }}
             prompt="Select a Queue"
           >
             <Picker.Item label={PARTY.SOLO} value={PARTY.SOLO} />
