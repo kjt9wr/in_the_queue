@@ -1,14 +1,19 @@
 import CustomButton from "@/components/CustomButton";
-import { PARTY } from "@/constants/enums";
+import { PARTY, RELEASE_STATUS } from "@/constants/enums";
+import { updateShow } from "@/services/appwrite";
+import { determineReleaseStatus } from "@/services/helpers";
 import { Picker } from "@react-native-picker/picker";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 
 interface ShowActionsProps {
   loading: boolean;
   status: string;
+  show?: TVShow;
 }
-const ShowActions = ({ loading, status }: ShowActionsProps) => {
+const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
+  const router = useRouter();
   const [queue, setQueue] = useState<string>(PARTY.SOLO);
   const [showForm, setShowForm] = useState(false);
 
@@ -16,6 +21,23 @@ const ShowActions = ({ loading, status }: ShowActionsProps) => {
     setQueue(PARTY.SOLO);
     setShowForm(false);
   };
+
+  console.log(show);
+  const onSubmit = async (page: string) => {
+    const showToAdd: ShowFromDB = {
+      Name: show?.name || "",
+      Release_Status: determineReleaseStatus(show!), //implement this tbd
+      Party: queue,
+      Viewing_Status: page,
+      TMDB_ID: show?.id || 0,
+    };
+
+    await updateShow(showToAdd).then(() => {
+      reset();
+      router.back();
+    });
+  };
+
   return (
     <View>
       {showForm && (
@@ -46,7 +68,7 @@ const ShowActions = ({ loading, status }: ShowActionsProps) => {
           <CustomButton
             title={`Add to ${queue} queue`}
             handlePress={() => {
-              setShowForm(true);
+              onSubmit("Queue");
             }}
             containerStyles="mt-7 bg-green-700"
             isLoading={loading}

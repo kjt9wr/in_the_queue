@@ -78,7 +78,11 @@ const ShowDetails = () => {
             />
           </View>
           {show && (
-            <ShowActions loading={loading} status={show.Viewing_Status} />
+            <ShowActions
+              show={show}
+              loading={loading}
+              status={show.Viewing_Status}
+            />
           )}
         </ScrollView>
       )}

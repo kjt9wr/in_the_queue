@@ -18,6 +18,7 @@ const ComingSoon = () => {
     data: detailedShows,
     loading: detailsLoading,
     error: detailsError,
+    refetch,
   } = useFetch(fetchComingSoonShowsDetails);
 
   const releaseDatedShows = detailedShows?.filter(

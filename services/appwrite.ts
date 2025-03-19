@@ -25,3 +25,38 @@ export const getShowsFromDB = async (
     return undefined;
   }
 };
+
+export const updateShow = async (tvShow: ShowFromDB) => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      Query.equal("TMDB_ID", tvShow.TMDB_ID),
+    ]);
+    // console.log(result);
+
+    // already in DB
+    if (result.documents.length > 0) {
+      const existingShow = result.documents[0];
+
+      await database.updateDocument(
+        DATABASE_ID,
+        COLLECTION_ID,
+        existingShow.$id,
+        {
+          Party: tvShow.Party,
+          Viewing_Status: tvShow.Viewing_Status,
+          Release_Status: tvShow.Release_Status,
+        }
+      );
+    } else {
+      await database.createDocument(
+        DATABASE_ID,
+        COLLECTION_ID,
+        ID.unique(),
+        tvShow
+      );
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

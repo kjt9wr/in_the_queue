@@ -9,6 +9,7 @@ interface TVShow {
   next_episode_to_air?: {
     air_date: string;
   };
+  last_air_date: string;
   original_language: string;
   original_title: string;
   overview: string;
@@ -24,7 +25,7 @@ interface TVShow {
 }
 
 interface ShowFromDB {
-  name: string;
+  Name: string;
   Release_Status: string;
   Party: string;
   Viewing_Status: string;

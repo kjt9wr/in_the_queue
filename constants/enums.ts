@@ -4,3 +4,10 @@ export enum PARTY {
   FAMILY = "Family",
   CHRISTINE = "Christine",
 }
+
+export enum RELEASE_STATUS {
+  AIRING = "Airing",
+  AWAITING = "Awaiting",
+  LIMBO = "Limbo",
+  FINISHED = "Finished",
+}
