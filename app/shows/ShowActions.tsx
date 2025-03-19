@@ -1,5 +1,5 @@
 import CustomButton from "@/components/CustomButton";
-import { PARTY, RELEASE_STATUS } from "@/constants/enums";
+import { PARTY, VIEWING_STATUS } from "@/constants/enums";
 import { updateShow } from "@/services/appwrite";
 import { determineReleaseStatus } from "@/services/helpers";
 import { Picker } from "@react-native-picker/picker";
@@ -10,24 +10,29 @@ import { View } from "react-native";
 interface ShowActionsProps {
   loading: boolean;
   status: string;
-  show?: TVShow;
+  show: TVShow;
 }
 const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
   const router = useRouter();
   const [queue, setQueue] = useState<string>(PARTY.SOLO);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState<string>("");
 
   const reset = () => {
     setQueue(PARTY.SOLO);
-    setShowForm(false);
+    setShowForm("");
   };
 
-  const onSubmit = async (page: string) => {
+  const startWatching = async () => {
+    onSubmit(VIEWING_STATUS.CURRENTLY_WATCHING);
+  };
+
+  const onSubmit = async (nextStatus: string) => {
     const showToAdd: ShowFromDB = {
       Name: show?.name || "",
-      Release_Status: determineReleaseStatus(show!), //implement this tbd
-      Party: queue,
-      Viewing_Status: page,
+      Release_Status: determineReleaseStatus(show),
+      Party:
+        nextStatus === VIEWING_STATUS.CURRENTLY_WATCHING ? show.party : queue,
+      Viewing_Status: nextStatus,
       TMDB_ID: show?.id || 0,
     };
 
@@ -54,6 +59,7 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
           </Picker>
         </View>
       )}
+      {/* Select Form */}
       {showForm && (
         <View className="flex-row gap-x-6 mt-2">
           <CustomButton
@@ -64,33 +70,41 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
             containerStyles="mt-7 text-blue-700 font-semibold border border-gray-500 rounded"
             isLoading={loading}
           />
-          <CustomButton
-            title={`Add to ${queue} queue`}
-            handlePress={() => {
-              onSubmit("Queue");
-            }}
-            containerStyles="mt-7 bg-green-700"
-            isLoading={loading}
-          />
+          {showForm === VIEWING_STATUS.QUEUE && (
+            <CustomButton
+              title={`Add to ${queue} queue`}
+              handlePress={() => {
+                onSubmit(VIEWING_STATUS.QUEUE);
+              }}
+              containerStyles="mt-7 bg-green-700"
+              isLoading={loading}
+            />
+          )}
         </View>
       )}
-      {status !== "Queue" && !showForm && (
+      {/* Action Buttons */}
+      {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
-          <CustomButton
-            title="Add to Queue"
-            handlePress={() => {
-              setShowForm(true);
-            }}
-            containerStyles="mt-7 bg-green-700"
-            isLoading={loading}
-          />
-
-          <CustomButton
-            title="Start Watching"
-            handlePress={() => {}}
-            containerStyles="mt-7 bg-green-700"
-            isLoading={loading}
-          />
+          {status !== VIEWING_STATUS.QUEUE && (
+            <CustomButton
+              title="Add to Queue"
+              handlePress={() => {
+                setShowForm(VIEWING_STATUS.QUEUE);
+              }}
+              containerStyles="mt-7 bg-green-700"
+              isLoading={loading}
+            />
+          )}
+          {status === VIEWING_STATUS.QUEUE && (
+            <CustomButton
+              title="Start Watching"
+              handlePress={() => {
+                startWatching();
+              }}
+              containerStyles="mt-7 bg-green-700"
+              isLoading={loading}
+            />
+          )}
         </View>
       )}
     </View>
