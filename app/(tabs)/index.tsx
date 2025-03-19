@@ -64,7 +64,7 @@ const Index = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
+        <Image source={icons.logo} className="w-12 h-12 mt-20 mb-5 mx-auto" />
         {showsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : showsError ? (

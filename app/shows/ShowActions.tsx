@@ -86,7 +86,7 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               handlePress={() => {
                 setShowForm(VIEWING_STATUS.QUEUE);
               }}
-              containerStyles="mt-7 bg-green-700"
+              containerStyles="mt-7 bg-blue-300"
               isLoading={loading}
             />
           )}
@@ -107,7 +107,7 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               handlePress={() => {
                 onSubmit(VIEWING_STATUS.CAUGHT_UP);
               }}
-              containerStyles="mt-7 bg-green-700"
+              containerStyles="mt-7 bg-red-400"
               isLoading={loading}
             />
           )}
