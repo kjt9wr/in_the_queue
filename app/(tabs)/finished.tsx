@@ -1,13 +1,14 @@
 import TVShowCard from "@/components/TVShowCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { fetchAllShows, fetchFinishedShows } from "@/services/api";
+import { fetchFinishedShows } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import React from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
   Image,
+  RefreshControl,
   ScrollView,
   Text,
   View,
@@ -18,8 +19,16 @@ const Finished = () => {
     data: shows,
     loading: showsLoading,
     error: showsError,
+    refetch,
   } = useFetch(fetchFinishedShows);
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  };
   return (
     <View className="bg-primary flex-1">
       <Image
@@ -32,6 +41,9 @@ const Finished = () => {
         className="flex-1 px-5"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
         {showsLoading ? (

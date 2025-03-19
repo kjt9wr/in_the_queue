@@ -7,16 +7,25 @@ import { images } from "@/constants/images";
 import { fetchShowsintheQueue } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
-import React from "react";
-import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  ActivityIndicator,
+  Image,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Index = () => {
   const router = useRouter();
-
+  const [refreshing, setRefreshing] = useState(false);
   const {
     data: allQueuedShows,
     loading: showsLoading,
     error: showsError,
+    refetch,
   } = useFetch(fetchShowsintheQueue);
 
   const soloQueueShows = allQueuedShows?.filter(
@@ -35,6 +44,11 @@ const Index = () => {
     (tvShow: TVShow) => tvShow.party === PARTY.CHRISTINE
   );
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  };
   return (
     <View className="bg-primary flex-1">
       <Image
@@ -46,6 +60,9 @@ const Index = () => {
         className="flex-1 px-5 mb-32"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
         {showsLoading ? (

@@ -3,11 +3,12 @@ import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchComingSoonShowsDetails } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import React from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
   Image,
+  RefreshControl,
   ScrollView,
   Text,
   View,
@@ -18,8 +19,10 @@ const ComingSoon = () => {
     data: detailedShows,
     loading: detailsLoading,
     error: detailsError,
+    refetch,
   } = useFetch(fetchComingSoonShowsDetails);
 
+  const [refreshing, setRefreshing] = useState(false);
   const releaseDatedShows = detailedShows?.filter(
     (tvShow: TVShow) => tvShow.next_episode_to_air
   );
@@ -34,6 +37,12 @@ const ComingSoon = () => {
       !tvShow.next_episode_to_air && tvShow.status !== "Returning Series"
   );
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  };
+
   return (
     <View className="bg-primary flex-1">
       <Image
@@ -46,6 +55,9 @@ const ComingSoon = () => {
         className="flex-1 px-5"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
         {detailsLoading ? (
