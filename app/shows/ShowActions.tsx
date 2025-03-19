@@ -22,18 +22,13 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
     setShowForm("");
   };
 
-  const startWatching = async () => {
-    onSubmit(VIEWING_STATUS.CURRENTLY_WATCHING);
-  };
-
-  const onSubmit = async (nextStatus: string) => {
+  const onSubmit = async (nextViewingStatus: string) => {
     const showToAdd: ShowFromDB = {
-      Name: show?.name || "",
+      Name: show.name,
       Release_Status: determineReleaseStatus(show),
-      Party:
-        nextStatus === VIEWING_STATUS.CURRENTLY_WATCHING ? show.party : queue,
-      Viewing_Status: nextStatus,
-      TMDB_ID: show?.id || 0,
+      Party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : show.party,
+      Viewing_Status: nextViewingStatus,
+      TMDB_ID: show.id,
     };
 
     await updateShow(showToAdd).then(() => {
@@ -99,7 +94,18 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
             <CustomButton
               title="Start Watching"
               handlePress={() => {
-                startWatching();
+                onSubmit(VIEWING_STATUS.CURRENTLY_WATCHING);
+              }}
+              containerStyles="mt-7 bg-green-700"
+              isLoading={loading}
+            />
+          )}
+          {(status === VIEWING_STATUS.CURRENTLY_WATCHING ||
+            status === VIEWING_STATUS.REWATCHING) && (
+            <CustomButton
+              title={show.status === "Ended" ? "Finish Show" : "Caught Up"}
+              handlePress={() => {
+                onSubmit(VIEWING_STATUS.CAUGHT_UP);
               }}
               containerStyles="mt-7 bg-green-700"
               isLoading={loading}
