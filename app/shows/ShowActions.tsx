@@ -1,5 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import { PARTY, VIEWING_STATUS } from "@/constants/enums";
+import { icons } from "@/constants/icons";
 import { updateShow } from "@/services/appwrite";
 import { determineReleaseStatus } from "@/services/helpers";
 import { Picker } from "@react-native-picker/picker";
@@ -65,6 +66,7 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
             }}
             containerStyles="mt-7 text-blue-700 font-semibold border border-gray-500 rounded"
             isLoading={loading}
+            icon={null}
           />
           {showForm === VIEWING_STATUS.QUEUE && (
             <CustomButton
@@ -72,8 +74,9 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               handlePress={() => {
                 onSubmit(VIEWING_STATUS.QUEUE);
               }}
-              containerStyles="mt-7 bg-green-700"
+              containerStyles="mt-7 bg-blue-300"
               isLoading={loading}
+              icon={null}
             />
           )}
         </View>
@@ -89,6 +92,8 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               }}
               containerStyles="mt-7 bg-blue-300"
               isLoading={loading}
+              icon={icons.enqueue}
+              iconStyles="w-8 mr-3"
             />
           )}
           {status === VIEWING_STATUS.QUEUE && (
@@ -99,6 +104,8 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               }}
               containerStyles="mt-7 bg-green-700"
               isLoading={loading}
+              icon={icons.play}
+              iconStyles="w-8 mr-2"
             />
           )}
           {(status === VIEWING_STATUS.CURRENTLY_WATCHING ||
@@ -110,6 +117,8 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               }}
               containerStyles="mt-7 bg-red-400"
               isLoading={loading}
+              icon={icons.check}
+              iconStyles="w-8"
             />
           )}
         </View>
