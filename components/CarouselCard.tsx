@@ -18,20 +18,12 @@ const CarouselCard = ({ id, name, poster_path, viewing_status }: TVShow) => {
           resizeMode="cover"
         />
         {viewing_status === "Rewatching" && (
-          <View className="absolute top-2 -left-3.5 px-6 py-1 rounded-full">
-            <MaskedView
-              maskElement={
-                <Text className="font-bold text-white text-6xl">
-                  Rewatching
-                </Text>
-              }
-            >
-              <Image
-                source={images.rankingGradient}
-                className="size-14"
-                resizeMode="cover"
-              />
-            </MaskedView>
+          <View className="absolute -bottom-12 -right-0.5 px-2 py-1 rounded-full">
+            <Image
+              source={images.rewatching}
+              className="w-20 h-48"
+              resizeMode="contain"
+            />
           </View>
         )}
 

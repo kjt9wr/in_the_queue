@@ -115,7 +115,7 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               handlePress={() => {
                 onSubmit(VIEWING_STATUS.CAUGHT_UP);
               }}
-              containerStyles="mt-7 bg-red-400"
+              containerStyles="mt-7 bg-purple-400"
               isLoading={loading}
               icon={icons.check}
               iconStyles="w-8"
