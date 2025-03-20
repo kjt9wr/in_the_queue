@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "InTheQueue",
+    "name": "In The Queue",
     "slug": "in_the_queue",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptiveIcon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#201E2E"
       },
       "package": "com.kjt.inthequeue"
@@ -31,7 +31,7 @@
           "image": "./assets/images/logo.png",
           "imageWidth": 200,
           "resizeMode": "cover",
-          "backgroundColor": "#444351"
+          "backgroundColor": "#201E2E"
         }
       ]
     ],
