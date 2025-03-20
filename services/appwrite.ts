@@ -59,3 +59,21 @@ export const updateShow = async (tvShow: ShowFromDB) => {
     throw error;
   }
 };
+
+export const deleteShow = async (tmdb_id: number) => {
+  try {
+    const showFromDatabase = await database.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID,
+      [Query.equal("TMDB_ID", tmdb_id)]
+    );
+    database.deleteDocument(
+      DATABASE_ID,
+      COLLECTION_ID,
+      showFromDatabase.documents[0].$id
+    );
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

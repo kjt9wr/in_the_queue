@@ -1,7 +1,7 @@
 import CustomButton from "@/components/CustomButton";
 import { PARTY, VIEWING_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
-import { updateShow } from "@/services/appwrite";
+import { deleteShow, updateShow } from "@/services/appwrite";
 import { determineReleaseStatus } from "@/services/helpers";
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
@@ -33,6 +33,13 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
     };
 
     await updateShow(showToAdd).then(() => {
+      reset();
+      router.back();
+    });
+  };
+
+  const onDelete = async (showId: number) => {
+    await deleteShow(showId).then(() => {
       reset();
       router.back();
     });
@@ -106,6 +113,19 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               isLoading={loading}
               icon={icons.play}
               iconStyles="w-8 mr-2"
+            />
+          )}
+          {status === VIEWING_STATUS.QUEUE && (
+            <CustomButton
+              title="Remove"
+              handlePress={() => {
+                onDelete(show.id);
+              }}
+              containerStyles="mt-7 bg-red-700"
+              isLoading={loading}
+              textStyles="mr-2"
+              icon={icons.trash}
+              iconStyles="w-6 mx-2"
             />
           )}
           {(status === VIEWING_STATUS.CURRENTLY_WATCHING ||
