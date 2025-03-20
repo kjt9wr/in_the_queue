@@ -1,9 +1,11 @@
 import TVShowCard from "@/components/TVShowCard";
+import { RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchComingSoonShowsDetails } from "@/services/api";
+import { updateShow } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -26,6 +28,25 @@ const ComingSoon = () => {
   const releaseDatedShows = detailedShows?.filter(
     (tvShow: TVShow) => tvShow.next_episode_to_air
   );
+
+  useEffect(() => {
+    releaseDatedShows?.forEach((show: TVShow) => {
+      if (show.next_episode_to_air!.episode_number > 1) {
+        const showToAdd: ShowFromDB = {
+          Name: show.name,
+          Release_Status: RELEASE_STATUS.AIRING,
+          Party: show.party,
+          Viewing_Status: VIEWING_STATUS.QUEUE,
+          TMDB_ID: show.id,
+        };
+        try {
+          updateShow(showToAdd);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
+  }, [releaseDatedShows]);
 
   const awaitingReturnShows = detailedShows?.filter(
     (tvShow: TVShow) =>

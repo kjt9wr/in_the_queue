@@ -74,7 +74,7 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               handlePress={() => {
                 onSubmit(VIEWING_STATUS.QUEUE);
               }}
-              containerStyles="mt-7 bg-blue-300"
+              containerStyles="mt-7 bg-blue-400"
               isLoading={loading}
               icon={null}
             />
@@ -90,7 +90,7 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
               handlePress={() => {
                 setShowForm(VIEWING_STATUS.QUEUE);
               }}
-              containerStyles="mt-7 bg-blue-300"
+              containerStyles="mt-7 bg-blue-400"
               isLoading={loading}
               icon={icons.enqueue}
               iconStyles="w-8 mr-3"
