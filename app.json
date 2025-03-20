@@ -13,8 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
-        "backgroundColor": "#444350"
+        "foregroundImage": "./assets/images/adaptiveIcon.png",
+        "backgroundColor": "#201E2E"
       },
       "package": "com.kjt.inthequeue"
     },
@@ -37,6 +37,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a80c3b1f-4466-460b-b4fb-97e8f101b305"
+      }
     }
   }
 }
