@@ -5,7 +5,8 @@ import { images } from "@/constants/images";
 import { fetchComingSoonShowsDetails } from "@/services/api";
 import { updateShow } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
-import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -27,6 +28,14 @@ const ComingSoon = () => {
   const [refreshing, setRefreshing] = useState(false);
   const releaseDatedShows = detailedShows?.filter(
     (tvShow: TVShow) => tvShow.next_episode_to_air
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = refetch();
+
+      return () => fetchData;
+    }, [])
   );
 
   useEffect(() => {

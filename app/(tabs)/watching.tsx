@@ -4,7 +4,8 @@ import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchWatchingNow } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import React, { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -22,6 +23,14 @@ const Watching = () => {
     refetch,
   } = useFetch(fetchWatchingNow);
   const [refreshing, setRefreshing] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = refetch();
+
+      return () => fetchData;
+    }, [])
+  );
 
   const soloShows = shows?.filter(
     (tvShow: TVShow) => tvShow.party === PARTY.SOLO

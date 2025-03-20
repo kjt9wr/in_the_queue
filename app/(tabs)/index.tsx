@@ -6,8 +6,9 @@ import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchShowsintheQueue } from "@/services/api";
 import useFetch from "@/services/useFetch";
+import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -16,7 +17,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const Index = () => {
   const router = useRouter();
@@ -27,6 +27,14 @@ const Index = () => {
     error: showsError,
     refetch,
   } = useFetch(fetchShowsintheQueue);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = refetch();
+
+      return () => fetchData;
+    }, [])
+  );
 
   const soloQueueShows = allQueuedShows?.filter(
     (tvShow: TVShow) => tvShow.party === PARTY.SOLO

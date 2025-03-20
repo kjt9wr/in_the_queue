@@ -3,7 +3,8 @@ import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchFinishedShows } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import React, { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -23,6 +24,14 @@ const Finished = () => {
   } = useFetch(fetchFinishedShows);
 
   const [refreshing, setRefreshing] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = refetch();
+
+      return () => fetchData;
+    }, [])
+  );
 
   const onRefresh = async () => {
     setRefreshing(true);
