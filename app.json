@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "InTheQueue",
+    "name": "In The Queue",
     "slug": "in_the_queue",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -45,6 +45,12 @@
       "eas": {
         "projectId": "a80c3b1f-4466-460b-b4fb-97e8f101b305"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a80c3b1f-4466-460b-b4fb-97e8f101b305"
     }
   }
 }

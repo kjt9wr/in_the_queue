@@ -1,5 +1,3 @@
-//TODO Update these
-
 interface TVShow {
   id: number;
   name: string;
@@ -16,7 +14,6 @@ interface TVShow {
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
