@@ -4,7 +4,7 @@ import CarouselCard from "./CarouselCard";
 
 interface Props {
   sectionTitle: string;
-  shows?: TVShow[];
+  shows?: ShowFromDB[];
 }
 
 const ShowsCarousel = ({ sectionTitle, shows }: Props) => {
@@ -18,7 +18,7 @@ const ShowsCarousel = ({ sectionTitle, shows }: Props) => {
           <FlatList
             data={shows}
             renderItem={({ item }) => <CarouselCard {...item} />}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item.TMDB_ID.toString()}
             horizontal
             className="mb-4 mt-3"
             showsHorizontalScrollIndicator={false}

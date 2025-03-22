@@ -1,12 +1,16 @@
+import { images } from "@/constants/images";
 import { Link } from "expo-router";
 import React from "react";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { Image, TouchableOpacity, Text, View } from "react-native";
-import { images } from "@/constants/images";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
-const CarouselCard = ({ id, name, poster_path, viewing_status }: TVShow) => {
+const CarouselCard = ({
+  TMDB_ID,
+  name,
+  poster_path,
+  Viewing_Status,
+}: ShowFromDB) => {
   return (
-    <Link href={`/shows/${id}`} asChild>
+    <Link href={`/shows/${TMDB_ID}`} asChild>
       <TouchableOpacity className="w-32 relative mr-5 pl-5">
         <Image
           source={{
@@ -17,7 +21,7 @@ const CarouselCard = ({ id, name, poster_path, viewing_status }: TVShow) => {
           className="w-32 h-48 rounded-lg"
           resizeMode="cover"
         />
-        {viewing_status === "Rewatching" && (
+        {Viewing_Status === "Rewatching" && (
           <View className="absolute -bottom-12 -right-0.5 px-2 py-1 rounded-full">
             <Image
               source={images.rewatching}

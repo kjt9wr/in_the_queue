@@ -25,11 +25,12 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
 
   const onSubmit = async (nextViewingStatus: string) => {
     const showToAdd: ShowFromDB = {
-      Name: show.name,
+      name: show.name,
       Release_Status: determineReleaseStatus(show),
       Party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : show.party,
       Viewing_Status: nextViewingStatus,
       TMDB_ID: show.id,
+      poster_path: show.poster_path,
     };
 
     await updateShow(showToAdd).then(() => {

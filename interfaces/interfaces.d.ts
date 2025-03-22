@@ -23,11 +23,12 @@ interface TVShow {
 }
 
 interface ShowFromDB {
-  Name: string;
+  name: string;
   Release_Status: string;
   Party: string;
   Viewing_Status: string;
   TMDB_ID: number;
+  poster_path?: string;
 }
 
 interface TrendingCardProps {

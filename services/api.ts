@@ -44,7 +44,7 @@ export const fetchComingSoonShowsDetails = async () => {
 
 export const fetchShowsintheQueue = async () => {
   const queueQuery = [Query.equal("Viewing_Status", ["Queue"])];
-  return fetchDetailedShows(queueQuery);
+  return await getShowsFromDB(queueQuery);
 };
 
 export const fetchWatchingNow = async () => {
@@ -54,7 +54,7 @@ export const fetchWatchingNow = async () => {
       Query.equal("Viewing_Status", ["Rewatching"]),
     ]),
   ];
-  return fetchDetailedShows(watchingQuery);
+  return await getShowsFromDB(watchingQuery);
 };
 
 export const fetchFinishedShows = async () => {
