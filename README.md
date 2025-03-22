@@ -1,50 +1,99 @@
-# Welcome to your Expo app 👋
+<a id="readme-top"></a>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
 
-## Get started
+<h1 align="center">In The Queue</h1>
 
-1. Install dependencies
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/cd73b1ad-d2dc-467e-a54a-6daa75a64c5e" />
 
-   ```bash
-   npm install
-   ```
 
-2. Start the app
+</div>
 
-   ```bash
-    npx expo start
-   ```
 
-In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+<!-- ABOUT THE PROJECT -->
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## About The Project
 
-## Get a fresh project
+I created this mobile app to track every show I watch. The app keeps track of what shows I watch, what shows I want to watch in the future, and the current status of these shows. Appwrite is used for the backend server and database to keep track of my queues and watch progress. The TMDB API is used to fetch more details about tv shows.
 
-When you're ready, run:
+## Technologies
+  <div>
+    <img src="https://img.shields.io/badge/-React_Native-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="React Native" />
+    <img src="https://img.shields.io/badge/-Expo-black?style=for-the-badge&logoColor=white&logo=expo&color=000020" alt="Expo" />
+    <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/-Appwrite-black?style=for-the-badge&logoColor=white&logo=appwrite&color=F02E65" alt="Appwrite" />
+  </div>
+
+## Features
+
+### Queue Page
+TV shows I plan to watch are sorted into four queues, each based on whom I’m watching with. These queues are displayed on the Queue page.
+
+### Search Page
+The search page allows the user to query the TMDB API for TV shows.
+
+### Watching Page
+TV shows that I am currently watching are sorted into four categories, each based on whom I’m watching with. These shows are displayed on the Queue page.
+
+### Coming Soon Page
+The Coming Soon page tracks shows awaiting a new season, separating those with a return date from those without one. Airing shows are automatically added to their respective queue.
+
+### Finished Page
+The Coming Soon page displays shows that I have finished watching and have ended.
+
+### Show Details Page
+Tap on a show from any page to view its details. This page displays metadata fetched from the TMDB API and includes action buttons for adding the show to a queue, marking it as currently watching, and more.
+
+# Getting Started
+
+
+**Installation**
+
+Install the project dependencies using npm:
 
 ```bash
-npm run reset-project
+
+npm install
+
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+**Set Up Environment Variables**
 
-## Learn more
+Create a new file named `.env` in the root of your project and add the following content:
 
-To learn more about developing your project with Expo, look at the following resources:
+```env
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+EXPO_PUBLIC_TV_API_KEY=
 
-## Join the community
+EXPO_PUBLIC_APPWRITE_PROJECT_ID=
 
-Join our community of developers creating universal apps.
+EXPO_PUBLIC_APPWRITE_DATABASE_ID=
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+EXPO_PUBLIC_APPWRITE_COLLECTION_ID=
+
+```
+
+Add the actual TMDB API key, Appwrite project ID, Database ID, and Collection ID from [Appwrite](https://cloud.appwrite.io/console/login), [TMDB](https://www.themoviedb.org/login).
+
+**Running the Project**
+
+```bash
+
+npx expo start
+
+```
+
+Open your ExpoGO app on your phone and scan the QR code to view the project.
+
+
+<!-- ROADMAP -->
+
+## Potential Features
+
+The next step is to incorporate support for tracking video games in a similar matter
+
+- [ ] Include support for tracking video games
