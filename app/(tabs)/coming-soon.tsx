@@ -42,7 +42,7 @@ const ComingSoon = () => {
     releaseDatedShows?.forEach((show: TVShow) => {
       if (show.next_episode_to_air!.episode_number > 1) {
         const showToAdd: ShowFromDB = {
-          Name: show.name,
+          name: show.name,
           Release_Status: RELEASE_STATUS.AIRING,
           Party: show.party,
           Viewing_Status: VIEWING_STATUS.QUEUE,
@@ -75,11 +75,11 @@ const ComingSoon = () => {
 
   return (
     <View className="bg-primary flex-1">
-      <Image
+      {/* <Image
         source={images.bg}
         className="absolute w-full z-0"
         resizeMode="cover"
-      />
+      /> */}
 
       <ScrollView
         className="flex-1 px-5"
@@ -89,7 +89,7 @@ const ComingSoon = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Image source={icons.logo} className="w-12 h-12 mt-20 mb-5 mx-auto" />
+        {/* <Image source={icons.logo} className="w-12 h-12 mt-20 mb-5 mx-auto" /> */}
         {detailsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : detailsError ? (
