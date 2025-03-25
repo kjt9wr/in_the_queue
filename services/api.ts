@@ -79,6 +79,11 @@ export const fetchFinishedShows = async () => {
   return fetchDetailedShows(finishedQuery);
 };
 
+export const fetchWatchedMovies = async () => {
+  const watchedQuery = [Query.equal("viewing_status", ["Watched"])];
+  return fetchDetailedMovies(watchedQuery);
+};
+
 const fetchDetailedShows = async (queries: string[]) => {
   const showsFromDb = await getShowsFromDB(queries);
 

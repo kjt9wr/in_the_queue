@@ -275,7 +275,7 @@ const TabsLayout = () => {
                     <TabIcon
                       focused={focused}
                       icon={icons.finished}
-                      title="Finished"
+                      title="Watched"
                       highlight={images.yellowHighlight}
                     />
                   ),
