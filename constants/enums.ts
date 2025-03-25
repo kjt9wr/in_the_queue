@@ -18,3 +18,9 @@ export enum VIEWING_STATUS {
   CAUGHT_UP = "Caught_Up",
   REWATCHING = "Rewatching",
 }
+
+export enum MODE {
+  TV_SHOWS = "TV_SHOWS",
+  MOVIES = "MOVIES",
+  VIDEO_GAMES = "VIDEO_GAMES",
+}

@@ -3,7 +3,7 @@ import {
   BottomSheetModalProvider,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useRef, useState } from "react";
 import {
@@ -19,6 +19,7 @@ import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { MODE } from "@/constants/enums";
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 36,
     alignItems: "center",
+    backgroundColor: "grey",
   },
 });
 const TabIcon = ({ focused, icon, title, highlight }: any) => {
@@ -53,7 +55,8 @@ const TabIcon = ({ focused, icon, title, highlight }: any) => {
   }
 };
 const TabsLayout = () => {
-  const [mode, setMode] = useState("movies");
+  const [mode, setMode] = useState<string>(MODE.TV_SHOWS);
+  const router = useRouter();
 
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -65,6 +68,24 @@ const TabsLayout = () => {
   const handleSheetChanges = useCallback((index: number) => {
     console.log("handleSheetChanges", index);
   }, []);
+
+  const changeMode = (mode: string) => {
+    setMode(mode);
+    switch (mode) {
+      case MODE.TV_SHOWS:
+        router.replace("/(tabs)");
+        break;
+      case MODE.MOVIES:
+        router.replace("/(tabs)/movie/queue-movies");
+        break;
+      case MODE.VIDEO_GAMES:
+        // TODO: implement video games
+        break;
+      default:
+        break;
+    }
+    bottomSheetModalRef?.current?.dismiss();
+  };
 
   return (
     <>
@@ -86,7 +107,7 @@ const TabsLayout = () => {
               />
             </TouchableOpacity>
           </View>
-          {mode === "shows" && (
+          {mode === MODE.TV_SHOWS && (
             <Tabs
               screenOptions={{
                 tabBarShowLabel: false,
@@ -193,7 +214,7 @@ const TabsLayout = () => {
             </Tabs>
           )}
 
-          {mode === "movies" && (
+          {mode === MODE.MOVIES && (
             <Tabs
               screenOptions={{
                 tabBarShowLabel: false,
@@ -294,7 +315,30 @@ const TabsLayout = () => {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <Text>Awesome 🎉</Text>
+              <View className="flex flex-row justify-center items-center">
+                <TouchableOpacity
+                  onPress={() => changeMode(MODE.TV_SHOWS)}
+                  className="mx-auto items-center"
+                >
+                  <Image source={icons.logo} className="w-16 h-16 mb-4 mx-10" />
+                  <Text>TV Shows</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => changeMode(MODE.MOVIES)}
+                  className="mx-auto items-center"
+                >
+                  <Image source={icons.logo} className="w-16 h-16 mb-4 mx-10" />
+                  <Text>Movies</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handlePresentModalPress}
+                  className="mx-auto items-center"
+                >
+                  <Image source={icons.logo} className="w-16 h-16 mb-4 mx-10" />
+                  <Text>Video Games</Text>
+                </TouchableOpacity>
+              </View>
             </BottomSheetView>
           </BottomSheetModal>
         </BottomSheetModalProvider>
