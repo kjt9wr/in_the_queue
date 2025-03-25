@@ -2,7 +2,7 @@ import { Link } from "expo-router";
 import React from "react";
 import { Image, TouchableOpacity, Text } from "react-native";
 
-const TVShowCard = ({ id, poster_path, name, next_episode_to_air }: TVShow) => {
+const SeriesCard = ({ id, poster_path, name, next_episode_to_air }: TVShow) => {
   return (
     <Link href={`/shows/${id}`} asChild>
       <TouchableOpacity className="w-[30%]">
@@ -28,4 +28,4 @@ const TVShowCard = ({ id, poster_path, name, next_episode_to_air }: TVShow) => {
   );
 };
 
-export default TVShowCard;
+export default SeriesCard;

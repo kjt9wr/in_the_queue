@@ -1,4 +1,4 @@
-import TVShowCard from "@/components/Cards/TVShowCard";
+import SeriesCard from "@/components/Cards/SeriesCard";
 import { RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
 import { fetchComingSoonShowsDetails } from "@/services/api";
 import { updateShow } from "@/services/appwrite";
@@ -92,7 +92,7 @@ const ComingSoon = () => {
               </Text>
               <FlatList
                 data={releaseDatedShows}
-                renderItem={({ item }) => <TVShowCard {...item} />}
+                renderItem={({ item }) => <SeriesCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
                 columnWrapperStyle={{
@@ -111,7 +111,7 @@ const ComingSoon = () => {
               </Text>
               <FlatList
                 data={awaitingReturnShows}
-                renderItem={({ item }) => <TVShowCard {...item} />}
+                renderItem={({ item }) => <SeriesCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
                 columnWrapperStyle={{
@@ -130,7 +130,7 @@ const ComingSoon = () => {
               </Text>
               <FlatList
                 data={showsInLimbo}
-                renderItem={({ item }) => <TVShowCard {...item} />}
+                renderItem={({ item }) => <SeriesCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
                 columnWrapperStyle={{

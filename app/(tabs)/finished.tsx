@@ -1,6 +1,4 @@
-import TVShowCard from "@/components/Cards/TVShowCard";
-import { icons } from "@/constants/icons";
-import { images } from "@/constants/images";
+import SeriesCard from "@/components/Cards/SeriesCard";
 import { fetchFinishedShows } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
@@ -8,7 +6,6 @@ import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  Image,
   RefreshControl,
   ScrollView,
   Text,
@@ -60,7 +57,7 @@ const Finished = () => {
               </Text>
               <FlatList
                 data={shows}
-                renderItem={({ item }) => <TVShowCard {...item} />}
+                renderItem={({ item }) => <SeriesCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
                 columnWrapperStyle={{

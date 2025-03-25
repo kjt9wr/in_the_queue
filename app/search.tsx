@@ -1,5 +1,5 @@
+import SeriesCard from "@/components/Cards/SeriesCard";
 import SearchBar from "@/components/SearchBar";
-import TVShowCard from "@/components/Cards/TVShowCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchShows } from "@/services/api";
@@ -40,7 +40,7 @@ const Search = () => {
 
       <FlatList
         data={shows}
-        renderItem={({ item }) => <TVShowCard {...item} />}
+        renderItem={({ item }) => <SeriesCard {...item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={3}
         columnWrapperStyle={{
