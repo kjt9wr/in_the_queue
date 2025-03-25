@@ -3,7 +3,7 @@ import { Link } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-const PosterCard = ({
+const MovieCarouselCard = ({
   TMDB_ID,
   name,
   poster_path,
@@ -39,4 +39,4 @@ const PosterCard = ({
   );
 };
 
-export default PosterCard;
+export default MovieCarouselCard;

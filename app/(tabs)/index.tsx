@@ -1,7 +1,7 @@
+import PosterCarousel from "@/components/PosterCarousel";
 import SearchBar from "@/components/SearchBar";
-import ShowsCarousel from "@/components/ShowsCarousel";
 
-import { PARTY } from "@/constants/enums";
+import { MODE, PARTY } from "@/constants/enums";
 import { fetchShowsintheQueue } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
@@ -78,21 +78,25 @@ const Index = () => {
               In The Queue
             </Text>
 
-            <ShowsCarousel
+            <PosterCarousel
               shows={soloQueueShows}
               sectionTitle={`${PARTY.SOLO} Queue`}
+              mode={MODE.TV_SHOWS}
             />
-            <ShowsCarousel
+            <PosterCarousel
               shows={friendQueueShows}
               sectionTitle={`${PARTY.FRIENDS} Queue`}
+              mode={MODE.TV_SHOWS}
             />
-            <ShowsCarousel
+            <PosterCarousel
               shows={familyQueueShows}
               sectionTitle={`${PARTY.FAMILY} Queue`}
+              mode={MODE.TV_SHOWS}
             />
-            <ShowsCarousel
+            <PosterCarousel
               shows={christineQueueShows}
               sectionTitle={`${PARTY.CHRISTINE} Queue`}
+              mode={MODE.TV_SHOWS}
             />
           </View>
         )}

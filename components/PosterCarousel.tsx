@@ -1,15 +1,37 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
-import PosterCard from "./PosterCard";
+import MovieCarouselCard from "./Cards/MovieCarouselCard";
+import SeriesCarouselCard from "./Cards/SeriesCarouselCard";
 
 interface Props {
   sectionTitle: string;
+  mode: string;
   movies?: MovieFromDB[];
+  shows?: ShowFromDB[];
 }
 
-const PosterCarousel = ({ sectionTitle, movies }: Props) => {
+const PosterCarousel = ({ sectionTitle, shows, movies }: Props) => {
   return (
     <View>
+      {shows && shows.length > 0 && (
+        <>
+          <Text className="text-lg text-white font-bold mt-5 mb-3">
+            {sectionTitle}
+          </Text>
+          <FlatList
+            data={shows}
+            renderItem={({ item }) => <SeriesCarouselCard {...item} />}
+            keyExtractor={(item) => item.TMDB_ID.toString()}
+            horizontal
+            className="mb-4 mt-3"
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              gap: 12,
+            }}
+            ItemSeparatorComponent={() => <View className="w-4" />}
+          />
+        </>
+      )}
       {movies && movies.length > 0 && (
         <>
           <Text className="text-lg text-white font-bold mt-5 mb-3">
@@ -17,7 +39,7 @@ const PosterCarousel = ({ sectionTitle, movies }: Props) => {
           </Text>
           <FlatList
             data={movies}
-            renderItem={({ item }) => <PosterCard {...item} />}
+            renderItem={({ item }) => <MovieCarouselCard {...item} />}
             keyExtractor={(item) => item.TMDB_ID.toString()}
             horizontal
             className="mb-4 mt-3"

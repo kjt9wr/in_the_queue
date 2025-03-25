@@ -1,19 +1,18 @@
+import PosterCarousel from "@/components/PosterCarousel";
+import SearchBar from "@/components/SearchBar";
+import { MODE, PARTY } from "@/constants/enums";
+import { fetchMoviesintheQueue } from "@/services/api";
+import useFetch from "@/services/useFetch";
+import { useFocusEffect } from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import React, { useCallback, useState } from "react";
 import {
-  View,
-  Text,
   ActivityIndicator,
   RefreshControl,
   ScrollView,
+  Text,
+  View,
 } from "react-native";
-import React, { useCallback, useState } from "react";
-import SearchBar from "@/components/SearchBar";
-import ShowsCarousel from "@/components/ShowsCarousel";
-import { PARTY } from "@/constants/enums";
-import { useFocusEffect } from "@react-navigation/native";
-import { useRouter } from "expo-router";
-import { fetchMoviesintheQueue, fetchShowsintheQueue } from "@/services/api";
-import useFetch from "@/services/useFetch";
-import PosterCarousel from "@/components/PosterCarousel";
 
 const QueueMovies = () => {
   const router = useRouter();
@@ -32,7 +31,6 @@ const QueueMovies = () => {
       return () => fetchData;
     }, [])
   );
-  console.log(allQueuedMovies);
   const soloQueueMovies = allQueuedMovies?.filter(
     (movie: MovieFromDB) => movie.party === PARTY.SOLO
   );
@@ -72,7 +70,7 @@ const QueueMovies = () => {
           <View>
             <SearchBar
               onPress={() => router.push("/search")}
-              placeholder="Search for a TV show"
+              placeholder="Search for a movie"
             />
             <Text className="text-2xl text-white font-bold mt-5 mb-3">
               In The Queue
@@ -81,18 +79,22 @@ const QueueMovies = () => {
             <PosterCarousel
               movies={soloQueueMovies}
               sectionTitle={`${PARTY.SOLO} Queue`}
+              mode={MODE.MOVIES}
             />
             <PosterCarousel
               movies={friendQueueMovies}
               sectionTitle={`${PARTY.FRIENDS} Queue`}
+              mode={MODE.MOVIES}
             />
             <PosterCarousel
               movies={familyQueueMovies}
               sectionTitle={`${PARTY.FAMILY} Queue`}
+              mode={MODE.MOVIES}
             />
             <PosterCarousel
               movies={christineQueueMovies}
               sectionTitle={`${PARTY.CHRISTINE} Queue`}
+              mode={MODE.MOVIES}
             />
           </View>
         )}

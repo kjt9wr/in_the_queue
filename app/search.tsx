@@ -1,5 +1,5 @@
 import SearchBar from "@/components/SearchBar";
-import TVShowCard from "@/components/TVShowCard";
+import TVShowCard from "@/components/Cards/TVShowCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchShows } from "@/services/api";

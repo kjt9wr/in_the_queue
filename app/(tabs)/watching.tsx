@@ -1,14 +1,11 @@
-import ShowsCarousel from "@/components/ShowsCarousel";
-import { PARTY } from "@/constants/enums";
-import { icons } from "@/constants/icons";
-import { images } from "@/constants/images";
+import PosterCarousel from "@/components/PosterCarousel";
+import { MODE, PARTY } from "@/constants/enums";
 import { fetchWatchingNow } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
-  Image,
   RefreshControl,
   ScrollView,
   Text,
@@ -82,21 +79,25 @@ const Watching = () => {
                 Watching Now
               </Text>
             </>
-            <ShowsCarousel
+            <PosterCarousel
               shows={soloShows}
               sectionTitle={`Watching ${PARTY.SOLO}`}
+              mode={MODE.TV_SHOWS}
             />
-            <ShowsCarousel
+            <PosterCarousel
               shows={friendShows}
               sectionTitle={`Watching with ${PARTY.FRIENDS}`}
+              mode={MODE.TV_SHOWS}
             />
-            <ShowsCarousel
+            <PosterCarousel
               shows={familyShows}
               sectionTitle={`Watching with ${PARTY.FAMILY}`}
+              mode={MODE.TV_SHOWS}
             />
-            <ShowsCarousel
+            <PosterCarousel
               shows={christineShows}
               sectionTitle={`Watching with ${PARTY.CHRISTINE}`}
+              mode={MODE.TV_SHOWS}
             />
           </View>
         )}

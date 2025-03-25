@@ -1,4 +1,4 @@
-import TVShowCard from "@/components/TVShowCard";
+import TVShowCard from "@/components/Cards/TVShowCard";
 import { RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";

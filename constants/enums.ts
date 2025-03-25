@@ -24,3 +24,8 @@ export enum MODE {
   MOVIES = "MOVIES",
   VIDEO_GAMES = "VIDEO_GAMES",
 }
+
+export enum MOVIE_RELEASE_STATUS {
+  UPCOMING = "upcoming",
+  RELEASED = "released",
+}
