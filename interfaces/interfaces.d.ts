@@ -31,6 +31,11 @@ interface ShowFromDB {
   poster_path?: string;
 }
 
-interface TrendingCardProps {
-  tvShow: TVShow;
+interface MovieFromDB {
+  name: string;
+  release_status: string;
+  party: string;
+  viewing_status: string;
+  TMDB_ID: number;
+  poster_path?: string;
 }

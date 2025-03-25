@@ -2,6 +2,8 @@ import { Client, Databases, ID, Query } from "react-native-appwrite";
 
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
 const COLLECTION_ID = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID!;
+const COLLECTION_ID_MOVIES =
+  process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID_MOVIES!;
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -20,6 +22,23 @@ export const getShowsFromDB = async (
     );
 
     return result.documents as unknown as ShowFromDB[];
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
+export const getMoviesFromDB = async (
+  queries: string[]
+): Promise<MovieFromDB[] | undefined> => {
+  try {
+    const result = await database.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID_MOVIES,
+      queries
+    );
+
+    return result.documents as unknown as MovieFromDB[];
   } catch (error) {
     console.error(error);
     return undefined;

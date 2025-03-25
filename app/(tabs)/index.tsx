@@ -2,8 +2,6 @@ import SearchBar from "@/components/SearchBar";
 import ShowsCarousel from "@/components/ShowsCarousel";
 
 import { PARTY } from "@/constants/enums";
-import { icons } from "@/constants/icons";
-import { images } from "@/constants/images";
 import { fetchShowsintheQueue } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
@@ -11,7 +9,6 @@ import { useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
-  Image,
   RefreshControl,
   ScrollView,
   Text,

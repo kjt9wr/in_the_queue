@@ -1,5 +1,5 @@
 import { Query } from "react-native-appwrite";
-import { getShowsFromDB } from "./appwrite";
+import { getMoviesFromDB, getShowsFromDB } from "./appwrite";
 
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
@@ -45,6 +45,14 @@ export const fetchComingSoonShowsDetails = async () => {
 export const fetchShowsintheQueue = async () => {
   const queueQuery = [Query.equal("Viewing_Status", ["Queue"])];
   return await getShowsFromDB(queueQuery);
+};
+
+export const fetchMoviesintheQueue = async () => {
+  const queueQuery = [
+    Query.equal("release_status", ["released"]),
+    Query.equal("viewing_status", ["Queue"]),
+  ];
+  return await getMoviesFromDB(queueQuery);
 };
 
 export const fetchWatchingNow = async () => {

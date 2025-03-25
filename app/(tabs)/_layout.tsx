@@ -7,7 +7,6 @@ import { Tabs, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useRef, useState } from "react";
 import {
-  Button,
   Image,
   ImageBackground,
   StyleSheet,
@@ -18,13 +17,13 @@ import {
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
 
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { MODE } from "@/constants/enums";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "grey",
+    backgroundColor: "green",
   },
   contentContainer: {
     flex: 1,
