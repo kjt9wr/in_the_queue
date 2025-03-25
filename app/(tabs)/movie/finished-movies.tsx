@@ -3,8 +3,8 @@ import React from "react";
 
 const FinishedMovies = () => {
   return (
-    <View>
-      <Text>finishedMovies</Text>
+    <View className="bg-primary flex-1">
+      <Text className="text-white">Finished Movies</Text>
     </View>
   );
 };

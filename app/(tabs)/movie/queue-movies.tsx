@@ -3,8 +3,8 @@ import React from "react";
 
 const QueueMovies = () => {
   return (
-    <View>
-      <Text>Queue Movies</Text>
+    <View className="bg-primary flex-1">
+      <Text className="text-white">Queue Movies</Text>
     </View>
   );
 };

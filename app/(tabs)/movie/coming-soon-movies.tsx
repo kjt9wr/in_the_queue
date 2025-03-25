@@ -4,9 +4,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const ComingSoonMovies = () => {
   return (
-    <SafeAreaView>
-      <Text>coming-soon-movies</Text>
-    </SafeAreaView>
+    <View className="bg-primary flex-1">
+      <Text className="text-white">Coming Soon Movies</Text>
+    </View>
   );
 };
 
