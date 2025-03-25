@@ -8,12 +8,12 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 
-interface ShowActionsProps {
+interface SeriesActionsProps {
   loading: boolean;
   status: string;
   show: TVShow;
 }
-const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
+const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
   const router = useRouter();
   const [queue, setQueue] = useState<string>(PARTY.SOLO);
   const [showForm, setShowForm] = useState<string>("");
@@ -148,4 +148,4 @@ const ShowActions = ({ show, loading, status }: ShowActionsProps) => {
   );
 };
 
-export default ShowActions;
+export default SeriesActions;

@@ -5,7 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ShowActions from "./ShowActions";
+import SeriesActions from "./SeriesActions";
 
 interface ShowInfoProps {
   label: string;
@@ -78,7 +78,7 @@ const ShowDetails = () => {
             />
           </View>
           {show && (
-            <ShowActions
+            <SeriesActions
               show={show}
               loading={loading}
               status={show.Viewing_Status}
