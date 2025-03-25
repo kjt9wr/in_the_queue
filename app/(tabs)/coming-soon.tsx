@@ -1,7 +1,5 @@
 import TVShowCard from "@/components/Cards/TVShowCard";
 import { RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
-import { icons } from "@/constants/icons";
-import { images } from "@/constants/images";
 import { fetchComingSoonShowsDetails } from "@/services/api";
 import { updateShow } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
@@ -10,7 +8,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  Image,
   RefreshControl,
   ScrollView,
   Text,
@@ -75,12 +72,6 @@ const ComingSoon = () => {
 
   return (
     <View className="bg-primary flex-1">
-      {/* <Image
-        source={images.bg}
-        className="absolute w-full z-0"
-        resizeMode="cover"
-      /> */}
-
       <ScrollView
         className="flex-1 px-5"
         showsVerticalScrollIndicator={false}
@@ -89,7 +80,6 @@ const ComingSoon = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {/* <Image source={icons.logo} className="w-12 h-12 mt-20 mb-5 mx-auto" /> */}
         {detailsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : detailsError ? (

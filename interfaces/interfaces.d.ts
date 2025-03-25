@@ -22,6 +22,28 @@ interface TVShow {
   viewing_status: string;
 }
 
+interface Movie {
+  id: number;
+  imdb_id: string;
+  origin_country: string[];
+  original_language: string;
+  original_title: string;
+  overview: string;
+  party: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  revenue: number;
+  runtime: number;
+  status: string;
+  tagline: string;
+  title: string;
+  video: false;
+  viewing_status: string;
+  vote_average: number;
+  vote_count: number;
+}
+
 interface ShowFromDB {
   name: string;
   Release_Status: string;

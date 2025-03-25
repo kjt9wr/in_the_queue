@@ -53,12 +53,6 @@ const Watching = () => {
 
   return (
     <View className="bg-primary flex-1">
-      {/* <Image
-        source={images.bg}
-        className="absolute w-full z-0"
-        resizeMode="cover"
-      /> */}
-
       <ScrollView
         className="flex-1 px-5 mb-32"
         showsVerticalScrollIndicator={false}
@@ -67,7 +61,6 @@ const Watching = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {/* <Image source={icons.logo} className="w-12 h-12 mt-20 mb-5 mx-auto" /> */}
         {showsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : showsError ? (

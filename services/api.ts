@@ -43,6 +43,11 @@ export const fetchComingSoonShowsDetails = async () => {
   return fetchDetailedShows(comingSoonQueries);
 };
 
+export const fetchComingSoonMoviesDetails = async () => {
+  const comingSoonQueries = [Query.equal("release_status", ["upcoming"])];
+  return fetchDetailedMovies(comingSoonQueries);
+};
+
 export const fetchShowsintheQueue = async () => {
   const queueQuery = [Query.equal("Viewing_Status", ["Queue"])];
   return await getShowsFromDB(queueQuery);
@@ -89,6 +94,29 @@ const fetchDetailedShows = async (queries: string[]) => {
             ).json()),
             party: tvShow.Party,
             viewing_status: tvShow.Viewing_Status,
+          };
+        })
+      )
+    : [];
+
+  return data;
+};
+
+const fetchDetailedMovies = async (queries: string[]) => {
+  const moviesFromDB = await getMoviesFromDB(queries);
+
+  const data = moviesFromDB
+    ? Promise.all(
+        moviesFromDB.map(async (movie: MovieFromDB) => {
+          return {
+            ...(await (
+              await fetch(`${TMDB_CONFIG.BASE_URL}/movie/${movie.TMDB_ID}`, {
+                method: "GET",
+                headers: TMDB_CONFIG.headers,
+              })
+            ).json()),
+            party: movie.party,
+            viewing_status: movie.viewing_status,
           };
         })
       )
