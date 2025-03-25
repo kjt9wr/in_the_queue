@@ -174,3 +174,29 @@ export const fetchSingleShowDetails = async (showId: string) => {
     throw error;
   }
 };
+
+export const fetchSingleMovieDetails = async (movieId: string) => {
+  const movieFromDB = await getMoviesFromDB([
+    Query.equal("TMDB_ID", [Number(movieId)]),
+  ]);
+  try {
+    const response = await fetch(`${TMDB_CONFIG.BASE_URL}/movie/${movieId}`, {
+      method: "GET",
+      headers: TMDB_CONFIG.headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch movie details: ${response.statusText}`);
+    }
+
+    let detailedMovie = await response.json();
+
+    if (movieFromDB && movieFromDB.length > 0) {
+      detailedMovie = { ...detailedMovie, ...movieFromDB[0] };
+    }
+    return detailedMovie;
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    throw error;
+  }
+};

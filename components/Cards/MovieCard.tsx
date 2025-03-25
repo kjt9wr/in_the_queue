@@ -4,7 +4,7 @@ import { Image, Text, TouchableOpacity } from "react-native";
 
 const MovieCard = ({ id, poster_path, title, release_date, status }: Movie) => {
   return (
-    <Link href={`/shows/${id}`} asChild>
+    <Link href={`/movies/${id}`} asChild>
       <TouchableOpacity className="w-[30%]">
         <Image
           source={{

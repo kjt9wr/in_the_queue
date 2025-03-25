@@ -10,7 +10,7 @@ const MovieCarouselCard = ({
   viewing_status,
 }: MovieFromDB) => {
   return (
-    <Link href={`/shows/${TMDB_ID}`} asChild>
+    <Link href={`/movies/${TMDB_ID}`} asChild>
       <TouchableOpacity className="w-32 relative mr-5 pl-5">
         <Image
           source={{
