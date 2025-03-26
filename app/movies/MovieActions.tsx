@@ -1,5 +1,10 @@
 import CustomButton from "@/components/CustomButton";
-import { MODE, PARTY, VIEWING_STATUS } from "@/constants/enums";
+import {
+  MODE,
+  MOVIE_RELEASE_STATUS,
+  PARTY,
+  VIEWING_STATUS,
+} from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { deleteFromDB, updateMovie } from "@/services/appwrite";
 import { Picker } from "@react-native-picker/picker";
@@ -24,7 +29,10 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
   const onSubmit = async (nextViewingStatus: string) => {
     const movieToAdd: MovieFromDB = {
       name: movie.title,
-      release_status: movie.status === "Released" ? "released" : "upcoming",
+      release_status:
+        movie.status === MOVIE_RELEASE_STATUS.RELEASED
+          ? MOVIE_RELEASE_STATUS.RELEASED
+          : MOVIE_RELEASE_STATUS.UPCOMING,
       party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : movie.party,
       viewing_status: nextViewingStatus,
       TMDB_ID: movie.id,
@@ -89,32 +97,34 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
       {/* Action Buttons */}
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
-          {movie.status === "Released" && movie.viewing_status !== "Queue" && (
-            <CustomButton
-              title="Add to Queue"
-              handlePress={() => {
-                setShowForm(VIEWING_STATUS.QUEUE);
-              }}
-              containerStyles="mt-7 bg-blue-400"
-              isLoading={loading}
-              icon={icons.enqueue}
-              iconStyles="w-8 mr-3"
-            />
-          )}
-          {movie.viewing_status === "Queue" && movie.status === "Released" && (
-            <CustomButton
-              title={"Watched"}
-              handlePress={() => {
-                onSubmit(VIEWING_STATUS.CAUGHT_UP);
-              }}
-              containerStyles="mt-7 bg-purple-400"
-              isLoading={loading}
-              icon={icons.check}
-              iconStyles="w-8"
-            />
-          )}
-          {movie.status !== "Released" &&
-            movie.release_status !== "upcoming" && (
+          {movie.status === MOVIE_RELEASE_STATUS.RELEASED &&
+            movie.viewing_status !== "Queue" && (
+              <CustomButton
+                title="Add to Queue"
+                handlePress={() => {
+                  setShowForm(VIEWING_STATUS.QUEUE);
+                }}
+                containerStyles="mt-7 bg-blue-400"
+                isLoading={loading}
+                icon={icons.enqueue}
+                iconStyles="w-8 mr-3"
+              />
+            )}
+          {movie.viewing_status === "Queue" &&
+            movie.status === MOVIE_RELEASE_STATUS.RELEASED && (
+              <CustomButton
+                title={"Watched"}
+                handlePress={() => {
+                  onSubmit(VIEWING_STATUS.CAUGHT_UP);
+                }}
+                containerStyles="mt-7 bg-purple-400"
+                isLoading={loading}
+                icon={icons.check}
+                iconStyles="w-8"
+              />
+            )}
+          {movie.status !== MOVIE_RELEASE_STATUS.RELEASED &&
+            movie.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
               <CustomButton
                 title="Add to Coming Soon"
                 handlePress={() => {

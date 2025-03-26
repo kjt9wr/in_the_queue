@@ -6,6 +6,7 @@ import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MovieActions from "./MovieActions";
+import { MOVIE_RELEASE_STATUS } from "@/constants/enums";
 
 interface MovieInfoProps {
   label: string;
@@ -48,7 +49,7 @@ const MovieDetails = () => {
                 {`${movie?.release_date?.split("-")[0]}`}
               </Text>
             </View>
-            {movie?.status === "Released" && (
+            {movie?.status === MOVIE_RELEASE_STATUS.RELEASED && (
               <View className="flex-row items-center bg-dark-100 px-2 py-1 rounded-md gap-x-1 mt-2">
                 <Image source={icons.star} className="size-4" />
 

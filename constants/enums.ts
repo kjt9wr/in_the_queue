@@ -26,6 +26,6 @@ export enum MODE {
 }
 
 export enum MOVIE_RELEASE_STATUS {
-  UPCOMING = "upcoming",
-  RELEASED = "released",
+  UPCOMING = "Upcoming",
+  RELEASED = "Released",
 }

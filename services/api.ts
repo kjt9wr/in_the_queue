@@ -63,7 +63,9 @@ export const fetchComingSoonShowsDetails = async () => {
 };
 
 export const fetchComingSoonMoviesDetails = async () => {
-  const comingSoonQueries = [Query.equal("release_status", ["upcoming"])];
+  const comingSoonQueries = [
+    Query.equal("release_status", [MOVIE_RELEASE_STATUS.UPCOMING]),
+  ];
   return fetchDetailedMovies(comingSoonQueries);
 };
 
