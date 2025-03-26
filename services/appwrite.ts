@@ -1,3 +1,4 @@
+import { MODE } from "@/constants/enums";
 import { Client, Databases, ID, Query } from "react-native-appwrite";
 
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
@@ -89,12 +90,12 @@ export const updateMovie = async (movie: MovieFromDB) => {
 
     // already in DB
     if (result.documents.length > 0) {
-      const existingShow = result.documents[0];
+      const existingMovie = result.documents[0];
 
       await database.updateDocument(
         DATABASE_ID,
         COLLECTION_ID_MOVIES,
-        existingShow.$id,
+        existingMovie.$id,
         {
           party: movie.party,
           viewing_status: movie.viewing_status,
@@ -115,16 +116,29 @@ export const updateMovie = async (movie: MovieFromDB) => {
   }
 };
 
-export const deleteShow = async (tmdb_id: number) => {
+export const deleteFromDB = async (tmdb_id: number, mode: string) => {
+  let collection;
+  switch (mode) {
+    case MODE.TV_SHOWS:
+      collection = COLLECTION_ID;
+      break;
+    case MODE.MOVIES:
+      collection = COLLECTION_ID_MOVIES;
+      break;
+    default:
+      collection = COLLECTION_ID;
+      break;
+  }
+
   try {
     const showFromDatabase = await database.listDocuments(
       DATABASE_ID,
-      COLLECTION_ID,
+      collection,
       [Query.equal("TMDB_ID", tmdb_id)]
     );
     database.deleteDocument(
       DATABASE_ID,
-      COLLECTION_ID,
+      collection,
       showFromDatabase.documents[0].$id
     );
   } catch (error) {

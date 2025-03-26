@@ -1,12 +1,11 @@
 import CustomButton from "@/components/CustomButton";
-import { PARTY, VIEWING_STATUS } from "@/constants/enums";
+import { MODE, PARTY, VIEWING_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
-import { deleteShow, updateMovie, updateShow } from "@/services/appwrite";
-import { determineReleaseStatus } from "@/services/helpers";
+import { deleteFromDB, updateMovie } from "@/services/appwrite";
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 
 interface SeriesActionsProps {
   loading: boolean;
@@ -37,11 +36,11 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
     });
   };
 
-  const onDelete = async (showId: number) => {
-    // await deleteShow(showId).then(() => {
-    //   reset();
-    //   router.back();
-    // });
+  const onDelete = async (movieId: number) => {
+    await deleteFromDB(movieId, MODE.MOVIES).then(() => {
+      reset();
+      router.back();
+    });
   };
 
   return (
