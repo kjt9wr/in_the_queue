@@ -1,8 +1,10 @@
 import MovieCard from "@/components/Cards/MovieCard";
+import { MOVIE_RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
 import { fetchComingSoonMoviesDetails } from "@/services/api";
+import { updateMovie } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -21,9 +23,6 @@ const ComingSoonMovies = () => {
   } = useFetch(fetchComingSoonMoviesDetails);
 
   const [refreshing, setRefreshing] = useState(false);
-  const releaseDatedShows = detailedMovies?.filter(
-    (tvShow: TVShow) => tvShow.next_episode_to_air
-  );
 
   useFocusEffect(
     useCallback(() => {
@@ -33,24 +32,24 @@ const ComingSoonMovies = () => {
     }, [])
   );
 
-  // useEffect(() => {
-  //   releaseDatedShows?.forEach((show: TVShow) => {
-  //     if (show.next_episode_to_air!.episode_number > 1) {
-  //       const showToAdd: ShowFromDB = {
-  //         name: show.name,
-  //         Release_Status: RELEASE_STATUS.AIRING,
-  //         Party: show.party,
-  //         Viewing_Status: VIEWING_STATUS.QUEUE,
-  //         TMDB_ID: show.id,
-  //       };
-  //       try {
-  //         updateShow(showToAdd);
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     }
-  //   });
-  // }, [releaseDatedShows]);
+  useEffect(() => {
+    detailedMovies?.forEach((movie: Movie) => {
+      if (movie.status === MOVIE_RELEASE_STATUS.RELEASED) {
+        const movieToAdd: MovieFromDB = {
+          name: movie.title,
+          release_status: MOVIE_RELEASE_STATUS.RELEASED,
+          party: movie.party,
+          viewing_status: VIEWING_STATUS.QUEUE,
+          TMDB_ID: movie.id,
+        };
+        try {
+          updateMovie(movieToAdd);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
+  }, [detailedMovies]);
 
   const sortedMovies = detailedMovies
     ?.filter((movie: Movie) => movie.release_date)

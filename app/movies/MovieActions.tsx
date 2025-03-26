@@ -54,7 +54,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
 
   return (
     <View className="ml-5">
-      {/* Select Form */}
+      {/* Select Queue Form */}
       {showForm && (
         <QueuePickerForm
           queue={queue}
