@@ -33,6 +33,7 @@ interface Movie {
   popularity: number;
   poster_path: string;
   release_date: string;
+  release_status: string;
   revenue: number;
   runtime: number;
   status: string;

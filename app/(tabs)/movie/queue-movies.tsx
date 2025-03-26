@@ -69,7 +69,7 @@ const QueueMovies = () => {
         ) : (
           <View>
             <SearchBar
-              onPress={() => router.push("/search-movies")}
+              onPress={() => router.push("/search/search-movies")}
               placeholder="Search for a movie"
             />
             <Text className="text-2xl text-white font-bold mt-5 mb-3">

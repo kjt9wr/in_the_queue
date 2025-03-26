@@ -7,7 +7,7 @@ import useFetch from "@/services/useFetch";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 
-const Search = () => {
+const SearchSeries = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const {
@@ -95,4 +95,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchSeries;

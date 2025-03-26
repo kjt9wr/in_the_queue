@@ -5,6 +5,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import MovieActions from "./MovieActions";
 
 interface MovieInfoProps {
   label: string;
@@ -19,9 +20,6 @@ const MovieInfo = ({ label, value }: MovieInfoProps) => (
     </Text>
   </View>
 );
-const displaySeasons = (num: number) => {
-  return num == 1 ? `1 Season` : `${num} Seasons`;
-};
 
 const MovieDetails = () => {
   const router = useRouter();
@@ -71,13 +69,7 @@ const MovieDetails = () => {
               }
             />
           </View>
-          {/* {show && (
-            <ShowActions
-              show={show}
-              loading={loading}
-              status={show.Viewing_Status}
-            />
-          )} */}
+          {movie && <MovieActions movie={movie} loading={loading} />}
         </ScrollView>
       )}
     </SafeAreaView>

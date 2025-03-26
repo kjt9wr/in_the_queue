@@ -71,7 +71,7 @@ const Index = () => {
         ) : (
           <View>
             <SearchBar
-              onPress={() => router.push("/search")}
+              onPress={() => router.push("/search/search-series")}
               placeholder="Search for a TV show"
             />
             <Text className="text-2xl text-white font-bold mt-5 mb-3">

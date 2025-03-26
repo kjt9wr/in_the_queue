@@ -7,6 +7,7 @@ import logo from "@/assets/icons/queueIcon2.png";
 import search from "@/assets/icons/search.png";
 import star from "@/assets/icons/star.png";
 import timer from "@/assets/icons/timer.png";
+import timerWhite from "@/assets/icons/timer-white.png";
 import trash from "@/assets/icons/trash.png";
 import tv from "@/assets/icons/tv.png";
 
@@ -20,6 +21,7 @@ export const icons = {
   star,
   queue,
   timer,
+  timerWhite,
   trash,
   tv,
 };
