@@ -1,7 +1,7 @@
 import CustomButton from "@/components/CustomButton";
 import { PARTY, VIEWING_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
-import { deleteShow, updateShow } from "@/services/appwrite";
+import { deleteShow, updateMovie, updateShow } from "@/services/appwrite";
 import { determineReleaseStatus } from "@/services/helpers";
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
@@ -23,18 +23,18 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
   };
 
   const onSubmit = async (nextViewingStatus: string) => {
-    // const showToAdd: ShowFromDB = {
-    //   name: show.name,
-    //   Release_Status: determineReleaseStatus(show),
-    //   Party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : show.party,
-    //   Viewing_Status: nextViewingStatus,
-    //   TMDB_ID: show.id,
-    //   poster_path: show.poster_path,
-    // };
-    // await updateShow(showToAdd).then(() => {
-    //   reset();
-    //   router.back();
-    // });
+    const movieToAdd: MovieFromDB = {
+      name: movie.title,
+      release_status: movie.status === "Released" ? "released" : "upcoming",
+      party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : movie.party,
+      viewing_status: nextViewingStatus,
+      TMDB_ID: movie.id,
+      poster_path: movie.poster_path,
+    };
+    await updateMovie(movieToAdd).then(() => {
+      reset();
+      router.back();
+    });
   };
 
   const onDelete = async (showId: number) => {
@@ -46,7 +46,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
 
   return (
     <View className="ml-5">
-      {/* {showForm && (
+      {showForm && (
         <View className="mt-6">
           <Text className="text-white">Add to Queue: </Text>
           <Picker
@@ -61,9 +61,9 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
             <Picker.Item label={PARTY.FAMILY} value={PARTY.FAMILY} />
           </Picker>
         </View>
-      )} */}
+      )}
       {/* Select Form */}
-      {/* {showForm && (
+      {showForm && (
         <View className="flex-row gap-x-6 mt-2">
           <CustomButton
             title="Cancel"
@@ -86,7 +86,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
             />
           )}
         </View>
-      )} */}
+      )}
       {/* Action Buttons */}
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">

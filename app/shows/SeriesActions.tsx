@@ -47,7 +47,7 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
   };
 
   return (
-    <View>
+    <View className="ml-5">
       {showForm && (
         <View className="mt-6">
           <Text className="text-white">Add to Queue: </Text>

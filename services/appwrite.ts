@@ -79,6 +79,42 @@ export const updateShow = async (tvShow: ShowFromDB) => {
   }
 };
 
+export const updateMovie = async (movie: MovieFromDB) => {
+  try {
+    const result = await database.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID_MOVIES,
+      [Query.equal("TMDB_ID", movie.TMDB_ID)]
+    );
+
+    // already in DB
+    if (result.documents.length > 0) {
+      const existingShow = result.documents[0];
+
+      await database.updateDocument(
+        DATABASE_ID,
+        COLLECTION_ID_MOVIES,
+        existingShow.$id,
+        {
+          party: movie.party,
+          viewing_status: movie.viewing_status,
+          release_status: movie.release_status,
+        }
+      );
+    } else {
+      await database.createDocument(
+        DATABASE_ID,
+        COLLECTION_ID_MOVIES,
+        ID.unique(),
+        movie
+      );
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const deleteShow = async (tmdb_id: number) => {
   try {
     const showFromDatabase = await database.listDocuments(
