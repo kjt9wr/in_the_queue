@@ -115,7 +115,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
               <CustomButton
                 title={"Watched"}
                 handlePress={() => {
-                  onSubmit(VIEWING_STATUS.CAUGHT_UP);
+                  onSubmit(VIEWING_STATUS.WATCHED);
                 }}
                 containerStyles="mt-7 bg-purple-400"
                 isLoading={loading}
@@ -128,7 +128,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
               <CustomButton
                 title="Add to Coming Soon"
                 handlePress={() => {
-                  onSubmit(VIEWING_STATUS.CURRENTLY_WATCHING);
+                  onSubmit(VIEWING_STATUS.QUEUE);
                 }}
                 containerStyles="mt-7 bg-green-700"
                 isLoading={loading}
