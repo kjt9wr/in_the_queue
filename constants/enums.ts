@@ -17,6 +17,7 @@ export enum VIEWING_STATUS {
   CURRENTLY_WATCHING = "Currently_Watching",
   CAUGHT_UP = "Caught_Up",
   REWATCHING = "Rewatching",
+  WATCHED = "Watched",
 }
 
 export enum MODE {

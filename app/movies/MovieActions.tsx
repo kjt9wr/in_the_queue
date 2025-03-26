@@ -98,7 +98,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
           {movie.status === MOVIE_RELEASE_STATUS.RELEASED &&
-            movie.viewing_status !== "Queue" && (
+            movie.viewing_status !== VIEWING_STATUS.QUEUE && (
               <CustomButton
                 title="Add to Queue"
                 handlePress={() => {
@@ -110,7 +110,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8 mr-3"
               />
             )}
-          {movie.viewing_status === "Queue" &&
+          {movie.viewing_status === VIEWING_STATUS.QUEUE &&
             movie.status === MOVIE_RELEASE_STATUS.RELEASED && (
               <CustomButton
                 title={"Watched"}
@@ -136,7 +136,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8 mr-2"
               />
             )}
-          {movie.viewing_status === "Queue" && (
+          {movie.viewing_status === VIEWING_STATUS.QUEUE && (
             <CustomButton
               title="Remove"
               handlePress={() => {
