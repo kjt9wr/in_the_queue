@@ -1,4 +1,5 @@
 import CustomButton from "@/components/CustomButton";
+import QueuePickerForm from "@/components/QueuePickerForm";
 import { MODE, PARTY, VIEWING_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { deleteFromDB, updateShow } from "@/services/appwrite";
@@ -49,46 +50,15 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
   return (
     <View className="ml-5">
       {showForm && (
-        <View className="mt-6">
-          <Text className="text-white">Add to Queue: </Text>
-          <Picker
-            selectedValue={queue}
-            onValueChange={(itemValue) => setQueue(itemValue)}
-            style={{ backgroundColor: "#221F3D", color: "white" }}
-            prompt="Select a Queue"
-          >
-            <Picker.Item label={PARTY.SOLO} value={PARTY.SOLO} />
-            <Picker.Item label={PARTY.FRIENDS} value={PARTY.FRIENDS} />
-            <Picker.Item label={PARTY.CHRISTINE} value={PARTY.CHRISTINE} />
-            <Picker.Item label={PARTY.FAMILY} value={PARTY.FAMILY} />
-          </Picker>
-        </View>
+        <QueuePickerForm
+          queue={queue}
+          loading={loading}
+          changeQueue={(itemValue) => setQueue(itemValue)}
+          onSubmit={onSubmit}
+          reset={reset}
+        />
       )}
-      {/* Select Form */}
-      {showForm && (
-        <View className="flex-row gap-x-6 mt-2">
-          <CustomButton
-            title="Cancel"
-            handlePress={() => {
-              reset();
-            }}
-            containerStyles="mt-7 text-blue-700 font-semibold border border-gray-500 rounded"
-            isLoading={loading}
-            icon={null}
-          />
-          {showForm === VIEWING_STATUS.QUEUE && (
-            <CustomButton
-              title={`Add to ${queue} queue`}
-              handlePress={() => {
-                onSubmit(VIEWING_STATUS.QUEUE);
-              }}
-              containerStyles="mt-7 bg-blue-400"
-              isLoading={loading}
-              icon={null}
-            />
-          )}
-        </View>
-      )}
+
       {/* Action Buttons */}
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
