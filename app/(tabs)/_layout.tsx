@@ -91,6 +91,9 @@ const TabsLayout = () => {
     case MODE.MOVIES:
       topLogoSource = icons.logoMovies;
       break;
+    case MODE.VIDEO_GAMES:
+      topLogoSource = icons.logoGames;
+      break;
     default:
       topLogoSource = icons.logo;
       break;
@@ -349,7 +352,10 @@ const TabsLayout = () => {
                   onPress={handlePresentModalPress}
                   className="mx-auto items-center"
                 >
-                  <Image source={icons.logo} className="w-16 h-16 mb-4 mx-10" />
+                  <Image
+                    source={icons.logoGames}
+                    className="w-16 h-16 mb-4 mx-10"
+                  />
                   <Text>Video Games</Text>
                 </TouchableOpacity>
               </View>
