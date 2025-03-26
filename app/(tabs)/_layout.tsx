@@ -64,9 +64,7 @@ const TabsLayout = () => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const handleSheetChanges = useCallback((index: number) => {}, []);
 
   const changeMode = (mode: string) => {
     setMode(mode);
@@ -85,7 +83,18 @@ const TabsLayout = () => {
     }
     bottomSheetModalRef?.current?.dismiss();
   };
-
+  let topLogoSource;
+  switch (mode) {
+    case MODE.TV_SHOWS:
+      topLogoSource = icons.logoSeries;
+      break;
+    case MODE.MOVIES:
+      topLogoSource = icons.logoMovies;
+      break;
+    default:
+      topLogoSource = icons.logo;
+      break;
+  }
   return (
     <>
       <GestureHandlerRootView style={styles.container}>
@@ -101,7 +110,7 @@ const TabsLayout = () => {
               className="mx-auto"
             >
               <Image
-                source={icons.logo}
+                source={topLogoSource}
                 className="w-12 h-12 mt-20 mb-5 mx-auto"
               />
             </TouchableOpacity>
@@ -319,7 +328,10 @@ const TabsLayout = () => {
                   onPress={() => changeMode(MODE.TV_SHOWS)}
                   className="mx-auto items-center"
                 >
-                  <Image source={icons.logo} className="w-16 h-16 mb-4 mx-10" />
+                  <Image
+                    source={icons.logoSeries}
+                    className="w-16 h-16 mb-4 mx-10"
+                  />
                   <Text>TV Shows</Text>
                 </TouchableOpacity>
 
@@ -327,7 +339,10 @@ const TabsLayout = () => {
                   onPress={() => changeMode(MODE.MOVIES)}
                   className="mx-auto items-center"
                 >
-                  <Image source={icons.logo} className="w-16 h-16 mb-4 mx-10" />
+                  <Image
+                    source={icons.logoMovies}
+                    className="w-16 h-16 mb-4 mx-10"
+                  />
                   <Text>Movies</Text>
                 </TouchableOpacity>
                 <TouchableOpacity

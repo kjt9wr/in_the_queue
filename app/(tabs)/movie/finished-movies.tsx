@@ -36,7 +36,6 @@ const FinishedMovies = () => {
     setRefreshing(false);
   };
 
-  console.log(movies);
   return (
     <View className="bg-primary flex-1">
       <ScrollView
