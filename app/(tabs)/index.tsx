@@ -3,6 +3,7 @@ import SearchBar from "@/components/SearchBar";
 
 import { MODE, PARTY } from "@/constants/enums";
 import { fetchShowsintheQueue } from "@/services/api";
+import { fetchGameDetails } from "@/services/igdm";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
@@ -24,6 +25,8 @@ const Index = () => {
     error: showsError,
     refetch,
   } = useFetch(fetchShowsintheQueue);
+
+  const { data: singleGameData } = useFetch(() => fetchGameDetails(110503));
 
   useFocusEffect(
     useCallback(() => {
@@ -48,6 +51,8 @@ const Index = () => {
   const christineQueueShows = allQueuedShows?.filter(
     (tvShow: ShowFromDB) => tvShow.Party === PARTY.CHRISTINE
   );
+
+  console.log(singleGameData);
 
   const onRefresh = async () => {
     setRefreshing(true);
