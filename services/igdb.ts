@@ -36,3 +36,18 @@ export const fetchCoverArt = async (game_id: number) => {
     console.error(error);
   }
 };
+
+export const fetchGamesDetails = async (game_ids: number[]) => {
+  console.log(game_ids);
+  try {
+    const response = await apicalypse(requestOptions)
+      .fields("first_release_date")
+      .limit(100)
+      .where(`id = (${game_ids})`)
+      .request("/games");
+    return await response.data;
+  } catch (error) {
+    console.log("api fetch failed");
+    console.error(error);
+  }
+};

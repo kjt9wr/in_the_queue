@@ -10,6 +10,7 @@ import {
   RELEASE_STATUS,
   VIEWING_STATUS,
 } from "@/constants/enums";
+import { fetchGamesDetails } from "./igdb";
 
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
@@ -76,6 +77,13 @@ export const fetchComingSoonMoviesDetails = async () => {
     Query.equal("release_status", [MOVIE_RELEASE_STATUS.UPCOMING]),
   ];
   return fetchDetailedMovies(comingSoonQueries);
+};
+
+export const fetchComingSoonVideoGamesDetails = async () => {
+  const comingSoonQueries = [
+    Query.equal("release_status", [MOVIE_RELEASE_STATUS.UPCOMING]),
+  ];
+  return fetchDetailedVideoGames(comingSoonQueries);
 };
 
 export const fetchShowsintheQueue = async () => {
@@ -173,6 +181,26 @@ const fetchDetailedMovies = async (queries: string[]) => {
     : [];
 
   return data;
+};
+
+const fetchDetailedVideoGames = async (queries: string[]) => {
+  const videoGamesFromDB = await getVideoGamesFromDB(queries);
+  if (videoGamesFromDB) {
+    const gameIds = videoGamesFromDB.map((game) => game.IGDB_ID);
+    const dataFromApi = await fetchGamesDetails(gameIds);
+    const dataWithDates = mergeArrays(videoGamesFromDB, dataFromApi);
+    return dataWithDates;
+  }
+};
+
+const mergeArrays = (gamesFromDB: any[], dataFromApi: any[]) => {
+  return gamesFromDB.reduce((acc, dbGameData) => {
+    let nameWithDate = dataFromApi.find(
+      (game) => game.id === dbGameData.IGDB_ID
+    );
+    acc.push(nameWithDate ? { ...dbGameData, ...nameWithDate } : dbGameData);
+    return acc;
+  }, []);
 };
 
 export const fetchSingleShowDetails = async (showId: string) => {

@@ -25,8 +25,10 @@ const QueueGames = () => {
     refetch,
   } = useFetch(fetchGamesintheQueue);
 
-  // const { data: singleGameData } = useFetch(() => fetchGameDetails(19241));
-  const { data: coverArtData } = useFetch(() => fetchCoverArt(314933));
+  // const { data: singleGameData, loading } = useFetch(() =>
+  //   fetchGameDetails(306141)
+  // );
+  const { data: coverArtData } = useFetch(() => fetchCoverArt(140669));
 
   useFocusEffect(
     useCallback(() => {
@@ -52,6 +54,13 @@ const QueueGames = () => {
   );
 
   // console.log(singleGameData);
+  // if (singleGameData && !loading) {
+  //   console.log(singleGameData[0]?.first_release_date);
+  //   const theDate = singleGameData[0].first_release_date * 1000;
+  //   const date = new Date(theDate);
+  //   console.log(date.toISOString().split("T")[0]);
+  // }
+
   console.log(coverArtData);
 
   const onRefresh = async () => {
