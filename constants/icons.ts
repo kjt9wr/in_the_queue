@@ -1,4 +1,5 @@
 import check from "@/assets/icons/check.png";
+import controller from "@/assets/icons/controller.png";
 import enqueue from "@/assets/icons/enqueue.png";
 import finished from "@/assets/icons/finished.png";
 import logoGames from "@/assets/icons/logoGames.png";
@@ -16,6 +17,7 @@ import tv from "@/assets/icons/tv.png";
 
 export const icons = {
   check,
+  controller,
   enqueue,
   finished,
   logo,

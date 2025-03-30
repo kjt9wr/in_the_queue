@@ -5,6 +5,8 @@ const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
 const COLLECTION_ID = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID!;
 const COLLECTION_ID_MOVIES =
   process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID_MOVIES!;
+const COLLECTION_ID_VIDEO_GAMES =
+  process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID_VIDEO_GAMES!;
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -40,6 +42,23 @@ export const getMoviesFromDB = async (
     );
 
     return result.documents as unknown as MovieFromDB[];
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
+export const getVideoGamesFromDB = async (
+  queries: string[]
+): Promise<VideoGameFromDB[] | undefined> => {
+  try {
+    const result = await database.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID_VIDEO_GAMES,
+      queries
+    );
+
+    return result.documents as unknown as VideoGameFromDB[];
   } catch (error) {
     console.error(error);
     return undefined;

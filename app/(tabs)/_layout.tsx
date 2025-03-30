@@ -31,6 +31,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "grey",
   },
+  tabBar: {
+    backgroundColor: "#0F0D23",
+    borderRadius: 50,
+    marginHorizontal: 20,
+    marginBottom: 36,
+    height: 52,
+    position: "absolute",
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "#0F0D23",
+  },
+  tabBarItem: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 const TabIcon = ({ focused, icon, title, highlight }: any) => {
   if (focused) {
@@ -39,7 +56,12 @@ const TabIcon = ({ focused, icon, title, highlight }: any) => {
         source={highlight}
         className="flex flex-row w-full flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden"
       >
-        <Image source={icon} tintColor="#151312" className="size-5" />
+        <Image
+          source={icon}
+          tintColor="#151312"
+          className="size-5"
+          resizeMode="contain"
+        />
         <Text className="text-secondary text-sm font-semibold ml-2">
           {title}
         </Text>
@@ -48,11 +70,28 @@ const TabIcon = ({ focused, icon, title, highlight }: any) => {
   } else {
     return (
       <View className="size-full justify-center items-center mt-4 rounded-full">
-        <Image source={icon} tintColor="#A8B5DB" className="size-5" />
+        <Image
+          source={icon}
+          tintColor="#A8B5DB"
+          className="size-5"
+          resizeMode="contain"
+        />
       </View>
     );
   }
 };
+
+const hideTab = (name: string) => {
+  return (
+    <Tabs.Screen
+      name={name}
+      options={{
+        href: null,
+      }}
+    />
+  );
+};
+
 const TabsLayout = () => {
   const [mode, setMode] = useState<string>(MODE.TV_SHOWS);
   const router = useRouter();
@@ -76,7 +115,7 @@ const TabsLayout = () => {
         router.replace("/(tabs)/movie/queue-movies");
         break;
       case MODE.VIDEO_GAMES:
-        // TODO: implement video games
+        router.replace("/(tabs)/games/queue-games");
         break;
       default:
         break;
@@ -122,23 +161,8 @@ const TabsLayout = () => {
             <Tabs
               screenOptions={{
                 tabBarShowLabel: false,
-                tabBarItemStyle: {
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
-                tabBarStyle: {
-                  backgroundColor: "#0F0D23",
-                  borderRadius: 50,
-                  marginHorizontal: 20,
-                  marginBottom: 36,
-                  height: 52,
-                  position: "absolute",
-                  overflow: "hidden",
-                  borderWidth: 1,
-                  borderColor: "#0F0D23",
-                },
+                tabBarItemStyle: styles.tabBarItem,
+                tabBarStyle: styles.tabBar,
               }}
             >
               <Tabs.Screen
@@ -186,7 +210,6 @@ const TabsLayout = () => {
                   ),
                 }}
               />
-
               <Tabs.Screen
                 name="finished"
                 options={{
@@ -202,26 +225,14 @@ const TabsLayout = () => {
                   ),
                 }}
               />
+              {hideTab("movie/queue-movies")}
+              {hideTab("movie/coming-soon-movies")}
+              {hideTab("movie/finished-movies")}
 
-              <Tabs.Screen
-                name="movie/queue-movies"
-                options={{
-                  href: null,
-                }}
-              />
-              <Tabs.Screen
-                name="movie/coming-soon-movies"
-                options={{
-                  href: null,
-                }}
-              />
-
-              <Tabs.Screen
-                name="movie/finished-movies"
-                options={{
-                  href: null,
-                }}
-              />
+              {hideTab("games/queue-games")}
+              {hideTab("games/playing-games")}
+              {hideTab("games/coming-soon-games")}
+              {hideTab("games/finished-games")}
             </Tabs>
           )}
 
@@ -229,23 +240,8 @@ const TabsLayout = () => {
             <Tabs
               screenOptions={{
                 tabBarShowLabel: false,
-                tabBarItemStyle: {
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
-                tabBarStyle: {
-                  backgroundColor: "#0F0D23",
-                  borderRadius: 50,
-                  marginHorizontal: 20,
-                  marginBottom: 36,
-                  height: 52,
-                  position: "absolute",
-                  overflow: "hidden",
-                  borderWidth: 1,
-                  borderColor: "#0F0D23",
-                },
+                tabBarItemStyle: styles.tabBarItem,
+                tabBarStyle: styles.tabBar,
               }}
             >
               <Tabs.Screen
@@ -294,30 +290,95 @@ const TabsLayout = () => {
                 }}
               />
 
+              {hideTab("index")}
+              {hideTab("watching")}
+              {hideTab("coming-soon")}
+              {hideTab("finished")}
+
+              {hideTab("games/queue-games")}
+              {hideTab("games/playing-games")}
+              {hideTab("games/coming-soon-games")}
+              {hideTab("games/finished-games")}
+            </Tabs>
+          )}
+
+          {mode === MODE.VIDEO_GAMES && (
+            <Tabs
+              screenOptions={{
+                tabBarShowLabel: false,
+                tabBarItemStyle: styles.tabBarItem,
+                tabBarStyle: styles.tabBar,
+              }}
+            >
               <Tabs.Screen
-                name="index"
+                name="games/queue-games"
                 options={{
-                  href: null,
+                  title: "Queue",
+                  headerShown: false,
+                  tabBarIcon: ({ color, focused }) => (
+                    <TabIcon
+                      focused={focused}
+                      icon={icons.queue}
+                      title="Queue"
+                      highlight={images.yellowHighlight}
+                    />
+                  ),
                 }}
               />
               <Tabs.Screen
-                name="watching"
+                name="games/playing-games"
                 options={{
-                  href: null,
+                  title: "Playing",
+                  headerShown: false,
+                  tabBarIcon: ({ color, focused }) => (
+                    <TabIcon
+                      focused={focused}
+                      icon={icons.controller}
+                      title="Playing"
+                      highlight={images.yellowHighlight}
+                    />
+                  ),
                 }}
               />
               <Tabs.Screen
-                name="coming-soon"
+                name="games/coming-soon-games"
                 options={{
-                  href: null,
+                  title: "Coming Soon",
+                  headerShown: false,
+                  tabBarIcon: ({ color, focused }) => (
+                    <TabIcon
+                      focused={focused}
+                      icon={icons.timer}
+                      title="Coming Soon"
+                      highlight={images.yellowHighlight}
+                    />
+                  ),
                 }}
               />
               <Tabs.Screen
-                name="finished"
+                name="games/finished-games"
                 options={{
-                  href: null,
+                  title: "Finished",
+                  headerShown: false,
+                  tabBarIcon: ({ color, focused }) => (
+                    <TabIcon
+                      focused={focused}
+                      icon={icons.finished}
+                      title="Watched"
+                      highlight={images.yellowHighlight}
+                    />
+                  ),
                 }}
               />
+
+              {hideTab("index")}
+              {hideTab("watching")}
+              {hideTab("coming-soon")}
+              {hideTab("finished")}
+
+              {hideTab("movie/queue-movies")}
+              {hideTab("movie/coming-soon-movies")}
+              {hideTab("movie/finished-movies")}
             </Tabs>
           )}
 
@@ -349,7 +410,7 @@ const TabsLayout = () => {
                   <Text>Movies</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={handlePresentModalPress}
+                  onPress={() => changeMode(MODE.VIDEO_GAMES)}
                   className="mx-auto items-center"
                 >
                   <Image

@@ -3,7 +3,7 @@ import SearchBar from "@/components/SearchBar";
 
 import { MODE, PARTY } from "@/constants/enums";
 import { fetchShowsintheQueue } from "@/services/api";
-import { fetchGameDetails } from "@/services/igdm";
+import { fetchCoverArt, fetchGameDetails } from "@/services/igdm";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
@@ -26,8 +26,8 @@ const Index = () => {
     refetch,
   } = useFetch(fetchShowsintheQueue);
 
-  const { data: singleGameData } = useFetch(() => fetchGameDetails(110503));
-
+  const { data: singleGameData } = useFetch(() => fetchGameDetails(284716));
+  const { data: coverArtData } = useFetch(() => fetchCoverArt(388752));
   useFocusEffect(
     useCallback(() => {
       const fetchData = refetch();
@@ -53,6 +53,7 @@ const Index = () => {
   );
 
   console.log(singleGameData);
+  console.log(coverArtData);
 
   const onRefresh = async () => {
     setRefreshing(true);
