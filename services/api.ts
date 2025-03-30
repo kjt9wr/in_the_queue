@@ -6,6 +6,7 @@ import {
 } from "./appwrite";
 import {
   MOVIE_RELEASE_STATUS,
+  PLAY_STATUS,
   RELEASE_STATUS,
   VIEWING_STATUS,
 } from "@/constants/enums";
@@ -106,6 +107,13 @@ export const fetchWatchingNow = async () => {
     ]),
   ];
   return await getShowsFromDB(watchingQuery);
+};
+
+export const fetchPlayingNow = async () => {
+  const queueQuery = [
+    Query.equal("play_status", [PLAY_STATUS.CURRENTLY_PLAYING]),
+  ];
+  return await getVideoGamesFromDB(queueQuery);
 };
 
 export const fetchFinishedShows = async () => {

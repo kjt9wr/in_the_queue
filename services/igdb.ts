@@ -23,12 +23,12 @@ export const fetchGameDetails = async (game_id: number) => {
   }
 };
 
-export const fetchCoverArt = async (cover_id: number) => {
+export const fetchCoverArt = async (game_id: number) => {
   try {
     const response = await apicalypse(requestOptions)
       .fields("game, url")
       .limit(10)
-      .where(`id = ${cover_id}`)
+      .where(`game = ${game_id}`)
       .request("/covers");
 
     return await response.data;

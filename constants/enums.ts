@@ -30,3 +30,9 @@ export enum MOVIE_RELEASE_STATUS {
   UPCOMING = "Upcoming",
   RELEASED = "Released",
 }
+
+export enum PLAY_STATUS {
+  QUEUE = "QUEUE",
+  CURRENTLY_PLAYING = "Currently_Playing",
+  FINISHED = "Finished",
+}

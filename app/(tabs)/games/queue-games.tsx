@@ -25,8 +25,8 @@ const QueueGames = () => {
     refetch,
   } = useFetch(fetchGamesintheQueue);
 
-  const { data: singleGameData } = useFetch(() => fetchGameDetails(19241));
-  const { data: coverArtData } = useFetch(() => fetchCoverArt(427095));
+  // const { data: singleGameData } = useFetch(() => fetchGameDetails(19241));
+  const { data: coverArtData } = useFetch(() => fetchCoverArt(314933));
 
   useFocusEffect(
     useCallback(() => {
@@ -50,9 +50,8 @@ const QueueGames = () => {
   const christineQueueGames = allQueuedGames?.filter(
     (movie: VideoGameFromDB) => movie.party === PARTY.CHRISTINE
   );
-  console.log(allQueuedGames);
 
-  console.log(singleGameData);
+  // console.log(singleGameData);
   console.log(coverArtData);
 
   const onRefresh = async () => {
