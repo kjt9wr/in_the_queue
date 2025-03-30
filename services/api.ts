@@ -4,7 +4,11 @@ import {
   getShowsFromDB,
   getVideoGamesFromDB,
 } from "./appwrite";
-import { MOVIE_RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
+import {
+  MOVIE_RELEASE_STATUS,
+  RELEASE_STATUS,
+  VIEWING_STATUS,
+} from "@/constants/enums";
 
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
@@ -87,7 +91,10 @@ export const fetchMoviesintheQueue = async () => {
 };
 
 export const fetchGamesintheQueue = async () => {
-  const queueQuery = [Query.equal("play_status", [VIEWING_STATUS.QUEUE])];
+  const queueQuery = [
+    Query.equal("play_status", [VIEWING_STATUS.QUEUE]),
+    Query.equal("release_status", [MOVIE_RELEASE_STATUS.RELEASED]),
+  ];
   return await getVideoGamesFromDB(queueQuery);
 };
 

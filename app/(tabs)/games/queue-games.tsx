@@ -2,7 +2,7 @@ import PosterCarousel from "@/components/PosterCarousel";
 import SearchBar from "@/components/SearchBar";
 import { MODE, PARTY } from "@/constants/enums";
 import { fetchGamesintheQueue, fetchMoviesintheQueue } from "@/services/api";
-import { fetchCoverArt, fetchGameDetails } from "@/services/igdm";
+import { fetchCoverArt, fetchGameDetails } from "@/services/igdb";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
@@ -25,8 +25,8 @@ const QueueGames = () => {
     refetch,
   } = useFetch(fetchGamesintheQueue);
 
-  const { data: singleGameData } = useFetch(() => fetchGameDetails(136625));
-  const { data: coverArtData } = useFetch(() => fetchCoverArt(114879));
+  const { data: singleGameData } = useFetch(() => fetchGameDetails(19241));
+  const { data: coverArtData } = useFetch(() => fetchCoverArt(427095));
 
   useFocusEffect(
     useCallback(() => {

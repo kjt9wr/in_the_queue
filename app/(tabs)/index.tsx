@@ -3,7 +3,7 @@ import SearchBar from "@/components/SearchBar";
 
 import { MODE, PARTY } from "@/constants/enums";
 import { fetchShowsintheQueue } from "@/services/api";
-import { fetchCoverArt, fetchGameDetails } from "@/services/igdm";
+import { fetchCoverArt, fetchGameDetails } from "@/services/igdb";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
