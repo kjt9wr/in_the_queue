@@ -320,7 +320,7 @@ const TabsLayout = () => {
                       focused={focused}
                       icon={icons.queue}
                       title="Queue"
-                      highlight={images.yellowHighlight}
+                      highlight={images.blueHighlight}
                     />
                   ),
                 }}
@@ -335,7 +335,7 @@ const TabsLayout = () => {
                       focused={focused}
                       icon={icons.controller}
                       title="Playing"
-                      highlight={images.yellowHighlight}
+                      highlight={images.blueHighlight}
                     />
                   ),
                 }}
@@ -350,7 +350,7 @@ const TabsLayout = () => {
                       focused={focused}
                       icon={icons.timer}
                       title="Coming Soon"
-                      highlight={images.yellowHighlight}
+                      highlight={images.blueHighlight}
                     />
                   ),
                 }}
@@ -365,7 +365,7 @@ const TabsLayout = () => {
                       focused={focused}
                       icon={icons.finished}
                       title="Watched"
-                      highlight={images.yellowHighlight}
+                      highlight={images.blueHighlight}
                     />
                   ),
                 }}

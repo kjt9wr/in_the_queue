@@ -1,5 +1,9 @@
 import { Query } from "react-native-appwrite";
-import { getMoviesFromDB, getShowsFromDB } from "./appwrite";
+import {
+  getMoviesFromDB,
+  getShowsFromDB,
+  getVideoGamesFromDB,
+} from "./appwrite";
 import { MOVIE_RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
 
 export const TMDB_CONFIG = {
@@ -80,6 +84,11 @@ export const fetchMoviesintheQueue = async () => {
     Query.equal("viewing_status", [VIEWING_STATUS.QUEUE]),
   ];
   return await getMoviesFromDB(queueQuery);
+};
+
+export const fetchGamesintheQueue = async () => {
+  const queueQuery = [Query.equal("play_status", [VIEWING_STATUS.QUEUE])];
+  return await getVideoGamesFromDB(queueQuery);
 };
 
 export const fetchWatchingNow = async () => {

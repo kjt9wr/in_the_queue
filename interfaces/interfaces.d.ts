@@ -67,8 +67,8 @@ interface VideoGameFromDB {
   name: string;
   release_status: string;
   party: string;
-  viewing_status: string;
-  TMDB_ID: number;
+  play_status: string;
+  IGDB_ID: number;
   poster_path?: string;
   owned: boolean;
 }

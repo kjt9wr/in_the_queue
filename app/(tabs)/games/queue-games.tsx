@@ -1,7 +1,8 @@
 import PosterCarousel from "@/components/PosterCarousel";
 import SearchBar from "@/components/SearchBar";
 import { MODE, PARTY } from "@/constants/enums";
-import { fetchMoviesintheQueue } from "@/services/api";
+import { fetchGamesintheQueue, fetchMoviesintheQueue } from "@/services/api";
+import { fetchCoverArt, fetchGameDetails } from "@/services/igdm";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
@@ -22,7 +23,10 @@ const QueueGames = () => {
     loading: gamesLoading,
     error: gamesError,
     refetch,
-  } = useFetch(fetchMoviesintheQueue);
+  } = useFetch(fetchGamesintheQueue);
+
+  const { data: singleGameData } = useFetch(() => fetchGameDetails(136625));
+  const { data: coverArtData } = useFetch(() => fetchCoverArt(114879));
 
   useFocusEffect(
     useCallback(() => {
@@ -31,22 +35,25 @@ const QueueGames = () => {
       return () => fetchData;
     }, [])
   );
-  const soloQueueMovies = allQueuedGames?.filter(
-    (movie: MovieFromDB) => movie.party === PARTY.SOLO
+  const soloQueueGames = allQueuedGames?.filter(
+    (movie: VideoGameFromDB) => movie.party === PARTY.SOLO
   );
 
-  const friendQueueMovies = allQueuedGames?.filter(
-    (movie: MovieFromDB) => movie.party === PARTY.FRIENDS
+  const friendQueueGames = allQueuedGames?.filter(
+    (movie: VideoGameFromDB) => movie.party === PARTY.FRIENDS
   );
 
-  const familyQueueMovies = allQueuedGames?.filter(
-    (movie: MovieFromDB) => movie.party === PARTY.FAMILY
+  const familyQueueGames = allQueuedGames?.filter(
+    (movie: VideoGameFromDB) => movie.party === PARTY.FAMILY
   );
 
-  const christineQueueMovies = allQueuedGames?.filter(
-    (movie: MovieFromDB) => movie.party === PARTY.CHRISTINE
+  const christineQueueGames = allQueuedGames?.filter(
+    (movie: VideoGameFromDB) => movie.party === PARTY.CHRISTINE
   );
   console.log(allQueuedGames);
+
+  console.log(singleGameData);
+  console.log(coverArtData);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -71,11 +78,32 @@ const QueueGames = () => {
           <View>
             <SearchBar
               onPress={() => router.push("/search/search-movies")}
-              placeholder="Search for a movie"
+              placeholder="Search for a video game"
             />
             <Text className="text-2xl text-white font-bold mt-5 mb-3">
               In The Queue
             </Text>
+
+            <PosterCarousel
+              games={soloQueueGames}
+              sectionTitle={`${PARTY.SOLO} Queue`}
+              mode={MODE.VIDEO_GAMES}
+            />
+            <PosterCarousel
+              games={friendQueueGames}
+              sectionTitle={`${PARTY.FRIENDS} Queue`}
+              mode={MODE.VIDEO_GAMES}
+            />
+            <PosterCarousel
+              games={familyQueueGames}
+              sectionTitle={`${PARTY.FAMILY} Queue`}
+              mode={MODE.VIDEO_GAMES}
+            />
+            <PosterCarousel
+              games={christineQueueGames}
+              sectionTitle={`${PARTY.CHRISTINE} Queue`}
+              mode={MODE.VIDEO_GAMES}
+            />
           </View>
         )}
       </ScrollView>

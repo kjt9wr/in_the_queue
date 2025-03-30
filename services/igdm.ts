@@ -26,7 +26,7 @@ export const fetchGameDetails = async (game_id: number) => {
 export const fetchCoverArt = async (cover_id: number) => {
   try {
     const response = await apicalypse(requestOptions)
-      .fields("*")
+      .fields("game, url")
       .limit(10)
       .where(`id = ${cover_id}`)
       .request("/covers");

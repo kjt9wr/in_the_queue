@@ -52,9 +52,6 @@ const Index = () => {
     (tvShow: ShowFromDB) => tvShow.Party === PARTY.CHRISTINE
   );
 
-  console.log(singleGameData);
-  console.log(coverArtData);
-
   const onRefresh = async () => {
     setRefreshing(true);
     refetch();
