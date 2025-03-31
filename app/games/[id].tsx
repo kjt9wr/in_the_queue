@@ -26,7 +26,7 @@ const VideoGameDetails = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const { data: selectedGame, loading } = useFetch(() =>
-    fetchSingleVideoGameDetails(id as string)
+    fetchSingleVideoGameDetails(Number(id))
   );
 
   let releaseYear;
@@ -54,16 +54,14 @@ const VideoGameDetails = () => {
             <View className="flex-row items-center gap-x-1 mt-2">
               <Text className="text-light-200 text-sm">{releaseYear}</Text>
             </View>
-            {selectedGame?.status === MOVIE_RELEASE_STATUS.RELEASED && (
+            {selectedGame?.rating && (
               <View className="flex-row items-center bg-dark-100 px-2 py-1 rounded-md gap-x-1 mt-2">
-                <Image source={icons.star} className="size-4" />
-
                 <Text className="text-white font-bold text-sm">
-                  {Math.round(selectedGame?.rating * 10) / 10}/10
+                  Rating: {Math.round(selectedGame?.rating * 10) / 10}/100
                 </Text>
               </View>
             )}
-            <VideoGameInfo label="Overview" value={selectedGame?.summary} />
+            <VideoGameInfo label="Summary" value={selectedGame?.summary} />
 
             <VideoGameInfo
               label="Platforms"

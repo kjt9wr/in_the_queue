@@ -12,7 +12,7 @@ const requestOptions: ApicalypseConfig = {
 export const fetchGameDetails = async (game_id: number) => {
   try {
     const response = await apicalypse(requestOptions)
-      .fields("*")
+      .fields("name, platforms, summary, rating")
       .limit(1)
       .where(`id = ${game_id}`)
       .request("/games");

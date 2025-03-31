@@ -262,13 +262,13 @@ export const fetchSingleMovieDetails = async (movieId: string) => {
 };
 
 export const fetchSingleVideoGameDetails = async (
-  video_game_IGDB_ID: string
+  video_game_IGDB_ID: number
 ) => {
   const movieFromDB = await getVideoGamesFromDB([
-    Query.equal("IGDB_ID", [Number(video_game_IGDB_ID)]),
+    Query.equal("IGDB_ID", [video_game_IGDB_ID]),
   ]);
   try {
-    const response = await fetchGameDetails(Number(video_game_IGDB_ID));
+    const response = await fetchGameDetails(video_game_IGDB_ID);
 
     let detailedGame = await response[0];
 
