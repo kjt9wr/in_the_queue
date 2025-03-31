@@ -115,6 +115,7 @@ const TabsLayout = () => {
         router.replace("/(tabs)/movie/queue-movies");
         break;
       case MODE.VIDEO_GAMES:
+        console.log("call me");
         router.replace("/(tabs)/games/queue-games");
         break;
       default:

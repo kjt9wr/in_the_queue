@@ -1,15 +1,14 @@
+import {
+  MOVIE_RELEASE_STATUS,
+  PLAY_STATUS,
+  VIEWING_STATUS,
+} from "@/constants/enums";
 import { Query } from "react-native-appwrite";
 import {
   getMoviesFromDB,
   getShowsFromDB,
   getVideoGamesFromDB,
 } from "./appwrite";
-import {
-  MOVIE_RELEASE_STATUS,
-  PLAY_STATUS,
-  RELEASE_STATUS,
-  VIEWING_STATUS,
-} from "@/constants/enums";
 import { fetchGamesDetails } from "./igdb";
 
 export const TMDB_CONFIG = {
@@ -67,7 +66,7 @@ export const fetchComingSoonShowsDetails = async () => {
       Query.equal("Release_Status", ["Awaiting"]),
       Query.equal("Release_Status", ["Limbo"]),
     ]),
-    Query.equal("Viewing_Status", ["Caught_Up"]),
+    Query.equal("Viewing_Status", [VIEWING_STATUS.CAUGHT_UP]),
   ];
   return fetchDetailedShows(comingSoonQueries);
 };
@@ -133,8 +132,15 @@ export const fetchFinishedShows = async () => {
 };
 
 export const fetchWatchedMovies = async () => {
-  const watchedQuery = [Query.equal("viewing_status", ["Watched"])];
+  const watchedQuery = [
+    Query.equal("viewing_status", [VIEWING_STATUS.WATCHED]),
+  ];
   return fetchDetailedMovies(watchedQuery);
+};
+
+export const fetchFinishedGames = async () => {
+  const finishedQuery = [Query.equal("play_status", [PLAY_STATUS.FINISHED])];
+  return fetchDetailedMovies(finishedQuery);
 };
 
 const fetchDetailedShows = async (queries: string[]) => {
