@@ -9,6 +9,7 @@ const RootLayout = () => {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="shows/[id]" options={{ headerShown: false }} />
         <Stack.Screen name="movies/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="games/[id]" options={{ headerShown: false }} />
         <Stack.Screen
           name="search/search-series"
           options={{ headerShown: false }}

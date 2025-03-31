@@ -9,7 +9,7 @@ import {
   getShowsFromDB,
   getVideoGamesFromDB,
 } from "./appwrite";
-import { fetchGamesDetails } from "./igdb";
+import { fetchGameDetails, fetchGamesDetails } from "./igdb";
 
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
@@ -257,6 +257,27 @@ export const fetchSingleMovieDetails = async (movieId: string) => {
     return detailedMovie;
   } catch (error) {
     console.error("Error fetching movie details:", error);
+    throw error;
+  }
+};
+
+export const fetchSingleVideoGameDetails = async (
+  video_game_IGDB_ID: string
+) => {
+  const movieFromDB = await getVideoGamesFromDB([
+    Query.equal("IGDB_ID", [Number(video_game_IGDB_ID)]),
+  ]);
+  try {
+    const response = await fetchGameDetails(Number(video_game_IGDB_ID));
+
+    let detailedGame = await response[0];
+
+    if (movieFromDB && movieFromDB.length > 0) {
+      detailedGame = { ...detailedGame, ...movieFromDB[0] };
+    }
+    return detailedGame;
+  } catch (error) {
+    console.error("Error fetching video game details:", error);
     throw error;
   }
 };

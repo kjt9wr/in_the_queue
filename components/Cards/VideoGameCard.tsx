@@ -1,12 +1,8 @@
 import { PLAY_STATUS } from "@/constants/enums";
+import { formatDate } from "@/services/helpers";
 import { Link } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity } from "react-native";
-
-const formatDate = (unixDate: number) => {
-  const date = new Date(unixDate * 1000);
-  return date.toISOString().split("T")[0];
-};
 
 const VideoGameCard = ({
   id,
@@ -16,7 +12,7 @@ const VideoGameCard = ({
   play_status,
 }: VideoGame) => {
   return (
-    <Link href={`/movies/${id}`} asChild>
+    <Link href={`/games/${id}`} asChild>
       <TouchableOpacity className="w-[30%]">
         <Image
           source={{

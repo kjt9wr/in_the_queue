@@ -20,3 +20,8 @@ const isOver30DaysAgo = (date: Date) => {
 
   return date < thirtyDaysAgo;
 };
+
+export const formatDate = (unixDate: number) => {
+  const date = new Date(unixDate * 1000);
+  return date.toISOString().split("T")[0];
+};

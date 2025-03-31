@@ -10,7 +10,7 @@ const GameCarouselCard = ({
   owned,
 }: VideoGameFromDB) => {
   return (
-    <Link href={`/movies/${IGDB_ID}`} asChild>
+    <Link href={`/games/${IGDB_ID}`} asChild>
       <TouchableOpacity className="w-32 relative mr-5 pl-5">
         <Image
           source={{

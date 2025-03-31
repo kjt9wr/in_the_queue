@@ -52,7 +52,7 @@ const QueueGames = () => {
   );
 
   // console.log(singleGameData);
-  console.log(coverArtData);
+  // console.log(coverArtData);
 
   const onRefresh = async () => {
     setRefreshing(true);
