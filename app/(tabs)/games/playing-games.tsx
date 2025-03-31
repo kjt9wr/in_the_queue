@@ -31,21 +31,20 @@ const PlayingGames = () => {
     }, [])
   );
   const soloGames = allQueuedGames?.filter(
-    (movie: VideoGameFromDB) => movie.party === PARTY.SOLO
+    (game: VideoGameFromDB) => game.party === PARTY.SOLO
   );
 
   const friendGames = allQueuedGames?.filter(
-    (movie: VideoGameFromDB) => movie.party === PARTY.FRIENDS
+    (game: VideoGameFromDB) => game.party === PARTY.FRIENDS
   );
 
   const familyGames = allQueuedGames?.filter(
-    (movie: VideoGameFromDB) => movie.party === PARTY.FAMILY
+    (game: VideoGameFromDB) => game.party === PARTY.FAMILY
   );
 
   const christineGames = allQueuedGames?.filter(
-    (movie: VideoGameFromDB) => movie.party === PARTY.CHRISTINE
+    (game: VideoGameFromDB) => game.party === PARTY.CHRISTINE
   );
-  console.log(allQueuedGames);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -78,6 +77,11 @@ const PlayingGames = () => {
               mode={MODE.VIDEO_GAMES}
             />
             <PosterCarousel
+              games={christineGames}
+              sectionTitle={`Playing with ${PARTY.CHRISTINE}`}
+              mode={MODE.VIDEO_GAMES}
+            />
+            <PosterCarousel
               games={friendGames}
               sectionTitle={`Playing with ${PARTY.FRIENDS}`}
               mode={MODE.VIDEO_GAMES}
@@ -85,11 +89,6 @@ const PlayingGames = () => {
             <PosterCarousel
               games={familyGames}
               sectionTitle={`Playing with ${PARTY.FAMILY}`}
-              mode={MODE.VIDEO_GAMES}
-            />
-            <PosterCarousel
-              games={christineGames}
-              sectionTitle={`Playing with ${PARTY.CHRISTINE}`}
               mode={MODE.VIDEO_GAMES}
             />
           </View>

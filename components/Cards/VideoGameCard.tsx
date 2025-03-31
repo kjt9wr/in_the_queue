@@ -1,10 +1,9 @@
-import { MOVIE_RELEASE_STATUS } from "@/constants/enums";
+import { PLAY_STATUS } from "@/constants/enums";
 import { Link } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity } from "react-native";
 
 const formatDate = (unixDate: number) => {
-  console.log(unixDate);
   const date = new Date(unixDate * 1000);
   return date.toISOString().split("T")[0];
 };
@@ -14,7 +13,7 @@ const VideoGameCard = ({
   poster_path,
   name,
   first_release_date,
-  status,
+  play_status,
 }: VideoGame) => {
   return (
     <Link href={`/movies/${id}`} asChild>
@@ -31,7 +30,7 @@ const VideoGameCard = ({
         <Text className="text-sm font-bold text-white mt-2" numberOfLines={1}>
           {name}
         </Text>
-        {first_release_date && status !== MOVIE_RELEASE_STATUS.RELEASED && (
+        {first_release_date && play_status !== PLAY_STATUS.FINISHED && (
           <Text className="text-sm font-bold text-white mt-2" numberOfLines={1}>
             {formatDate(first_release_date)}
           </Text>

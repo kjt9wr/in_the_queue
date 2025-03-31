@@ -82,6 +82,11 @@ const QueueMovies = () => {
               mode={MODE.MOVIES}
             />
             <PosterCarousel
+              movies={christineQueueMovies}
+              sectionTitle={`${PARTY.CHRISTINE} Queue`}
+              mode={MODE.MOVIES}
+            />
+            <PosterCarousel
               movies={friendQueueMovies}
               sectionTitle={`${PARTY.FRIENDS} Queue`}
               mode={MODE.MOVIES}
@@ -89,11 +94,6 @@ const QueueMovies = () => {
             <PosterCarousel
               movies={familyQueueMovies}
               sectionTitle={`${PARTY.FAMILY} Queue`}
-              mode={MODE.MOVIES}
-            />
-            <PosterCarousel
-              movies={christineQueueMovies}
-              sectionTitle={`${PARTY.CHRISTINE} Queue`}
               mode={MODE.MOVIES}
             />
           </View>

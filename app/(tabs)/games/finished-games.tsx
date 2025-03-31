@@ -14,9 +14,9 @@ import { fetchFinishedGames } from "@/services/api";
 
 const FinishedGames = () => {
   const {
-    data: movies,
-    loading: moviesLoading,
-    error: moviesError,
+    data: games,
+    loading: gamesLoading,
+    error: gamesError,
     refetch,
   } = useFetch(fetchFinishedGames);
 
@@ -46,18 +46,18 @@ const FinishedGames = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {moviesLoading ? (
+        {gamesLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
-        ) : moviesError ? (
-          <Text>Error: {moviesError?.message}</Text>
+        ) : gamesError ? (
+          <Text>Error: {gamesError?.message}</Text>
         ) : (
           <View>
             <>
               <Text className="text-lg text-white font-bold mt-5 mb-3">
-                Watched
+                Finished
               </Text>
               <FlatList
-                data={movies}
+                data={games}
                 renderItem={({ item }) => <VideoGameCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}

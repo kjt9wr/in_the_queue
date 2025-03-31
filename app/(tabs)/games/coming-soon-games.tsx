@@ -49,24 +49,23 @@ const ComingSoonGames = () => {
   //   });
   // }, [detailedMovies]);
 
-  // const sortedMovies = detailedMovies
-  //   ?.filter((movie: Movie) => movie.release_date)
-  //   .sort((a: Movie, b: Movie) => {
-  //     if (a.release_date < b.release_date) return -1;
-  //     if (a.release_date > b.release_date) return 1;
-  //     return 0;
-  //   });
+  const sortedGames = detailedGames
+    ?.filter((game: VideoGame) => game.first_release_date)
+    .sort((a: VideoGame, b: VideoGame) => {
+      if (a.first_release_date < b.first_release_date) return -1;
+      if (a.first_release_date > b.first_release_date) return 1;
+      return 0;
+    });
 
-  // const noReleaseDate = detailedMovies?.filter(
-  //   (movie: Movie) => !movie.release_date
-  // );
+  const gamesWithoutReleaseDate = detailedGames?.filter(
+    (game: VideoGame) => !game.first_release_date
+  );
 
   const onRefresh = async () => {
     setRefreshing(true);
     refetch();
     setRefreshing(false);
   };
-  console.log(detailedGames);
 
   return (
     <View className="bg-primary flex-1">
@@ -83,25 +82,46 @@ const ComingSoonGames = () => {
         ) : detailsError ? (
           <Text>Error: {detailsError?.message}</Text>
         ) : (
-          <View>
-            <Text className="text-2xl text-white font-bold mt-5 mb-3">
-              Coming Soon
-            </Text>
-            <FlatList
-              data={detailedGames}
-              renderItem={({ item }) => <VideoGameCard {...item} />}
-              keyExtractor={(item) => item.id.toString()}
-              numColumns={3}
-              columnWrapperStyle={{
-                justifyContent: "flex-start",
-                gap: 20,
-                paddingRight: 5,
-                marginBottom: 10,
-              }}
-              className="mt-2 pb-12"
-              scrollEnabled={false}
-            />
-          </View>
+          <>
+            <View>
+              <Text className="text-2xl text-white font-bold mt-5 mb-3">
+                Coming Soon
+              </Text>
+              <FlatList
+                data={sortedGames}
+                renderItem={({ item }) => <VideoGameCard {...item} />}
+                keyExtractor={(item) => item.id.toString()}
+                numColumns={3}
+                columnWrapperStyle={{
+                  justifyContent: "flex-start",
+                  gap: 20,
+                  paddingRight: 5,
+                  marginBottom: 10,
+                }}
+                className="mt-2 pb-12"
+                scrollEnabled={false}
+              />
+            </View>
+            <View>
+              <Text className="text-2xl text-white font-bold mt-5 mb-3">
+                Release Date Unknown
+              </Text>
+              <FlatList
+                data={gamesWithoutReleaseDate}
+                renderItem={({ item }) => <VideoGameCard {...item} />}
+                keyExtractor={(item) => item.id.toString()}
+                numColumns={3}
+                columnWrapperStyle={{
+                  justifyContent: "flex-start",
+                  gap: 20,
+                  paddingRight: 5,
+                  marginBottom: 10,
+                }}
+                className="mt-2 pb-12"
+                scrollEnabled={false}
+              />
+            </View>
+          </>
         )}
       </ScrollView>
     </View>

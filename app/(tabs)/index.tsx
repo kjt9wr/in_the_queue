@@ -87,6 +87,11 @@ const Index = () => {
               mode={MODE.TV_SHOWS}
             />
             <PosterCarousel
+              shows={christineQueueShows}
+              sectionTitle={`${PARTY.CHRISTINE} Queue`}
+              mode={MODE.TV_SHOWS}
+            />
+            <PosterCarousel
               shows={friendQueueShows}
               sectionTitle={`${PARTY.FRIENDS} Queue`}
               mode={MODE.TV_SHOWS}
@@ -94,11 +99,6 @@ const Index = () => {
             <PosterCarousel
               shows={familyQueueShows}
               sectionTitle={`${PARTY.FAMILY} Queue`}
-              mode={MODE.TV_SHOWS}
-            />
-            <PosterCarousel
-              shows={christineQueueShows}
-              sectionTitle={`${PARTY.CHRISTINE} Queue`}
               mode={MODE.TV_SHOWS}
             />
           </View>

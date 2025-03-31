@@ -87,7 +87,7 @@ interface VideoGame {
   websites: number[];
   poster_path: string;
   first_release_date: number;
-  status: string;
+  play_status: string;
 }
 
 interface ShowFromDB {

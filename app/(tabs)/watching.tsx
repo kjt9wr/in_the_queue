@@ -78,6 +78,11 @@ const Watching = () => {
               mode={MODE.TV_SHOWS}
             />
             <PosterCarousel
+              shows={christineShows}
+              sectionTitle={`Watching with ${PARTY.CHRISTINE}`}
+              mode={MODE.TV_SHOWS}
+            />
+            <PosterCarousel
               shows={friendShows}
               sectionTitle={`Watching with ${PARTY.FRIENDS}`}
               mode={MODE.TV_SHOWS}
@@ -85,11 +90,6 @@ const Watching = () => {
             <PosterCarousel
               shows={familyShows}
               sectionTitle={`Watching with ${PARTY.FAMILY}`}
-              mode={MODE.TV_SHOWS}
-            />
-            <PosterCarousel
-              shows={christineShows}
-              sectionTitle={`Watching with ${PARTY.CHRISTINE}`}
               mode={MODE.TV_SHOWS}
             />
           </View>

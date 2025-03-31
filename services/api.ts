@@ -140,7 +140,7 @@ export const fetchWatchedMovies = async () => {
 
 export const fetchFinishedGames = async () => {
   const finishedQuery = [Query.equal("play_status", [PLAY_STATUS.FINISHED])];
-  return fetchDetailedMovies(finishedQuery);
+  return fetchDetailedVideoGames(finishedQuery);
 };
 
 const fetchDetailedShows = async (queries: string[]) => {
