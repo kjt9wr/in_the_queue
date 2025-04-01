@@ -9,7 +9,12 @@ import {
   getShowsFromDB,
   getVideoGamesFromDB,
 } from "./appwrite";
-import { fetchGameDetails, fetchGamesDetails } from "./igdb";
+import {
+  fetchCoverArt,
+  fetchGameDetails,
+  fetchGamesDetails,
+  queryForGames,
+} from "./igdb";
 
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
@@ -58,6 +63,18 @@ export const fetchMovies = async ({ query }: { query: string }) => {
 
   const data = await response.json();
   return data.results;
+};
+
+export const fetchVideoGames = async ({ query }: { query: string }) => {
+  const response = await queryForGames(query);
+
+  const gameIds = response.map((game: VideoGame) => game.id);
+
+  if (gameIds.length > 0) {
+    const gamesWithCovers = await fetchCoverArt(gameIds);
+    const returnObjects = addCoverArt(response, gamesWithCovers);
+    return returnObjects;
+  }
 };
 
 export const fetchComingSoonShowsDetails = async () => {
@@ -205,6 +222,20 @@ const mergeArrays = (gamesFromDB: any[], dataFromApi: any[]) => {
       (game) => game.id === dbGameData.IGDB_ID
     );
     acc.push(nameWithDate ? { ...dbGameData, ...nameWithDate } : dbGameData);
+    return acc;
+  }, []);
+};
+
+const addCoverArt = (dataFromApi: any[], coverArtArray: any[]) => {
+  return dataFromApi.reduce((acc, dbGameData) => {
+    let foundCoverArt = coverArtArray.find(
+      (coverArtObj) => coverArtObj.game === dbGameData.id
+    );
+    acc.push(
+      foundCoverArt
+        ? { ...dbGameData, poster_path: foundCoverArt.url.split("t_thumb/")[1] }
+        : dbGameData
+    );
     return acc;
   }, []);
 };

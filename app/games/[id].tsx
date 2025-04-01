@@ -1,5 +1,4 @@
-import { MOVIE_RELEASE_STATUS, PlatformsById } from "@/constants/enums";
-import { icons } from "@/constants/icons";
+import { PlatformsById } from "@/constants/enums";
 import { fetchSingleVideoGameDetails } from "@/services/api";
 import { formatDate } from "@/services/helpers";
 import useFetch from "@/services/useFetch";

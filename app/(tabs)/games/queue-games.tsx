@@ -2,7 +2,6 @@ import PosterCarousel from "@/components/PosterCarousel";
 import SearchBar from "@/components/SearchBar";
 import { MODE, PARTY } from "@/constants/enums";
 import { fetchGamesintheQueue } from "@/services/api";
-import { fetchCoverArt } from "@/services/igdb";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
@@ -24,9 +23,6 @@ const QueueGames = () => {
     error: gamesError,
     refetch,
   } = useFetch(fetchGamesintheQueue);
-
-  // const { data: singleGameData } = useFetch(() => fetchGameDetails(306141));
-  const { data: coverArtData } = useFetch(() => fetchCoverArt(267796));
 
   useFocusEffect(
     useCallback(() => {
@@ -51,9 +47,6 @@ const QueueGames = () => {
     (game: VideoGameFromDB) => game.party === PARTY.FAMILY
   );
 
-  // console.log(singleGameData);
-  // console.log(coverArtData);
-
   const onRefresh = async () => {
     setRefreshing(true);
     refetch();
@@ -76,7 +69,7 @@ const QueueGames = () => {
         ) : (
           <View>
             <SearchBar
-              onPress={() => router.push("/search/search-movies")}
+              onPress={() => router.push("/search/search-video-games")}
               placeholder="Search for a video game"
             />
             <Text className="text-2xl text-white font-bold mt-5 mb-3">

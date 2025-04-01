@@ -23,12 +23,12 @@ export const fetchGameDetails = async (game_id: number) => {
   }
 };
 
-export const fetchCoverArt = async (game_id: number) => {
+export const fetchCoverArt = async (game_ids: number[]) => {
   try {
     const response = await apicalypse(requestOptions)
       .fields("game, url")
-      .limit(10)
-      .where(`game = ${game_id}`)
+      .limit(15)
+      .where(`game = (${game_ids})`)
       .request("/covers");
 
     return await response.data;
@@ -43,6 +43,19 @@ export const fetchGamesDetails = async (game_ids: number[]) => {
       .fields("first_release_date")
       .limit(100)
       .where(`id = (${game_ids})`)
+      .request("/games");
+    return await response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const queryForGames = async (searchTerm: string) => {
+  try {
+    const response = await apicalypse(requestOptions)
+      .fields("name, id")
+      .limit(15)
+      .search(searchTerm)
       .request("/games");
     return await response.data;
   } catch (error) {

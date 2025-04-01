@@ -18,6 +18,10 @@ const RootLayout = () => {
           name="search/search-movies"
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="search/search-video-games"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </>
   );
