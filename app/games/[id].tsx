@@ -35,7 +35,7 @@ const VideoGameDetails = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-primary">
-      {!loading && (
+      {!loading && selectedGame && (
         <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
           <View>
             <Image

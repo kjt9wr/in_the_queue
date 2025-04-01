@@ -295,7 +295,7 @@ export const fetchSingleMovieDetails = async (movieId: string) => {
 export const fetchSingleVideoGameDetails = async (
   video_game_IGDB_ID: number
 ) => {
-  const movieFromDB = await getVideoGamesFromDB([
+  const gameFromDB = await getVideoGamesFromDB([
     Query.equal("IGDB_ID", [video_game_IGDB_ID]),
   ]);
   try {
@@ -303,8 +303,13 @@ export const fetchSingleVideoGameDetails = async (
 
     let detailedGame = await response[0];
 
-    if (movieFromDB && movieFromDB.length > 0) {
-      detailedGame = { ...detailedGame, ...movieFromDB[0] };
+    if (gameFromDB && gameFromDB.length > 0) {
+      detailedGame = { ...detailedGame, ...gameFromDB[0] };
+    } else {
+      const gameIds = response.map((game: VideoGame) => game.id);
+
+      const gamesWithCovers = await fetchCoverArt(gameIds);
+      detailedGame = addCoverArt(response, gamesWithCovers)[0];
     }
     return detailedGame;
   } catch (error) {
