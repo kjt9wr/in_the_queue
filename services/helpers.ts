@@ -25,3 +25,7 @@ export const formatDate = (unixDate: number) => {
   const date = new Date(unixDate * 1000);
   return date.toISOString().split("T")[0];
 };
+
+export const gameIsReleased = (selectedGame: VideoGame) => {
+  return new Date() > new Date(selectedGame.first_release_date * 1000);
+};

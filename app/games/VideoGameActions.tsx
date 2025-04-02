@@ -7,16 +7,21 @@ import {
   VIEWING_STATUS,
 } from "@/constants/enums";
 import { icons } from "@/constants/icons";
-import { deleteFromDB, updateMovie } from "@/services/appwrite";
+import {
+  deleteFromDB,
+  updateMovie,
+  updateVideoGame,
+} from "@/services/appwrite";
+import { gameIsReleased } from "@/services/helpers";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 
-interface SeriesActionsProps {
+interface VideoGameActionsProps {
   loading: boolean;
-  movie: Movie;
+  selectedGame: VideoGame;
 }
-const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
+const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
   const router = useRouter();
   const [queue, setQueue] = useState<string>(PARTY.SOLO);
   const [showForm, setShowForm] = useState<string>("");
@@ -27,18 +32,20 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
   };
 
   const onSubmit = async (nextViewingStatus: string) => {
-    const movieToAdd: MovieFromDB = {
-      name: movie.title,
-      release_status:
-        movie.status === MOVIE_RELEASE_STATUS.RELEASED
-          ? MOVIE_RELEASE_STATUS.RELEASED
-          : MOVIE_RELEASE_STATUS.UPCOMING,
-      party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : movie.party,
-      viewing_status: nextViewingStatus,
-      TMDB_ID: movie.id,
-      poster_path: movie.poster_path,
+    const gameToAdd: VideoGameFromDB = {
+      name: selectedGame.name,
+      release_status: gameIsReleased(selectedGame)
+        ? MOVIE_RELEASE_STATUS.RELEASED
+        : MOVIE_RELEASE_STATUS.UPCOMING,
+      party:
+        nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : selectedGame.party,
+      play_status: nextViewingStatus,
+      IGDB_ID: selectedGame.id,
+      poster_path: selectedGame.poster_path,
+      owned: selectedGame.owned || false,
     };
-    await updateMovie(movieToAdd).then(() => {
+
+    await updateVideoGame(gameToAdd).then(() => {
       reset();
       router.back();
     });
@@ -66,8 +73,8 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
       {/* Action Buttons */}
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
-          {movie.status === MOVIE_RELEASE_STATUS.RELEASED &&
-            movie.viewing_status !== VIEWING_STATUS.QUEUE && (
+          {gameIsReleased(selectedGame) &&
+            selectedGame.play_status !== VIEWING_STATUS.QUEUE && (
               <CustomButton
                 title="Add to Queue"
                 handlePress={() => {
@@ -79,8 +86,8 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8 mr-3"
               />
             )}
-          {movie.viewing_status === VIEWING_STATUS.QUEUE &&
-            movie.status === MOVIE_RELEASE_STATUS.RELEASED && (
+          {/* {selectedGame.viewing_status === VIEWING_STATUS.QUEUE &&
+            selectedGame.status === MOVIE_RELEASE_STATUS.RELEASED && (
               <CustomButton
                 title={"Watched"}
                 handlePress={() => {
@@ -92,8 +99,8 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8"
               />
             )}
-          {movie.status !== MOVIE_RELEASE_STATUS.RELEASED &&
-            movie.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
+          {selectedGame.status !== MOVIE_RELEASE_STATUS.RELEASED &&
+            selectedGame.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
               <CustomButton
                 title="Add to Coming Soon"
                 handlePress={() => {
@@ -105,11 +112,11 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8 mr-2"
               />
             )}
-          {movie.viewing_status === VIEWING_STATUS.QUEUE && (
+          {selectedGame.viewing_status === VIEWING_STATUS.QUEUE && (
             <CustomButton
               title="Remove"
               handlePress={() => {
-                onDelete(movie.id);
+                onDelete(selectedGame.id);
               }}
               containerStyles="mt-7 bg-red-700"
               isLoading={loading}
@@ -117,11 +124,11 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
               icon={icons.trash}
               iconStyles="w-6 mx-2"
             />
-          )}
+          )} */}
         </View>
       )}
     </View>
   );
 };
 
-export default SeriesActions;
+export default VideoGameActions;

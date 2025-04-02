@@ -88,6 +88,9 @@ interface VideoGame {
   poster_path: string;
   first_release_date: number;
   play_status: string;
+  party: string;
+  release_status: string;
+  owned?: boolean;
 }
 
 interface ShowFromDB {

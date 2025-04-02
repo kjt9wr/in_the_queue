@@ -135,6 +135,44 @@ export const updateMovie = async (movie: MovieFromDB) => {
   }
 };
 
+export const updateVideoGame = async (videoGame: VideoGameFromDB) => {
+  try {
+    const result = await database.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID_VIDEO_GAMES,
+      [Query.equal("IGDB_ID", videoGame.IGDB_ID)]
+    );
+    console.log(videoGame);
+
+    // already in DB
+    if (result.documents.length > 0) {
+      const existingGame = result.documents[0];
+      console.log(existingGame);
+      await database.updateDocument(
+        DATABASE_ID,
+        COLLECTION_ID_VIDEO_GAMES,
+        existingGame.$id,
+        {
+          party: videoGame.party,
+          play_status: videoGame.play_status,
+          release_status: videoGame.release_status,
+          owned: videoGame.owned,
+        }
+      );
+    } else {
+      await database.createDocument(
+        DATABASE_ID,
+        COLLECTION_ID_VIDEO_GAMES,
+        ID.unique(),
+        videoGame
+      );
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const deleteFromDB = async (tmdb_id: number, mode: string) => {
   let collection;
   switch (mode) {

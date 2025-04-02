@@ -6,6 +6,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import VideoGameActions from "./VideoGameActions";
 
 interface VideoGameInfoProps {
   label: string;
@@ -71,7 +72,9 @@ const VideoGameDetails = () => {
               }
             />
           </View>
-          {/* {movie && <MovieActions movie={movie} loading={loading} />} */}
+          {selectedGame && (
+            <VideoGameActions selectedGame={selectedGame} loading={loading} />
+          )}
         </ScrollView>
       )}
     </SafeAreaView>
