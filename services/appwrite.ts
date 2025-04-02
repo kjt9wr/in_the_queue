@@ -173,7 +173,7 @@ export const updateVideoGame = async (videoGame: VideoGameFromDB) => {
   }
 };
 
-export const deleteFromDB = async (tmdb_id: number, mode: string) => {
+export const deleteFromDB = async (api_id: number, mode: string) => {
   let collection;
   switch (mode) {
     case MODE.TV_SHOWS:
@@ -182,16 +182,23 @@ export const deleteFromDB = async (tmdb_id: number, mode: string) => {
     case MODE.MOVIES:
       collection = COLLECTION_ID_MOVIES;
       break;
+    case MODE.VIDEO_GAMES:
+      collection = COLLECTION_ID_VIDEO_GAMES;
+      break;
     default:
       collection = COLLECTION_ID;
       break;
   }
 
+  const query =
+    mode === MODE.VIDEO_GAMES
+      ? Query.equal("IGDB_ID", api_id)
+      : Query.equal("TMDB_ID", api_id);
   try {
     const showFromDatabase = await database.listDocuments(
       DATABASE_ID,
       collection,
-      [Query.equal("TMDB_ID", tmdb_id)]
+      [query]
     );
     database.deleteDocument(
       DATABASE_ID,

@@ -51,8 +51,8 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
     });
   };
 
-  const onDelete = async (movieId: number) => {
-    await deleteFromDB(movieId, MODE.MOVIES).then(() => {
+  const onDelete = async (game_id: number) => {
+    await deleteFromDB(game_id, MODE.VIDEO_GAMES).then(() => {
       reset();
       router.back();
     });
@@ -112,7 +112,8 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
                 iconStyles="w-8 mr-2"
               />
             )}
-          {selectedGame.viewing_status === VIEWING_STATUS.QUEUE && (
+         */}
+          {selectedGame.play_status === VIEWING_STATUS.QUEUE && (
             <CustomButton
               title="Remove"
               handlePress={() => {
@@ -124,7 +125,7 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
               icon={icons.trash}
               iconStyles="w-6 mx-2"
             />
-          )} */}
+          )}
         </View>
       )}
     </View>
