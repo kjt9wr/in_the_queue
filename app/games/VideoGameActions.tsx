@@ -4,7 +4,7 @@ import {
   MODE,
   MOVIE_RELEASE_STATUS,
   PARTY,
-  VIEWING_STATUS,
+  PLAY_STATUS,
 } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import {
@@ -31,15 +31,16 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
     setShowForm("");
   };
 
-  const onSubmit = async (nextViewingStatus: string) => {
+  console.log(selectedGame);
+
+  const onSubmit = async (nextPlayStatus: string) => {
     const gameToAdd: VideoGameFromDB = {
       name: selectedGame.name,
       release_status: gameIsReleased(selectedGame)
         ? MOVIE_RELEASE_STATUS.RELEASED
         : MOVIE_RELEASE_STATUS.UPCOMING,
-      party:
-        nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : selectedGame.party,
-      play_status: nextViewingStatus,
+      party: nextPlayStatus === PLAY_STATUS.QUEUE ? queue : selectedGame.party,
+      play_status: nextPlayStatus,
       IGDB_ID: selectedGame.id,
       poster_path: selectedGame.poster_path,
       owned: selectedGame.owned || false,
@@ -74,16 +75,30 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
           {gameIsReleased(selectedGame) &&
-            selectedGame.play_status !== VIEWING_STATUS.QUEUE && (
+            selectedGame.play_status !== PLAY_STATUS.QUEUE && (
               <CustomButton
                 title="Add to Queue"
                 handlePress={() => {
-                  setShowForm(VIEWING_STATUS.QUEUE);
+                  setShowForm(PLAY_STATUS.QUEUE);
                 }}
                 containerStyles="mt-7 bg-blue-400"
                 isLoading={loading}
                 icon={icons.enqueue}
                 iconStyles="w-8 mr-3"
+              />
+            )}
+
+          {selectedGame.play_status === PLAY_STATUS.QUEUE &&
+            gameIsReleased(selectedGame) && (
+              <CustomButton
+                title="Start Playing"
+                handlePress={() => {
+                  onSubmit(PLAY_STATUS.CURRENTLY_PLAYING);
+                }}
+                containerStyles="mt-7 bg-green-700"
+                isLoading={loading}
+                icon={icons.play}
+                iconStyles="w-8 mr-2"
               />
             )}
           {/* {selectedGame.viewing_status === VIEWING_STATUS.QUEUE &&
@@ -99,6 +114,8 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
                 iconStyles="w-8"
               />
             )}
+
+
           {selectedGame.status !== MOVIE_RELEASE_STATUS.RELEASED &&
             selectedGame.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
               <CustomButton
@@ -113,19 +130,20 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
               />
             )}
          */}
-          {selectedGame.play_status === VIEWING_STATUS.QUEUE && (
-            <CustomButton
-              title="Remove"
-              handlePress={() => {
-                onDelete(selectedGame.id);
-              }}
-              containerStyles="mt-7 bg-red-700"
-              isLoading={loading}
-              textStyles="mr-2"
-              icon={icons.trash}
-              iconStyles="w-6 mx-2"
-            />
-          )}
+          {selectedGame.play_status === PLAY_STATUS.QUEUE &&
+            gameIsReleased(selectedGame) && (
+              <CustomButton
+                title="Remove"
+                handlePress={() => {
+                  onDelete(selectedGame.id);
+                }}
+                containerStyles="mt-7 bg-red-700"
+                isLoading={loading}
+                textStyles="mr-2"
+                icon={icons.trash}
+                iconStyles="w-6 mx-2"
+              />
+            )}
         </View>
       )}
     </View>

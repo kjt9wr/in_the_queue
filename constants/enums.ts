@@ -32,7 +32,7 @@ export enum MOVIE_RELEASE_STATUS {
 }
 
 export enum PLAY_STATUS {
-  QUEUE = "QUEUE",
+  QUEUE = "Queue",
   CURRENTLY_PLAYING = "Currently_Playing",
   FINISHED = "Finished",
 }
