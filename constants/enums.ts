@@ -14,7 +14,7 @@ export enum RELEASE_STATUS {
   RELEASED = "Released",
 }
 
-export enum VIEWING_STATUS {
+export enum VIEW_STATUS {
   QUEUE = "Queue",
   CURRENTLY_WATCHING = "Currently_Watching",
   CAUGHT_UP = "Caught_Up",

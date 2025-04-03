@@ -30,19 +30,19 @@ const WatchingSeries = () => {
   );
 
   const soloShows = shows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.SOLO
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.SOLO
   );
 
   const friendShows = shows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.FRIENDS
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.FRIENDS
   );
 
   const familyShows = shows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.FAMILY
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.FAMILY
   );
 
   const christineShows = shows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.CHRISTINE
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.CHRISTINE
   );
 
   const onRefresh = async () => {

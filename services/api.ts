@@ -1,7 +1,7 @@
 import {
   RELEASE_STATUS,
   PLAY_STATUS,
-  VIEWING_STATUS,
+  VIEW_STATUS,
   MODE,
 } from "@/constants/enums";
 import { Query } from "react-native-appwrite";
@@ -74,10 +74,10 @@ const searchVideoGames = async ({ query }: { query: string }) => {
 export const fetchComingSoonShowsDetails = async () => {
   const comingSoonQueries = [
     Query.or([
-      Query.equal("Release_Status", ["Awaiting"]),
-      Query.equal("Release_Status", ["Limbo"]),
+      Query.equal("release_status", [RELEASE_STATUS.AWAITING]),
+      Query.equal("release_status", [RELEASE_STATUS.LIMBO]),
     ]),
-    Query.equal("Viewing_Status", [VIEWING_STATUS.CAUGHT_UP]),
+    Query.equal("view_status", [VIEW_STATUS.CAUGHT_UP]),
   ];
   return fetchDetailedShows(comingSoonQueries);
 };
@@ -98,16 +98,14 @@ export const fetchComingSoonVideoGamesDetails = async () => {
 
 export const fetchFinishedShows = async () => {
   const finishedQuery = [
-    Query.equal("Release_Status", ["Finished"]),
-    Query.equal("Viewing_Status", ["Caught_Up"]),
+    Query.equal("release_status", [RELEASE_STATUS.FINISHED]),
+    Query.equal("view_status", [VIEW_STATUS.CAUGHT_UP]),
   ];
   return fetchDetailedShows(finishedQuery);
 };
 
 export const fetchWatchedMovies = async () => {
-  const watchedQuery = [
-    Query.equal("viewing_status", [VIEWING_STATUS.WATCHED]),
-  ];
+  const watchedQuery = [Query.equal("view_status", [VIEW_STATUS.WATCHED])];
   return fetchDetailedMovies(watchedQuery);
 };
 
@@ -129,8 +127,8 @@ const fetchDetailedShows = async (queries: string[]) => {
                 headers: TMDB_CONFIG.headers,
               })
             ).json()),
-            party: tvShow.Party,
-            viewing_status: tvShow.Viewing_Status,
+            party: tvShow.party,
+            view_status: tvShow.view_status,
           };
         })
       )
@@ -153,7 +151,7 @@ const fetchDetailedMovies = async (queries: string[]) => {
               })
             ).json()),
             party: movie.party,
-            viewing_status: movie.viewing_status,
+            view_status: movie.view_status,
           };
         })
       )

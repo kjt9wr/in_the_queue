@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { Picker } from "@react-native-picker/picker";
-import { PARTY, VIEWING_STATUS } from "@/constants/enums";
+import { PARTY, VIEW_STATUS } from "@/constants/enums";
 import CustomButton from "./CustomButton";
 
 interface QueuePickerProps {
@@ -49,7 +49,7 @@ const QueuePickerForm = ({
         <CustomButton
           title={`Add to ${queue} queue`}
           handlePress={() => {
-            onSubmit(VIEWING_STATUS.QUEUE);
+            onSubmit(VIEW_STATUS.QUEUE);
           }}
           containerStyles="mt-7 bg-blue-400"
           isLoading={loading}

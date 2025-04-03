@@ -7,7 +7,7 @@ const MovieCarouselCard = ({
   TMDB_ID,
   name,
   poster_path,
-  viewing_status,
+  view_status,
 }: MovieFromDB) => {
   return (
     <Link href={`/movies/${TMDB_ID}`} asChild>
@@ -21,7 +21,7 @@ const MovieCarouselCard = ({
           className="w-32 h-48 rounded-lg"
           resizeMode="cover"
         />
-        {viewing_status === "Rewatching" && (
+        {view_status === "Rewatching" && (
           <View className="absolute -bottom-12 -right-0.5 px-2 py-1 rounded-full">
             <Image
               source={images.rewatching}

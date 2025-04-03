@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import QueuePickerForm from "@/components/QueuePickerForm";
-import { MODE, PARTY, RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
+import { MODE, PARTY, RELEASE_STATUS, VIEW_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { deleteFromDB, updateMovie } from "@/services/appwrite";
 import { useRouter } from "expo-router";
@@ -28,8 +28,8 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
         movie.status === RELEASE_STATUS.RELEASED
           ? RELEASE_STATUS.RELEASED
           : RELEASE_STATUS.UPCOMING,
-      party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : movie.party,
-      viewing_status: nextViewingStatus,
+      party: nextViewingStatus === VIEW_STATUS.QUEUE ? queue : movie.party,
+      view_status: nextViewingStatus,
       TMDB_ID: movie.id,
       poster_path: movie.poster_path,
     };
@@ -62,11 +62,11 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
           {movie.status === RELEASE_STATUS.RELEASED &&
-            movie.viewing_status !== VIEWING_STATUS.QUEUE && (
+            movie.view_status !== VIEW_STATUS.QUEUE && (
               <CustomButton
                 title="Add to Queue"
                 handlePress={() => {
-                  setShowForm(VIEWING_STATUS.QUEUE);
+                  setShowForm(VIEW_STATUS.QUEUE);
                 }}
                 containerStyles="mt-7 bg-blue-400"
                 isLoading={loading}
@@ -74,12 +74,12 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8 mr-3"
               />
             )}
-          {movie.viewing_status === VIEWING_STATUS.QUEUE &&
+          {movie.view_status === VIEW_STATUS.QUEUE &&
             movie.status === RELEASE_STATUS.RELEASED && (
               <CustomButton
                 title={"Watched"}
                 handlePress={() => {
-                  onSubmit(VIEWING_STATUS.WATCHED);
+                  onSubmit(VIEW_STATUS.WATCHED);
                 }}
                 containerStyles="mt-7 bg-purple-400"
                 isLoading={loading}
@@ -92,7 +92,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
               <CustomButton
                 title="Add to Coming Soon"
                 handlePress={() => {
-                  onSubmit(VIEWING_STATUS.QUEUE);
+                  onSubmit(VIEW_STATUS.QUEUE);
                 }}
                 containerStyles="mt-7 bg-green-700"
                 isLoading={loading}
@@ -100,7 +100,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8 mr-2"
               />
             )}
-          {movie.viewing_status === VIEWING_STATUS.QUEUE && (
+          {movie.view_status === VIEW_STATUS.QUEUE && (
             <CustomButton
               title="Remove"
               handlePress={() => {

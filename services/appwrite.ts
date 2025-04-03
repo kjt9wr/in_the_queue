@@ -2,7 +2,7 @@ import {
   MODE,
   PLAY_STATUS,
   RELEASE_STATUS,
-  VIEWING_STATUS,
+  VIEW_STATUS,
 } from "@/constants/enums";
 import { Client, Databases, ID, Query } from "react-native-appwrite";
 
@@ -85,9 +85,9 @@ export const updateShow = async (tvShow: ShowFromDB) => {
         COLLECTION_ID,
         existingShow.$id,
         {
-          Party: tvShow.Party,
-          Viewing_Status: tvShow.Viewing_Status,
-          Release_Status: tvShow.Release_Status,
+          party: tvShow.party,
+          view_status: tvShow.view_status,
+          release_status: tvShow.release_status,
         }
       );
     } else {
@@ -122,7 +122,7 @@ export const updateMovie = async (movie: MovieFromDB) => {
         existingMovie.$id,
         {
           party: movie.party,
-          viewing_status: movie.viewing_status,
+          view_status: movie.view_status,
           release_status: movie.release_status,
         }
       );
@@ -215,21 +215,21 @@ export const deleteFromDB = async (api_id: number, mode: string) => {
 };
 
 export const fetchShowsintheQueue = async () => {
-  const queueQuery = [Query.equal("Viewing_Status", [VIEWING_STATUS.QUEUE])];
+  const queueQuery = [Query.equal("view_status", [VIEW_STATUS.QUEUE])];
   return await getShowsFromDB(queueQuery);
 };
 
 export const fetchMoviesintheQueue = async () => {
   const queueQuery = [
     Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
-    Query.equal("viewing_status", [VIEWING_STATUS.QUEUE]),
+    Query.equal("view_status", [VIEW_STATUS.QUEUE]),
   ];
   return await getMoviesFromDB(queueQuery);
 };
 
 export const fetchGamesintheQueue = async () => {
   const queueQuery = [
-    Query.equal("play_status", [VIEWING_STATUS.QUEUE]),
+    Query.equal("play_status", [VIEW_STATUS.QUEUE]),
     Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
   ];
   return await getVideoGamesFromDB(queueQuery);
@@ -238,8 +238,8 @@ export const fetchGamesintheQueue = async () => {
 export const fetchWatchingNow = async () => {
   const watchingQuery = [
     Query.or([
-      Query.equal("Viewing_Status", ["Currently_Watching"]),
-      Query.equal("Viewing_Status", ["Rewatching"]),
+      Query.equal("view_status", [VIEW_STATUS.CURRENTLY_WATCHING]),
+      Query.equal("view_status", [VIEW_STATUS.REWATCHING]),
     ]),
   ];
   return await getShowsFromDB(watchingQuery);

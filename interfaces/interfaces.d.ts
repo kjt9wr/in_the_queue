@@ -19,7 +19,7 @@ interface TVShow {
   vote_count: number;
   status: string;
   party: string;
-  viewing_status: string;
+  view_status: string;
 }
 
 interface Movie {
@@ -40,7 +40,7 @@ interface Movie {
   tagline: string;
   title: string;
   video: false;
-  viewing_status: string;
+  view_status: string;
   vote_average: number;
   vote_count: number;
 }
@@ -96,25 +96,21 @@ interface VideoGame {
 interface MediumFromDB {
   name: string;
   poster_path?: string;
+  release_status: string;
+  party: string;
 }
 
 interface ShowFromDB extends MediumFromDB {
-  Release_Status: string;
-  Party: string;
-  Viewing_Status: string;
+  view_status: string;
   TMDB_ID: number;
 }
 
 interface MovieFromDB extends MediumFromDB {
-  release_status: string;
-  party: string;
-  viewing_status: string;
+  view_status: string;
   TMDB_ID: number;
 }
 
 interface VideoGameFromDB extends MediumFromDB {
-  release_status: string;
-  party: string;
   play_status: string;
   IGDB_ID: number;
   owned: boolean;

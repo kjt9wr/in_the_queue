@@ -33,19 +33,19 @@ const Index = () => {
   );
 
   const soloQueueShows = allQueuedShows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.SOLO
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.SOLO
   );
 
   const friendQueueShows = allQueuedShows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.FRIENDS
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.FRIENDS
   );
 
   const familyQueueShows = allQueuedShows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.FAMILY
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.FAMILY
   );
 
   const christineQueueShows = allQueuedShows?.filter(
-    (tvShow: ShowFromDB) => tvShow.Party === PARTY.CHRISTINE
+    (tvShow: ShowFromDB) => tvShow.party === PARTY.CHRISTINE
   );
 
   const onRefresh = async () => {

@@ -7,7 +7,7 @@ const SeriesCarouselCard = ({
   TMDB_ID,
   name,
   poster_path,
-  Viewing_Status,
+  view_status,
 }: ShowFromDB) => {
   return (
     <Link href={`/shows/${TMDB_ID}`} asChild>
@@ -21,7 +21,7 @@ const SeriesCarouselCard = ({
           className="w-32 h-48 rounded-lg"
           resizeMode="cover"
         />
-        {Viewing_Status === "Rewatching" && (
+        {view_status === "Rewatching" && (
           <View className="absolute -bottom-12 -right-0.5 px-2 py-1 rounded-full">
             <Image
               source={images.rewatching}

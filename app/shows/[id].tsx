@@ -81,7 +81,7 @@ const ShowDetails = () => {
             <SeriesActions
               show={show}
               loading={loading}
-              status={show.Viewing_Status}
+              status={show.view_status}
             />
           )}
         </ScrollView>

@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import QueuePickerForm from "@/components/QueuePickerForm";
-import { MODE, PARTY, VIEWING_STATUS } from "@/constants/enums";
+import { MODE, PARTY, VIEW_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { deleteFromDB, updateShow } from "@/services/appwrite";
 import { determineReleaseStatus } from "@/services/helpers";
@@ -27,9 +27,9 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
   const onSubmit = async (nextViewingStatus: string) => {
     const showToAdd: ShowFromDB = {
       name: show.name,
-      Release_Status: determineReleaseStatus(show),
-      Party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : show.party,
-      Viewing_Status: nextViewingStatus,
+      release_status: determineReleaseStatus(show),
+      party: nextViewingStatus === VIEW_STATUS.QUEUE ? queue : show.party,
+      view_status: nextViewingStatus,
       TMDB_ID: show.id,
       poster_path: show.poster_path,
     };
@@ -62,11 +62,11 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
       {/* Action Buttons */}
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
-          {status !== VIEWING_STATUS.QUEUE && (
+          {status !== VIEW_STATUS.QUEUE && (
             <CustomButton
               title="Add to Queue"
               handlePress={() => {
-                setShowForm(VIEWING_STATUS.QUEUE);
+                setShowForm(VIEW_STATUS.QUEUE);
               }}
               containerStyles="mt-7 bg-blue-400"
               isLoading={loading}
@@ -74,11 +74,11 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
               iconStyles="w-8 mr-3"
             />
           )}
-          {status === VIEWING_STATUS.QUEUE && (
+          {status === VIEW_STATUS.QUEUE && (
             <CustomButton
               title="Start Watching"
               handlePress={() => {
-                onSubmit(VIEWING_STATUS.CURRENTLY_WATCHING);
+                onSubmit(VIEW_STATUS.CURRENTLY_WATCHING);
               }}
               containerStyles="mt-7 bg-green-700"
               isLoading={loading}
@@ -86,7 +86,7 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
               iconStyles="w-8 mr-2"
             />
           )}
-          {status === VIEWING_STATUS.QUEUE && (
+          {status === VIEW_STATUS.QUEUE && (
             <CustomButton
               title="Remove"
               handlePress={() => {
@@ -99,12 +99,12 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
               iconStyles="w-6 mx-2"
             />
           )}
-          {(status === VIEWING_STATUS.CURRENTLY_WATCHING ||
-            status === VIEWING_STATUS.REWATCHING) && (
+          {(status === VIEW_STATUS.CURRENTLY_WATCHING ||
+            status === VIEW_STATUS.REWATCHING) && (
             <CustomButton
               title={show.status === "Ended" ? "Finish Show" : "Caught Up"}
               handlePress={() => {
-                onSubmit(VIEWING_STATUS.CAUGHT_UP);
+                onSubmit(VIEW_STATUS.CAUGHT_UP);
               }}
               containerStyles="mt-7 bg-purple-400"
               isLoading={loading}

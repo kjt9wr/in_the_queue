@@ -1,5 +1,5 @@
 import SeriesCard from "@/components/Cards/SeriesCard";
-import { RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
+import { RELEASE_STATUS, VIEW_STATUS } from "@/constants/enums";
 import { fetchComingSoonShowsDetails } from "@/services/api";
 import { updateShow } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
@@ -40,9 +40,9 @@ const ComingSoonSeries = () => {
       if (show.next_episode_to_air!.episode_number > 1) {
         const showToAdd: ShowFromDB = {
           name: show.name,
-          Release_Status: RELEASE_STATUS.AIRING,
-          Party: show.party,
-          Viewing_Status: VIEWING_STATUS.QUEUE,
+          release_status: RELEASE_STATUS.AIRING,
+          party: show.party,
+          view_status: VIEW_STATUS.QUEUE,
           TMDB_ID: show.id,
         };
         try {

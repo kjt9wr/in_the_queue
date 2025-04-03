@@ -1,5 +1,5 @@
 import MovieCard from "@/components/Cards/MovieCard";
-import { RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
+import { RELEASE_STATUS, VIEW_STATUS } from "@/constants/enums";
 import { fetchComingSoonMoviesDetails } from "@/services/api";
 import { updateMovie } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
@@ -39,7 +39,7 @@ const ComingSoonMovies = () => {
           name: movie.title,
           release_status: RELEASE_STATUS.RELEASED,
           party: movie.party,
-          viewing_status: VIEWING_STATUS.QUEUE,
+          view_status: VIEW_STATUS.QUEUE,
           TMDB_ID: movie.id,
         };
         try {
