@@ -1,8 +1,9 @@
 import MovieCard from "@/components/Cards/MovieCard";
 import SearchBar from "@/components/SearchBar";
+import { MODE } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { fetchMovies } from "@/services/api";
+import { performSearch } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
@@ -16,7 +17,10 @@ const SearchMovies = () => {
     error,
     refetch: loadMovies,
     reset,
-  } = useFetch(() => fetchMovies({ query: searchQuery }), false);
+  } = useFetch(
+    () => performSearch({ query: searchQuery, mode: MODE.MOVIES }),
+    false
+  );
 
   useEffect(() => {
     const timeoutId = setTimeout(async () => {

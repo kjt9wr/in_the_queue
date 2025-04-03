@@ -1,4 +1,9 @@
-import { RELEASE_STATUS, PLAY_STATUS, VIEWING_STATUS } from "@/constants/enums";
+import {
+  RELEASE_STATUS,
+  PLAY_STATUS,
+  VIEWING_STATUS,
+  MODE,
+} from "@/constants/enums";
 import { Query } from "react-native-appwrite";
 import {
   getMoviesFromDB,
@@ -23,29 +28,22 @@ export const TMDB_CONFIG = {
   },
 };
 
-export const fetchShows = async ({ query }: { query: string }) => {
-  const endpoint = `${
-    TMDB_CONFIG.BASE_URL
-  }/search/tv?query=${encodeURIComponent(query)}`;
-
-  const response = await fetch(endpoint, {
-    method: "GET",
-    headers: TMDB_CONFIG.headers,
-  });
-
-  if (!response.ok) {
-    // @ts-ignore
-    throw new Error("Failed to fetch shows", response.statusText);
+export const performSearch = async ({
+  query,
+  mode,
+}: {
+  query: string;
+  mode: string;
+}) => {
+  if (mode === MODE.VIDEO_GAMES) {
+    return searchVideoGames({ query });
   }
-
-  const data = await response.json();
-  return data.results;
-};
-
-export const fetchMovies = async ({ query }: { query: string }) => {
-  const endpoint = `${
-    TMDB_CONFIG.BASE_URL
-  }/search/movie?query=${encodeURIComponent(query)}`;
+  const endpoint =
+    MODE.TV_SHOWS === mode
+      ? `${TMDB_CONFIG.BASE_URL}/search/tv?query=${encodeURIComponent(query)}`
+      : `${TMDB_CONFIG.BASE_URL}/search/movie?query=${encodeURIComponent(
+          query
+        )}`;
 
   const response = await fetch(endpoint, {
     method: "GET",
@@ -61,7 +59,7 @@ export const fetchMovies = async ({ query }: { query: string }) => {
   return data.results;
 };
 
-export const fetchVideoGames = async ({ query }: { query: string }) => {
+const searchVideoGames = async ({ query }: { query: string }) => {
   const response = await queryForGames(query);
 
   const gameIds = response.map((game: VideoGame) => game.id);
