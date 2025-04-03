@@ -117,7 +117,7 @@ const ComingSoonGames = () => {
                   paddingRight: 5,
                   marginBottom: 10,
                 }}
-                className="mt-2 pb-12"
+                className="mt-2 pb-28"
                 scrollEnabled={false}
               />
             </View>

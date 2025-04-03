@@ -142,12 +142,10 @@ export const updateVideoGame = async (videoGame: VideoGameFromDB) => {
       COLLECTION_ID_VIDEO_GAMES,
       [Query.equal("IGDB_ID", videoGame.IGDB_ID)]
     );
-    console.log(videoGame);
 
     // already in DB
     if (result.documents.length > 0) {
       const existingGame = result.documents[0];
-      console.log(existingGame);
       await database.updateDocument(
         DATABASE_ID,
         COLLECTION_ID_VIDEO_GAMES,

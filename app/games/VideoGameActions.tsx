@@ -5,6 +5,7 @@ import {
   MOVIE_RELEASE_STATUS,
   PARTY,
   PLAY_STATUS,
+  RELEASE_STATUS,
 } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import {
@@ -30,8 +31,6 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
     setQueue(PARTY.SOLO);
     setShowForm("");
   };
-
-  console.log(selectedGame);
 
   const onSubmit = async (nextPlayStatus: string) => {
     const gameToAdd: VideoGameFromDB = {
@@ -115,14 +114,12 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
               />
             )}
 
-          {/* 
-
-          {selectedGame.status !== MOVIE_RELEASE_STATUS.RELEASED &&
+          {!gameIsReleased(selectedGame) &&
             selectedGame.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
               <CustomButton
                 title="Add to Coming Soon"
                 handlePress={() => {
-                  onSubmit(VIEWING_STATUS.QUEUE);
+                  onSubmit(PLAY_STATUS.QUEUE);
                 }}
                 containerStyles="mt-7 bg-green-700"
                 isLoading={loading}
@@ -130,7 +127,7 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
                 iconStyles="w-8 mr-2"
               />
             )}
-         */}
+
           {selectedGame.play_status === PLAY_STATUS.QUEUE &&
             gameIsReleased(selectedGame) && (
               <CustomButton

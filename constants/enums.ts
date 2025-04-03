@@ -195,4 +195,5 @@ export const PlatformsById: Record<number, string> = {
   167: "Playstation 5",
   169: "Xbox Series",
   170: "Google Stadia",
+  508: "Nintendo Switch 2",
 };
