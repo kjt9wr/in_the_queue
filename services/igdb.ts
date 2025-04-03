@@ -47,6 +47,7 @@ export const fetchGamesDetails = async (game_ids: number[]) => {
     return await response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -60,5 +61,6 @@ export const queryForGames = async (searchTerm: string) => {
     return await response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
