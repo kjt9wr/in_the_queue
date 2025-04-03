@@ -65,7 +65,7 @@ const QueueGames = () => {
         {gamesLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : gamesError ? (
-          <Text>Error: {gamesError?.message}</Text>
+          <Text className="text-white">Error: {gamesError?.message}</Text>
         ) : (
           <View>
             <SearchBar

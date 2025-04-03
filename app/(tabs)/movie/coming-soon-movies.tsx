@@ -82,7 +82,7 @@ const ComingSoonMovies = () => {
         {detailsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : detailsError ? (
-          <Text>Error: {detailsError?.message}</Text>
+          <Text className="text-white">Error: {detailsError?.message}</Text>
         ) : (
           <View>
             <>

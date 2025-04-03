@@ -64,7 +64,7 @@ const Watching = () => {
         {showsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : showsError ? (
-          <Text>Error: {showsError?.message}</Text>
+          <Text className="text-white">Error: {showsError?.message}</Text>
         ) : (
           <View>
             <>

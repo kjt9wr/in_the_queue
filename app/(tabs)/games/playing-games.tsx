@@ -64,7 +64,7 @@ const PlayingGames = () => {
         {gamesLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : gamesError ? (
-          <Text>Error: {gamesError?.message}</Text>
+          <Text className="text-white">Error: {gamesError?.message}</Text>
         ) : (
           <View>
             <Text className="text-2xl text-white font-bold mt-5 mb-3">

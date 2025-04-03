@@ -49,7 +49,7 @@ const FinishedMovies = () => {
         {moviesLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : moviesError ? (
-          <Text>Error: {moviesError?.message}</Text>
+          <Text className="text-white">Error: {moviesError?.message}</Text>
         ) : (
           <View>
             <>
