@@ -1,8 +1,4 @@
-import {
-  MOVIE_RELEASE_STATUS,
-  PLAY_STATUS,
-  VIEWING_STATUS,
-} from "@/constants/enums";
+import { RELEASE_STATUS, PLAY_STATUS, VIEWING_STATUS } from "@/constants/enums";
 import { Query } from "react-native-appwrite";
 import {
   getMoviesFromDB,
@@ -90,14 +86,14 @@ export const fetchComingSoonShowsDetails = async () => {
 
 export const fetchComingSoonMoviesDetails = async () => {
   const comingSoonQueries = [
-    Query.equal("release_status", [MOVIE_RELEASE_STATUS.UPCOMING]),
+    Query.equal("release_status", [RELEASE_STATUS.UPCOMING]),
   ];
   return fetchDetailedMovies(comingSoonQueries);
 };
 
 export const fetchComingSoonVideoGamesDetails = async () => {
   const comingSoonQueries = [
-    Query.equal("release_status", [MOVIE_RELEASE_STATUS.UPCOMING]),
+    Query.equal("release_status", [RELEASE_STATUS.UPCOMING]),
   ];
   return fetchDetailedVideoGames(comingSoonQueries);
 };
@@ -109,7 +105,7 @@ export const fetchShowsintheQueue = async () => {
 
 export const fetchMoviesintheQueue = async () => {
   const queueQuery = [
-    Query.equal("release_status", [MOVIE_RELEASE_STATUS.RELEASED]),
+    Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
     Query.equal("viewing_status", [VIEWING_STATUS.QUEUE]),
   ];
   return await getMoviesFromDB(queueQuery);
@@ -118,7 +114,7 @@ export const fetchMoviesintheQueue = async () => {
 export const fetchGamesintheQueue = async () => {
   const queueQuery = [
     Query.equal("play_status", [VIEWING_STATUS.QUEUE]),
-    Query.equal("release_status", [MOVIE_RELEASE_STATUS.RELEASED]),
+    Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
   ];
   return await getVideoGamesFromDB(queueQuery);
 };

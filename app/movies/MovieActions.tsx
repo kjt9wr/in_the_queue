@@ -1,11 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import QueuePickerForm from "@/components/QueuePickerForm";
-import {
-  MODE,
-  MOVIE_RELEASE_STATUS,
-  PARTY,
-  VIEWING_STATUS,
-} from "@/constants/enums";
+import { MODE, PARTY, RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { deleteFromDB, updateMovie } from "@/services/appwrite";
 import { useRouter } from "expo-router";
@@ -30,9 +25,9 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
     const movieToAdd: MovieFromDB = {
       name: movie.title,
       release_status:
-        movie.status === MOVIE_RELEASE_STATUS.RELEASED
-          ? MOVIE_RELEASE_STATUS.RELEASED
-          : MOVIE_RELEASE_STATUS.UPCOMING,
+        movie.status === RELEASE_STATUS.RELEASED
+          ? RELEASE_STATUS.RELEASED
+          : RELEASE_STATUS.UPCOMING,
       party: nextViewingStatus === VIEWING_STATUS.QUEUE ? queue : movie.party,
       viewing_status: nextViewingStatus,
       TMDB_ID: movie.id,
@@ -66,7 +61,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
       {/* Action Buttons */}
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
-          {movie.status === MOVIE_RELEASE_STATUS.RELEASED &&
+          {movie.status === RELEASE_STATUS.RELEASED &&
             movie.viewing_status !== VIEWING_STATUS.QUEUE && (
               <CustomButton
                 title="Add to Queue"
@@ -80,7 +75,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
               />
             )}
           {movie.viewing_status === VIEWING_STATUS.QUEUE &&
-            movie.status === MOVIE_RELEASE_STATUS.RELEASED && (
+            movie.status === RELEASE_STATUS.RELEASED && (
               <CustomButton
                 title={"Watched"}
                 handlePress={() => {
@@ -92,8 +87,8 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8"
               />
             )}
-          {movie.status !== MOVIE_RELEASE_STATUS.RELEASED &&
-            movie.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
+          {movie.status !== RELEASE_STATUS.RELEASED &&
+            movie.release_status !== RELEASE_STATUS.UPCOMING && (
               <CustomButton
                 title="Add to Coming Soon"
                 handlePress={() => {

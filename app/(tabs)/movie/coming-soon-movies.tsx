@@ -1,5 +1,5 @@
 import MovieCard from "@/components/Cards/MovieCard";
-import { MOVIE_RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
+import { RELEASE_STATUS, VIEWING_STATUS } from "@/constants/enums";
 import { fetchComingSoonMoviesDetails } from "@/services/api";
 import { updateMovie } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
@@ -34,10 +34,10 @@ const ComingSoonMovies = () => {
 
   useEffect(() => {
     detailedMovies?.forEach((movie: Movie) => {
-      if (movie.status === MOVIE_RELEASE_STATUS.RELEASED) {
+      if (movie.status === RELEASE_STATUS.RELEASED) {
         const movieToAdd: MovieFromDB = {
           name: movie.title,
-          release_status: MOVIE_RELEASE_STATUS.RELEASED,
+          release_status: RELEASE_STATUS.RELEASED,
           party: movie.party,
           viewing_status: VIEWING_STATUS.QUEUE,
           TMDB_ID: movie.id,

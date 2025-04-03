@@ -1,8 +1,11 @@
 import VideoGameCard from "@/components/Cards/VideoGameCard";
+import { PLAY_STATUS, RELEASE_STATUS } from "@/constants/enums";
 import { fetchComingSoonVideoGamesDetails } from "@/services/api";
+import { updateVideoGame } from "@/services/appwrite";
+import { gameIsReleased } from "@/services/helpers";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -30,24 +33,25 @@ const ComingSoonGames = () => {
     }, [])
   );
 
-  // useEffect(() => {
-  //   detailedMovies?.forEach((movie: Movie) => {
-  //     if (movie.status === MOVIE_RELEASE_STATUS.RELEASED) {
-  //       const movieToAdd: MovieFromDB = {
-  //         name: movie.title,
-  //         release_status: MOVIE_RELEASE_STATUS.RELEASED,
-  //         party: movie.party,
-  //         viewing_status: VIEWING_STATUS.QUEUE,
-  //         TMDB_ID: movie.id,
-  //       };
-  //       try {
-  //         updateMovie(movieToAdd);
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     }
-  //   });
-  // }, [detailedMovies]);
+  useEffect(() => {
+    detailedGames?.forEach((game: VideoGame) => {
+      if (gameIsReleased(game)) {
+        const videoGameToAdd: VideoGameFromDB = {
+          name: game.name,
+          release_status: RELEASE_STATUS.RELEASED,
+          party: game.party,
+          play_status: PLAY_STATUS.QUEUE,
+          IGDB_ID: game.id,
+          owned: game.owned || false,
+        };
+        try {
+          updateVideoGame(videoGameToAdd);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
+  }, [detailedGames]);
 
   const sortedGames = detailedGames
     ?.filter((game: VideoGame) => game.first_release_date)

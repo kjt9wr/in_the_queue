@@ -1,18 +1,8 @@
 import CustomButton from "@/components/CustomButton";
 import QueuePickerForm from "@/components/QueuePickerForm";
-import {
-  MODE,
-  MOVIE_RELEASE_STATUS,
-  PARTY,
-  PLAY_STATUS,
-  RELEASE_STATUS,
-} from "@/constants/enums";
+import { MODE, PARTY, PLAY_STATUS, RELEASE_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
-import {
-  deleteFromDB,
-  updateMovie,
-  updateVideoGame,
-} from "@/services/appwrite";
+import { deleteFromDB, updateVideoGame } from "@/services/appwrite";
 import { gameIsReleased } from "@/services/helpers";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -36,8 +26,8 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
     const gameToAdd: VideoGameFromDB = {
       name: selectedGame.name,
       release_status: gameIsReleased(selectedGame)
-        ? MOVIE_RELEASE_STATUS.RELEASED
-        : MOVIE_RELEASE_STATUS.UPCOMING,
+        ? RELEASE_STATUS.RELEASED
+        : RELEASE_STATUS.UPCOMING,
       party: nextPlayStatus === PLAY_STATUS.QUEUE ? queue : selectedGame.party,
       play_status: nextPlayStatus,
       IGDB_ID: selectedGame.id,
@@ -115,7 +105,7 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
             )}
 
           {!gameIsReleased(selectedGame) &&
-            selectedGame.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
+            selectedGame.release_status !== RELEASE_STATUS.UPCOMING && (
               <CustomButton
                 title="Add to Coming Soon"
                 handlePress={() => {

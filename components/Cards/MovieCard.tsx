@@ -1,4 +1,4 @@
-import { MOVIE_RELEASE_STATUS } from "@/constants/enums";
+import { RELEASE_STATUS } from "@/constants/enums";
 import { Link } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity } from "react-native";
@@ -19,7 +19,7 @@ const MovieCard = ({ id, poster_path, title, release_date, status }: Movie) => {
         <Text className="text-sm font-bold text-white mt-2" numberOfLines={1}>
           {title}
         </Text>
-        {release_date && status !== MOVIE_RELEASE_STATUS.RELEASED && (
+        {release_date && status !== RELEASE_STATUS.RELEASED && (
           <Text className="text-sm font-bold text-white mt-2" numberOfLines={1}>
             {release_date}
           </Text>

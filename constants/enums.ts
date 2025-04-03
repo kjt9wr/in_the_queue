@@ -10,6 +10,8 @@ export enum RELEASE_STATUS {
   AWAITING = "Awaiting",
   LIMBO = "Limbo",
   FINISHED = "Finished",
+  UPCOMING = "Upcoming",
+  RELEASED = "Released",
 }
 
 export enum VIEWING_STATUS {
@@ -24,11 +26,6 @@ export enum MODE {
   TV_SHOWS = "TV_SHOWS",
   MOVIES = "MOVIES",
   VIDEO_GAMES = "VIDEO_GAMES",
-}
-
-export enum MOVIE_RELEASE_STATUS {
-  UPCOMING = "Upcoming",
-  RELEASED = "Released",
 }
 
 export enum PLAY_STATUS {
