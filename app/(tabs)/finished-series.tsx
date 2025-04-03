@@ -12,7 +12,7 @@ import {
   View,
 } from "react-native";
 
-const Finished = () => {
+const FinishedSeries = () => {
   const {
     data: shows,
     loading: showsLoading,
@@ -77,4 +77,4 @@ const Finished = () => {
   );
 };
 
-export default Finished;
+export default FinishedSeries;

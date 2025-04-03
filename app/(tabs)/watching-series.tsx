@@ -12,7 +12,7 @@ import {
   View,
 } from "react-native";
 
-const Watching = () => {
+const WatchingSeries = () => {
   const {
     data: shows,
     loading: showsLoading,
@@ -99,4 +99,4 @@ const Watching = () => {
   );
 };
 
-export default Watching;
+export default WatchingSeries;

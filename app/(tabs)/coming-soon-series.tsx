@@ -14,7 +14,7 @@ import {
   View,
 } from "react-native";
 
-const ComingSoon = () => {
+const ComingSoonSeries = () => {
   const {
     data: detailedShows,
     loading: detailsLoading,
@@ -150,4 +150,4 @@ const ComingSoon = () => {
   );
 };
 
-export default ComingSoon;
+export default ComingSoonSeries;

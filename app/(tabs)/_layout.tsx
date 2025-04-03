@@ -103,7 +103,6 @@ const TabsLayout = () => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-  const handleSheetChanges = useCallback((index: number) => {}, []);
 
   const changeMode = (mode: string) => {
     setMode(mode);
@@ -170,7 +169,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Queue",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.queue}
@@ -181,7 +180,7 @@ const TabsLayout = () => {
                 }}
               />
               <Tabs.Screen
-                name="watching"
+                name="watching-series"
                 options={{
                   title: "Watching",
                   headerShown: false,
@@ -196,11 +195,11 @@ const TabsLayout = () => {
                 }}
               />
               <Tabs.Screen
-                name="coming-soon"
+                name="coming-soon-series"
                 options={{
                   title: "Coming Soon",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.timer}
@@ -211,11 +210,11 @@ const TabsLayout = () => {
                 }}
               />
               <Tabs.Screen
-                name="finished"
+                name="finished-series"
                 options={{
                   title: "Finished",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.finished}
@@ -249,7 +248,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Queue",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.queue}
@@ -264,7 +263,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Coming Soon",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.timer}
@@ -279,7 +278,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Finished",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.finished}
@@ -291,9 +290,9 @@ const TabsLayout = () => {
               />
 
               {hideTab("index")}
-              {hideTab("watching")}
-              {hideTab("coming-soon")}
-              {hideTab("finished")}
+              {hideTab("watching-series")}
+              {hideTab("coming-soon-series")}
+              {hideTab("finished-series")}
 
               {hideTab("games/queue-games")}
               {hideTab("games/playing-games")}
@@ -315,7 +314,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Queue",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.queue}
@@ -330,7 +329,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Playing",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.controller}
@@ -345,7 +344,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Coming Soon",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.timer}
@@ -360,7 +359,7 @@ const TabsLayout = () => {
                 options={{
                   title: "Finished",
                   headerShown: false,
-                  tabBarIcon: ({ color, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <TabIcon
                       focused={focused}
                       icon={icons.finished}
@@ -372,9 +371,9 @@ const TabsLayout = () => {
               />
 
               {hideTab("index")}
-              {hideTab("watching")}
-              {hideTab("coming-soon")}
-              {hideTab("finished")}
+              {hideTab("watching-series")}
+              {hideTab("coming-soon-series")}
+              {hideTab("finished-series")}
 
               {hideTab("movie/queue-movies")}
               {hideTab("movie/coming-soon-movies")}
@@ -382,10 +381,7 @@ const TabsLayout = () => {
             </Tabs>
           )}
 
-          <BottomSheetModal
-            ref={bottomSheetModalRef}
-            onChange={handleSheetChanges}
-          >
+          <BottomSheetModal ref={bottomSheetModalRef}>
             <BottomSheetView style={styles.contentContainer}>
               <View className="flex flex-row justify-center items-center">
                 <TouchableOpacity
