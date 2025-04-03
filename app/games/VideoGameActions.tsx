@@ -101,12 +101,12 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
                 iconStyles="w-8 mr-2"
               />
             )}
-          {/* {selectedGame.viewing_status === VIEWING_STATUS.QUEUE &&
-            selectedGame.status === MOVIE_RELEASE_STATUS.RELEASED && (
+          {selectedGame.play_status === PLAY_STATUS.CURRENTLY_PLAYING &&
+            gameIsReleased(selectedGame) && (
               <CustomButton
-                title={"Watched"}
+                title={"Finished"}
                 handlePress={() => {
-                  onSubmit(VIEWING_STATUS.WATCHED);
+                  onSubmit(PLAY_STATUS.FINISHED);
                 }}
                 containerStyles="mt-7 bg-purple-400"
                 isLoading={loading}
@@ -115,6 +115,7 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
               />
             )}
 
+          {/* 
 
           {selectedGame.status !== MOVIE_RELEASE_STATUS.RELEASED &&
             selectedGame.release_status !== MOVIE_RELEASE_STATUS.UPCOMING && (
