@@ -1,6 +1,6 @@
 import PosterCarousel from "@/components/PosterCarousel";
 import { MODE, PARTY } from "@/constants/enums";
-import { fetchWatchingNow } from "@/services/api";
+import { fetchWatchingNow } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";

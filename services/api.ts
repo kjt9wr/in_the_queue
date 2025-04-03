@@ -96,44 +96,6 @@ export const fetchComingSoonVideoGamesDetails = async () => {
   return fetchDetailedVideoGames(comingSoonQueries);
 };
 
-export const fetchShowsintheQueue = async () => {
-  const queueQuery = [Query.equal("Viewing_Status", [VIEWING_STATUS.QUEUE])];
-  return await getShowsFromDB(queueQuery);
-};
-
-export const fetchMoviesintheQueue = async () => {
-  const queueQuery = [
-    Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
-    Query.equal("viewing_status", [VIEWING_STATUS.QUEUE]),
-  ];
-  return await getMoviesFromDB(queueQuery);
-};
-
-export const fetchGamesintheQueue = async () => {
-  const queueQuery = [
-    Query.equal("play_status", [VIEWING_STATUS.QUEUE]),
-    Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
-  ];
-  return await getVideoGamesFromDB(queueQuery);
-};
-
-export const fetchWatchingNow = async () => {
-  const watchingQuery = [
-    Query.or([
-      Query.equal("Viewing_Status", ["Currently_Watching"]),
-      Query.equal("Viewing_Status", ["Rewatching"]),
-    ]),
-  ];
-  return await getShowsFromDB(watchingQuery);
-};
-
-export const fetchPlayingNow = async () => {
-  const queueQuery = [
-    Query.equal("play_status", [PLAY_STATUS.CURRENTLY_PLAYING]),
-  ];
-  return await getVideoGamesFromDB(queueQuery);
-};
-
 export const fetchFinishedShows = async () => {
   const finishedQuery = [
     Query.equal("Release_Status", ["Finished"]),

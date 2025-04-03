@@ -1,6 +1,6 @@
 import PosterCarousel from "@/components/PosterCarousel";
 import { MODE, PARTY } from "@/constants/enums";
-import { fetchPlayingNow } from "@/services/api";
+import { fetchPlayingNow } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";

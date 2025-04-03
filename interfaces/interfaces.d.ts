@@ -93,30 +93,29 @@ interface VideoGame {
   owned?: boolean;
 }
 
-interface ShowFromDB {
+interface MediumFromDB {
   name: string;
+  poster_path?: string;
+}
+
+interface ShowFromDB extends MediumFromDB {
   Release_Status: string;
   Party: string;
   Viewing_Status: string;
   TMDB_ID: number;
-  poster_path?: string;
 }
 
-interface MovieFromDB {
-  name: string;
+interface MovieFromDB extends MediumFromDB {
   release_status: string;
   party: string;
   viewing_status: string;
   TMDB_ID: number;
-  poster_path?: string;
 }
 
-interface VideoGameFromDB {
-  name: string;
+interface VideoGameFromDB extends MediumFromDB {
   release_status: string;
   party: string;
   play_status: string;
   IGDB_ID: number;
-  poster_path?: string;
   owned: boolean;
 }

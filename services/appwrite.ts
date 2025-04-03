@@ -1,4 +1,9 @@
-import { MODE } from "@/constants/enums";
+import {
+  MODE,
+  PLAY_STATUS,
+  RELEASE_STATUS,
+  VIEWING_STATUS,
+} from "@/constants/enums";
 import { Client, Databases, ID, Query } from "react-native-appwrite";
 
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
@@ -207,4 +212,42 @@ export const deleteFromDB = async (api_id: number, mode: string) => {
     console.error(error);
     throw error;
   }
+};
+
+export const fetchShowsintheQueue = async () => {
+  const queueQuery = [Query.equal("Viewing_Status", [VIEWING_STATUS.QUEUE])];
+  return await getShowsFromDB(queueQuery);
+};
+
+export const fetchMoviesintheQueue = async () => {
+  const queueQuery = [
+    Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
+    Query.equal("viewing_status", [VIEWING_STATUS.QUEUE]),
+  ];
+  return await getMoviesFromDB(queueQuery);
+};
+
+export const fetchGamesintheQueue = async () => {
+  const queueQuery = [
+    Query.equal("play_status", [VIEWING_STATUS.QUEUE]),
+    Query.equal("release_status", [RELEASE_STATUS.RELEASED]),
+  ];
+  return await getVideoGamesFromDB(queueQuery);
+};
+
+export const fetchWatchingNow = async () => {
+  const watchingQuery = [
+    Query.or([
+      Query.equal("Viewing_Status", ["Currently_Watching"]),
+      Query.equal("Viewing_Status", ["Rewatching"]),
+    ]),
+  ];
+  return await getShowsFromDB(watchingQuery);
+};
+
+export const fetchPlayingNow = async () => {
+  const queueQuery = [
+    Query.equal("play_status", [PLAY_STATUS.CURRENTLY_PLAYING]),
+  ];
+  return await getVideoGamesFromDB(queueQuery);
 };

@@ -1,7 +1,7 @@
 import PosterCarousel from "@/components/PosterCarousel";
 import SearchBar from "@/components/SearchBar";
 import { MODE, PARTY } from "@/constants/enums";
-import { fetchGamesintheQueue } from "@/services/api";
+import { fetchGamesintheQueue } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
