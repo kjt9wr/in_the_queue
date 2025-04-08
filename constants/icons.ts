@@ -5,6 +5,7 @@ import finished from "@/assets/icons/finished.png";
 import logoGames from "@/assets/icons/logoGames.png";
 import logoMovies from "@/assets/icons/logoMovies.png";
 import logoSeries from "@/assets/icons/logoSeries.png";
+import owned from "@/assets/icons/owned.png";
 import play from "@/assets/icons/play.png";
 import queue from "@/assets/icons/queue.png";
 import logo from "@/assets/icons/queueIcon2.png";
@@ -24,6 +25,7 @@ export const icons = {
   logoGames,
   logoMovies,
   logoSeries,
+  owned,
   play,
   queue,
   search,

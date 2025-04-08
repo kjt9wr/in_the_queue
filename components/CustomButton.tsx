@@ -22,12 +22,12 @@ const CustomButton = ({
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.7}
-      className={`rounded-xl min-h-[62px] px-2 flex flex-row justify-center items-center ${containerStyles} ${
+      className={`rounded-full ${containerStyles} min-h-[62px] px-2 flex flex-row justify-center items-center  ${
         isLoading ? "opacity-50" : ""
       }`}
       disabled={isLoading}
     >
-      {icon && (
+      {icon && !isLoading && (
         <Image
           source={icon}
           className={`h-10 ${iconStyles}`}
@@ -44,7 +44,7 @@ const CustomButton = ({
           animating={isLoading}
           color="#fff"
           size="small"
-          className="ml-2"
+          className=""
         />
       )}
     </TouchableOpacity>
