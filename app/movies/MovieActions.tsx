@@ -3,6 +3,7 @@ import QueuePickerForm from "@/components/QueuePickerForm";
 import { MODE, PARTY, RELEASE_STATUS, VIEW_STATUS } from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { deleteFromDB, updateMovie } from "@/services/appwrite";
+import { movieIsReleased } from "@/services/helpers";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
@@ -61,7 +62,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
       {/* Action Buttons */}
       {!showForm && (
         <View className="flex-row gap-x-6 mt-2">
-          {movie.status === RELEASE_STATUS.RELEASED &&
+          {movieIsReleased(movie) &&
             movie.view_status !== VIEW_STATUS.QUEUE && (
               <CustomButton
                 title="Add to Queue"
@@ -87,7 +88,7 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
                 iconStyles="w-8"
               />
             )}
-          {movie.status !== RELEASE_STATUS.RELEASED &&
+          {!movieIsReleased(movie) &&
             movie.release_status !== RELEASE_STATUS.UPCOMING && (
               <CustomButton
                 title="Add to Coming Soon"

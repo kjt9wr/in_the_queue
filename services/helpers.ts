@@ -29,3 +29,11 @@ export const formatDate = (unixDate: number) => {
 export const gameIsReleased = (selectedGame: VideoGame) => {
   return new Date() > new Date(selectedGame.first_release_date * 1000);
 };
+
+export const movieIsReleased = (selectedMovie: Movie) => {
+  return movieReleaseDatePassed(selectedMovie.release_date);
+};
+
+export const movieReleaseDatePassed = (release_date: string) => {
+  return new Date() > new Date(release_date);
+};

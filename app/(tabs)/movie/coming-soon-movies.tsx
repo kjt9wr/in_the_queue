@@ -2,6 +2,7 @@ import MovieCard from "@/components/Cards/MovieCard";
 import { RELEASE_STATUS, VIEW_STATUS } from "@/constants/enums";
 import { fetchComingSoonMoviesDetails } from "@/services/api";
 import { updateMovie } from "@/services/appwrite";
+import { movieIsReleased } from "@/services/helpers";
 import useFetch from "@/services/useFetch";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
@@ -34,7 +35,7 @@ const ComingSoonMovies = () => {
 
   useEffect(() => {
     detailedMovies?.forEach((movie: Movie) => {
-      if (movie.status === RELEASE_STATUS.RELEASED) {
+      if (movieIsReleased(movie)) {
         const movieToAdd: MovieFromDB = {
           name: movie.title,
           release_status: RELEASE_STATUS.RELEASED,
