@@ -80,7 +80,7 @@ const VideoGameActions = ({ selectedGame, loading }: VideoGameActionsProps) => {
           {selectedGame.play_status === PLAY_STATUS.QUEUE &&
             gameIsReleased(selectedGame) && (
               <CustomButton
-                title="Start Playing"
+                title="Start"
                 handlePress={() => {
                   onSubmit(PLAY_STATUS.CURRENTLY_PLAYING);
                 }}

@@ -9,6 +9,7 @@ import owned from "@/assets/icons/owned.png";
 import play from "@/assets/icons/play.png";
 import queue from "@/assets/icons/queue.png";
 import logo from "@/assets/icons/queueIcon2.png";
+import rewatch from "@/assets/icons/rewatch.png";
 import search from "@/assets/icons/search.png";
 import star from "@/assets/icons/star.png";
 import timerWhite from "@/assets/icons/timer-white.png";
@@ -28,6 +29,7 @@ export const icons = {
   owned,
   play,
   queue,
+  rewatch,
   search,
   star,
   timer,

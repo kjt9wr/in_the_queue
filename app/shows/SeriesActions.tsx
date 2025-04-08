@@ -76,14 +76,26 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
           )}
           {status === VIEW_STATUS.QUEUE && (
             <CustomButton
-              title="Start Watching"
+              title="Start"
               handlePress={() => {
                 onSubmit(VIEW_STATUS.CURRENTLY_WATCHING);
               }}
-              containerStyles="mt-7 bg-green-700"
+              containerStyles="mt-7 bg-green-700 pr-5"
               isLoading={loading}
               icon={icons.play}
               iconStyles="w-8 mr-2"
+            />
+          )}
+          {status === VIEW_STATUS.QUEUE && (
+            <CustomButton
+              title="Rewatch"
+              handlePress={() => {
+                onSubmit(VIEW_STATUS.REWATCHING);
+              }}
+              containerStyles="mt-7 bg-purple-700"
+              isLoading={loading}
+              icon={icons.rewatch}
+              iconStyles="w-8 mr-1"
             />
           )}
           {status === VIEW_STATUS.QUEUE && (
