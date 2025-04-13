@@ -12,7 +12,14 @@ export enum RELEASE_STATUS {
   FINISHED = "Finished",
   UPCOMING = "Upcoming",
   RELEASED = "Released",
+  ENDED = "Ended",
+  CANCELLED = "Cancelled",
 }
+
+export const SHOW_TERMINATED_STATUSES = [
+  RELEASE_STATUS.ENDED.valueOf(),
+  RELEASE_STATUS.CANCELLED.valueOf(),
+];
 
 export enum VIEW_STATUS {
   QUEUE = "Queue",

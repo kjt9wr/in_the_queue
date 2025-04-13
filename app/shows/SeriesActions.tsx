@@ -1,6 +1,11 @@
 import CustomButton from "@/components/CustomButton";
 import QueuePickerForm from "@/components/QueuePickerForm";
-import { MODE, PARTY, VIEW_STATUS } from "@/constants/enums";
+import {
+  MODE,
+  PARTY,
+  SHOW_TERMINATED_STATUSES,
+  VIEW_STATUS,
+} from "@/constants/enums";
 import { icons } from "@/constants/icons";
 import { deleteFromDB, updateShow } from "@/services/appwrite";
 import { determineReleaseStatus } from "@/services/helpers";
@@ -114,7 +119,11 @@ const SeriesActions = ({ show, loading, status }: SeriesActionsProps) => {
           {(status === VIEW_STATUS.CURRENTLY_WATCHING ||
             status === VIEW_STATUS.REWATCHING) && (
             <CustomButton
-              title={show.status === "Ended" ? "Finish Show" : "Caught Up"}
+              title={
+                SHOW_TERMINATED_STATUSES.includes(show.status)
+                  ? "Finish Show"
+                  : "Caught Up"
+              }
               handlePress={() => {
                 onSubmit(VIEW_STATUS.CAUGHT_UP);
               }}

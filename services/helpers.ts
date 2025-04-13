@@ -1,7 +1,7 @@
-import { RELEASE_STATUS } from "@/constants/enums";
+import { RELEASE_STATUS, SHOW_TERMINATED_STATUSES } from "@/constants/enums";
 
 export const determineReleaseStatus = (show: TVShow) => {
-  if (show.status === "Ended") {
+  if (SHOW_TERMINATED_STATUSES.includes(show.status)) {
     return RELEASE_STATUS.FINISHED;
   }
   const lastAirDate = new Date(show.last_air_date);
