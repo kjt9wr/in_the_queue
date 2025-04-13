@@ -6,7 +6,7 @@
 
 <h1 align="center">In The Queue</h1>
 
-<img width="200" alt="image" src="https://github.com/user-attachments/assets/cd73b1ad-d2dc-467e-a54a-6daa75a64c5e" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/1432a826-af56-46fa-9e05-d0e61ac3a007" />
 
 
 </div>
@@ -17,7 +17,9 @@
 
 ## About The Project
 
-I created this mobile app to track every show I watch. The app keeps track of what shows I watch, what shows I want to watch in the future, and the current status of these shows. Appwrite is used for the backend server and database to keep track of my queues and watch progress. The TMDB API is used to fetch more details about tv shows.
+I created this mobile app to track every show I watch. The app keeps track of what shows I watch, what shows I want to watch in the future, and their current status. Appwrite is used for the backend server and database to keep track of my queues and watch progress. I fetch details about TV shows using the TMDB API.
+
+After developing the app to track TV shows, I added the functionality to track movies and video games. Multiple Appwrite Collections are used to track the queues and progress of each medium. The TMDB API returns movie details, and the IGDB API returns video game details.
 
 ## Technologies
   <div>
@@ -43,7 +45,7 @@ TV shows that I am currently watching are sorted into four categories, each base
 The Coming Soon page tracks shows awaiting a new season, separating those with a return date from those without one. Airing shows are automatically added to their respective queue.
 
 ### Finished Page
-The Coming Soon page displays shows that I have finished watching and have ended.
+The Coming Soon page displays TV shows that I have finished watching and have ended.
 
 ### Show Details Page
 Tap on a show from any page to view its details. This page displays metadata fetched from the TMDB API and includes action buttons for adding the show to a queue, marking it as currently watching, and more.
@@ -63,7 +65,7 @@ npm install
 
 **Set Up Environment Variables**
 
-Create a new file named `.env` in the root of your project and add the following content:
+Create a new file named `.env` in the root of your project and add the following environment variables:
 
 ```env
 
@@ -75,9 +77,19 @@ EXPO_PUBLIC_APPWRITE_DATABASE_ID=
 
 EXPO_PUBLIC_APPWRITE_COLLECTION_ID=
 
+EXPO_PUBLIC_APPWRITE_COLLECTION_ID_MOVIES=
+
+EXPO_PUBLIC_APPWRITE_COLLECTION_ID_VIDEO_GAMES=
+
+EXPO_PUBLIC_IGDB_CLIENT_ID=
+
+EXPO_PUBLIC_ACCESS_TOKEN=
+
 ```
 
 Add the actual TMDB API key, Appwrite project ID, Database ID, and Collection ID from [Appwrite](https://cloud.appwrite.io/console/login), [TMDB](https://www.themoviedb.org/login).
+
+IGDB authentication can be obtained by following this guide: [api-docs.igdb.com](https://api-docs.igdb.com/#authentication) 
 
 **Running the Project**
 
@@ -94,6 +106,7 @@ Open your ExpoGO app on your phone and scan the QR code to view the project.
 
 ## Potential Features
 
-The next step is to incorporate support for tracking video games in a similar matter
+The next step is to incorporate support for tracking movies and video games in a similar matter
 
-- [ ] Include support for tracking video games
+- [x] Include support for tracking movies
+- [x] Include support for tracking video games
