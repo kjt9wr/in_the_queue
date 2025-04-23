@@ -76,7 +76,7 @@ const VideoGameDetails = () => {
                   <CustomButton
                     title={""}
                     handlePress={() => onMarkOwned(false)}
-                    containerStyles="min-h-[30px] text-blue-700 font-semibold border border-gray-500 rounded h-2 mt-1 bg-blue-400 "
+                    containerStyles="min-h-[42px] text-blue-700 border border-gray-500 rounded h-2 mt-1 bg-blue-400 px-.5"
                     isLoading={loading}
                     icon={icons.owned}
                     iconStyles={"w-8"}
@@ -85,7 +85,7 @@ const VideoGameDetails = () => {
                   <CustomButton
                     title={""}
                     handlePress={() => onMarkOwned(true)}
-                    containerStyles="min-h-[30px] text-blue-700 font-semibold border border-gray-500 rounded h-2 mt-1"
+                    containerStyles="min-h-[42px] text-blue-700 border border-gray-500 rounded h-2 mt-1 pr-1.5"
                     isLoading={loading}
                     icon={icons.owned}
                     iconStyles={"w-8"}
