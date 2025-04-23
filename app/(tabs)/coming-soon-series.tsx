@@ -23,9 +23,16 @@ const ComingSoonSeries = () => {
   } = useFetch(fetchComingSoonShowsDetails);
 
   const [refreshing, setRefreshing] = useState(false);
-  const releaseDatedShows = detailedShows?.filter(
-    (tvShow: TVShow) => tvShow.next_episode_to_air
-  );
+  const releaseDatedShows = detailedShows
+    ?.filter((tvShow: TVShow) => tvShow.next_episode_to_air)
+    .sort((a: TVShow, b: TVShow) => {
+      if (!a.next_episode_to_air || !b.next_episode_to_air) return -1;
+      if (a.next_episode_to_air.air_date < b.next_episode_to_air.air_date)
+        return -1;
+      if (a.next_episode_to_air.air_date > b.next_episode_to_air.air_date)
+        return 1;
+      return 0;
+    });
 
   useFocusEffect(
     useCallback(() => {

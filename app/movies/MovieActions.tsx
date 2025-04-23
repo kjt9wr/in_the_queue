@@ -25,10 +25,9 @@ const SeriesActions = ({ movie, loading }: SeriesActionsProps) => {
   const onSubmit = async (nextViewingStatus: string) => {
     const movieToAdd: MovieFromDB = {
       name: movie.title,
-      release_status:
-        movie.status === RELEASE_STATUS.RELEASED
-          ? RELEASE_STATUS.RELEASED
-          : RELEASE_STATUS.UPCOMING,
+      release_status: movieIsReleased(movie)
+        ? RELEASE_STATUS.RELEASED
+        : RELEASE_STATUS.UPCOMING,
       party: nextViewingStatus === VIEW_STATUS.QUEUE ? queue : movie.party,
       view_status: nextViewingStatus,
       TMDB_ID: movie.id,
